@@ -136,7 +136,7 @@ fn fill_base(event: &mut KernelEvent, kind: u8, action: u8) {
 
 #[inline(always)]
 fn emit(event: &KernelEvent) {
-    let _ = EVENTS.output::<KernelEvent>(*event, 0);
+    let _ = EVENTS.output::<KernelEvent>(event, 0);
 }
 
 fn copy_bytes(dst: &mut [u8], src: &[u8]) {

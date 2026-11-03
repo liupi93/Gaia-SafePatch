@@ -22,6 +22,7 @@ use aya::{
     maps::{Array as BpfArray, HashMap as BpfHashMap, MapData, ring_buf::RingBuf},
     programs::{CgroupAttachMode, CgroupSockAddr, KProbe, TracePoint, UProbe},
 };
+use aya::programs::uprobe::UProbeScope;
 use clap::Parser;
 use gaia_xdp_common::{
     EVENT_ACTION_ALERT, EVENT_ACTION_BLOCKED, EVENT_ACTION_RATE_LIMITED,
@@ -781,7 +782,7 @@ fn apply_blocked_ports(bpf: &mut Ebpf, blocked_ports: &[TogglePort]) -> Result<(
     let active: Vec<u16> = blocked_ports.iter().filter(|p| p.enabled).map(|p| p.port).collect();
     for port in &active {
         ports
-            .insert(*port, 1, 0)
+            .insert(port, &1u8, 0)
             .with_context(|| format!("insert blocked port {port}"))?;
     }
     info!("blocked ports configured: {active:?} ({} enabled / {} total)", active.len(), blocked_ports.len());
@@ -795,7 +796,7 @@ fn apply_rate_limit_rules(bpf: &mut Ebpf, rules: &[RateLimitRule]) -> Result<()>
             .map_mut("RATE_LIMIT_RULE_COUNT")
             .context("missing RATE_LIMIT_RULE_COUNT map")?;
         let mut arr = BpfArray::<_, u32>::try_from(map).context("rule count array cast")?;
-        arr.set(0, rules.len() as u32, 0)
+        arr.set(0, &(rules.len() as u32), 0)
             .context("set rule count")?;
     }
 
@@ -815,7 +816,7 @@ fn apply_rate_limit_rules(bpf: &mut Ebpf, rules: &[RateLimitRule]) -> Result<()>
         for (idx, rule) in rules.iter().enumerate() {
             if let Some(entry) = parse_rate_limit_to_entry(rule) {
                 rule_map
-                    .insert(idx as u32, entry, 0)
+                    .insert(&(idx as u32), &entry, 0)
                     .with_context(|| format!("insert rate limit rule {idx}"))?;
             }
         }
@@ -909,7 +910,7 @@ fn sync_bpf_hotpatch_pids(shared: &Shared, targets: &[HotpatchTarget]) {
                     active: 1,
                     _pad: [0; 3],
                 };
-                let _ = pid_map.insert(pid, entry, 0);
+                let _ = pid_map.insert(&pid, &entry, 0);
             }
         }
         let enabled = targets.iter().filter(|t| t.enabled).count();
@@ -939,7 +940,7 @@ fn sync_bpf_hotpatch_rules(shared: &Shared, targets: &[HotpatchTarget]) {
                 }
             };
             let count = targets.iter().filter(|t| t.enabled).count() as u32;
-            let _ = arr.set(0, count, 0);
+            let _ = arr.set(0, &count, 0);
         }
 
         // Update rules map
@@ -983,7 +984,7 @@ fn sync_bpf_hotpatch_rules(shared: &Shared, targets: &[HotpatchTarget]) {
                     target_pid: target.pid.unwrap_or(0),
                     _pad2: [0; 4],
                 };
-                let _ = rule_map.insert(idx, entry, 0);
+                let _ = rule_map.insert(&idx, &entry, 0);
                 idx += 1;
             }
         }
@@ -1030,6 +1031,13 @@ fn attach_hotpatch_targets(
     }
 
     for target in &enabled_targets {
+        let scope = match target.pid {
+            Some(pid) => UProbeScope::OneProcess(
+                std::num::NonZeroU32::new(pid)
+                    .context("hotpatch PID must not be 0")?
+            ),
+            None => UProbeScope::AllProcesses,
+        };
         let binary_path = Path::new(&target.binary);
         if !binary_path.exists() {
             warn!(
@@ -1047,7 +1055,7 @@ fn attach_hotpatch_targets(
                 .try_into()
                 .context("cast")?;
             entry
-                .attach(target.symbol.as_str(), &target.binary, target.pid)
+                .attach([target.symbol.as_str()], &target.binary, scope)
                 .context("attach")?;
             Ok(())
         })() {
@@ -1065,7 +1073,7 @@ fn attach_hotpatch_targets(
                 .context("missing")?
                 .try_into()
                 .context("cast")?;
-            exit.attach(target.symbol.as_str(), &target.binary, target.pid)
+            exit.attach([target.symbol.as_str()], &target.binary, scope)
                 .context("attach")?;
             Ok(())
         })() {
