@@ -19,4 +19,7 @@ PASS: an in-flight request observed old and new function semantics.
 
 逐请求结果保存在 `experiments/concurrency/build/experiment.log`。脚本结束时会删除它新增的 Gaia 目标；若中断后清理失败，应在 WebUI 删除失效 PID 的目标，或恢复实验前的配置快照。
 
+统一 openEuler 24.03 LTS-SP4 虚拟机上的 30 轮正式结果保存在
+`results/openeuler-sp4-30-rounds.log`，汇总为 `rounds=30 mixed=240 total=240`。
+
 该实验说明：函数入口替换成功不等于请求级一致；即使切换瞬间目标函数活跃调用数为零，只要请求跨越多个调用，仍会混用新旧版本。完整分析见 `docs/task2-concurrency-analysis.md`。

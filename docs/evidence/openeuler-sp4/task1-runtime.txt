@@ -1,0 +1,27 @@
+captured_at=2026-11-06T03:03:19+08:00
+git_sha=0c6879f7d48f61853d44f9b84421bf4c33022442
+os=openEuler release 24.03 (LTS-SP4)
+kernel=6.6.0-159.4.3.154.oe2403sp4.x86_64
+arch=x86_64
+cgroup_fs=cgroup2fs
+gaia_sha256=8c604aa63f39893ef094326b894cfeebb2ed508ce96db14f3d6caf42b5f29cd5
+gaia_pid=1848
+gaia_process=Sl   ./target/release/gaia-xdp --config ./gaia.toml --web-listen 0.0.0.0:17890 --db-path ./gaia-task.db
+btf=readable
+CONFIG_BPF=y
+CONFIG_BPF_SYSCALL=y
+CONFIG_DEBUG_INFO_BTF=y
+CONFIG_UPROBE_EVENTS=y
+startup_agents:
+[INFO  gaia_xdp] file I/O agent attached
+[INFO  gaia_xdp] process & privilege agent attached
+[INFO  gaia_xdp] network telemetry agent attached
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect6 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind6 on /sys/fs/cgroup
+[INFO  gaia_xdp] hot-patch agent attached 1 uprobe target(s)
+[INFO  gaia_xdp::web] web api listening on http://0.0.0.0:17890
+[INFO  gaia_xdp] gaia controller started — press Ctrl-C to stop
+api_features:
+{"features":{"file_io_agent":true,"process_agent":true,"network_agent":true,"hotpatch_agent":true,"anomaly_engine":true,"symbol_resolver":true},"counters":{"network":100,"file_io":53442,"hotpatch":91,"privilege":8,"process":1543}}

@@ -35,6 +35,10 @@ cargo build --release -p gaia-xdp
 sha256sum target/release/gaia-xdp
 ```
 
+openEuler SP4 默认安装可能仍使用 cgroup v1。若启动日志报告找不到 cgroup v2，执行
+`grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=1"` 并重启；随后用
+`stat -fc %T /sys/fs/cgroup` 确认输出为 `cgroup2fs`。
+
 ## 启动、监控与 API
 
 复制配置并保持示例热补丁目标禁用，然后启动：
@@ -64,10 +68,12 @@ sudo THREADS=8 bash experiments/concurrency/run_experiment.sh | tee task1-hotpat
 
 | 检查项 | 实际结果 | 状态 |
 | --- | --- | --- |
-| openEuler SP4 / x86_64 / 6.6 | 待 VM 实测 | 待验证 |
-| BTF/BPF/uprobe | 待 VM 实测 | 待验证 |
-| release 构建 | 待 VM 实测 | 待验证 |
-| Gaia API 与 eBPF 事件 | 待 VM 实测 | 待验证 |
-| 用户态热补丁 | 待 VM 实测 | 待验证 |
+| openEuler SP4 / x86_64 / 6.6 | `24.03 LTS-SP4`，内核 `6.6.0-159.4.3.154.oe2403sp4.x86_64` | 通过 |
+| BTF/BPF/uprobe | BTF 可读，`CONFIG_BPF`、`CONFIG_BPF_SYSCALL`、`CONFIG_DEBUG_INFO_BTF`、`CONFIG_UPROBE_EVENTS` 均为 `y` | 通过 |
+| release 构建 | 构建成功，二进制 SHA-256 `8c604aa63f39893ef094326b894cfeebb2ed508ce96db14f3d6caf42b5f29cd5` | 通过 |
+| Gaia API 与 eBPF 事件 | API HTTP 200；六项 feature 均为 `true`；已采集 file/process/network/hotpatch/privilege 计数 | 通过 |
+| 用户态热补丁 | Gaia PID 在实验期间保持 `1848`；30 轮均把后续调用切换为返回 `200`，共 `240/240` 个请求观察到新语义 | 通过 |
 
-只有统一 openEuler VM 中真实得到的结果才能改为“通过”。
+实测时间为 2026-11-06，代码基线 `0c6879f`。环境、启动探针及 API 摘要见
+`docs/evidence/openeuler-sp4/task1-runtime.txt`；任务二的 30 轮逐请求原始输出见
+`experiments/concurrency/results/openeuler-sp4-30-rounds.log`。

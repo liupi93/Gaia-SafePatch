@@ -41,7 +41,11 @@ Uprobe/Uretprobe 可感知函数进入/退出，但业务边界仍需额外探�
 
 | 日期 | Git SHA | openEuler / 内核 | 线程数 | 轮次 | MIXED/总数 | 日志路径 |
 | --- | --- | --- | ---: | ---: | ---: | --- |
-| 待填写 | 待填写 | 待 VM 实测 | 8 | 30 | 待实测 | 待填写 |
+| 2026-11-06 | `0c6879f` | openEuler 24.03 LTS-SP4 / `6.6.0-159.4.3.154.oe2403sp4.x86_64` | 8 | 30 | `240/240` | `experiments/concurrency/results/openeuler-sp4-30-rounds.log` |
+
+30 轮均以退出码 0 完成，每轮均为 `SUMMARY total=8 mixed=8`，总计为
+`REPEAT_SUMMARY rounds=30 mixed=240 total=240`。原始日志 SHA-256 为
+`e8dac6911f2ff27a2a9ead829bb2ac4660f17a92a3e7c03829a32f3c3334186a`。
 
 ## 本机预验证（不作为 openEuler 正式验收）
 

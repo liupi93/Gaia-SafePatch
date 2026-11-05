@@ -1,0 +1,451 @@
+=== ROUND 1 ===
+Target PID 1994: 8 requests in flight; applying Gaia patch
+START pid=1994 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=1994 active_business_requests=8
+RESULT request=7 tid=139719618623168 before=107 after=200 classification=MIXED
+RESULT request=0 tid=139719677372096 before=100 after=200 classification=MIXED
+RESULT request=2 tid=139719660586688 before=102 after=200 classification=MIXED
+RESULT request=1 tid=139719668979392 before=101 after=200 classification=MIXED
+RESULT request=5 tid=139719635408576 before=105 after=200 classification=MIXED
+RESULT request=3 tid=139719652193984 before=103 after=200 classification=MIXED
+RESULT request=6 tid=139719627015872 before=106 after=200 classification=MIXED
+RESULT request=4 tid=139719643801280 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 2 ===
+Target PID 2042: 8 requests in flight; applying Gaia patch
+START pid=2042 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2042 active_business_requests=8
+RESULT request=4 tid=140635181930176 before=104 after=200 classification=MIXED
+RESULT request=5 tid=140635173537472 before=105 after=200 classification=MIXED
+RESULT request=2 tid=140635198715584 before=102 after=200 classification=MIXED
+RESULT request=7 tid=140635156752064 before=107 after=200 classification=MIXED
+RESULT request=0 tid=140635215500992 before=100 after=200 classification=MIXED
+RESULT request=3 tid=140635190322880 before=103 after=200 classification=MIXED
+RESULT request=6 tid=140635165144768 before=106 after=200 classification=MIXED
+RESULT request=1 tid=140635207108288 before=101 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 3 ===
+Target PID 2090: 8 requests in flight; applying Gaia patch
+START pid=2090 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2090 active_business_requests=8
+RESULT request=4 tid=139818012542656 before=104 after=200 classification=MIXED
+RESULT request=6 tid=139817995757248 before=106 after=200 classification=MIXED
+RESULT request=2 tid=139818029328064 before=102 after=200 classification=MIXED
+RESULT request=7 tid=139817987364544 before=107 after=200 classification=MIXED
+RESULT request=0 tid=139818046113472 before=100 after=200 classification=MIXED
+RESULT request=3 tid=139818020935360 before=103 after=200 classification=MIXED
+RESULT request=5 tid=139818004149952 before=105 after=200 classification=MIXED
+RESULT request=1 tid=139818037720768 before=101 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 4 ===
+Target PID 2144: 8 requests in flight; applying Gaia patch
+START pid=2144 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2144 active_business_requests=8
+RESULT request=2 tid=140504705828544 before=102 after=200 classification=MIXED
+RESULT request=5 tid=140504680650432 before=105 after=200 classification=MIXED
+RESULT request=3 tid=140504697435840 before=103 after=200 classification=MIXED
+RESULT request=7 tid=140504663865024 before=107 after=200 classification=MIXED
+RESULT request=4 tid=140504689043136 before=104 after=200 classification=MIXED
+RESULT request=6 tid=140504672257728 before=106 after=200 classification=MIXED
+RESULT request=0 tid=140504722613952 before=100 after=200 classification=MIXED
+RESULT request=1 tid=140504714221248 before=101 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 5 ===
+Target PID 2194: 8 requests in flight; applying Gaia patch
+START pid=2194 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2194 active_business_requests=8
+RESULT request=4 tid=140568558974656 before=104 after=200 classification=MIXED
+RESULT request=5 tid=140568550581952 before=105 after=200 classification=MIXED
+RESULT request=6 tid=140568542189248 before=106 after=200 classification=MIXED
+RESULT request=0 tid=140568592545472 before=100 after=200 classification=MIXED
+RESULT request=2 tid=140568575760064 before=102 after=200 classification=MIXED
+RESULT request=1 tid=140568584152768 before=101 after=200 classification=MIXED
+RESULT request=3 tid=140568567367360 before=103 after=200 classification=MIXED
+RESULT request=7 tid=140568533796544 before=107 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 6 ===
+Target PID 2243: 8 requests in flight; applying Gaia patch
+START pid=2243 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2243 active_business_requests=8
+RESULT request=7 tid=140128743847616 before=107 after=200 classification=MIXED
+RESULT request=1 tid=140128794203840 before=101 after=200 classification=MIXED
+RESULT request=0 tid=140128802596544 before=100 after=200 classification=MIXED
+RESULT request=5 tid=140128760633024 before=105 after=200 classification=MIXED
+RESULT request=2 tid=140128785811136 before=102 after=200 classification=MIXED
+RESULT request=6 tid=140128752240320 before=106 after=200 classification=MIXED
+RESULT request=3 tid=140128777418432 before=103 after=200 classification=MIXED
+RESULT request=4 tid=140128769025728 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 7 ===
+Target PID 2291: 8 requests in flight; applying Gaia patch
+START pid=2291 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2291 active_business_requests=8
+RESULT request=6 tid=140581730514624 before=106 after=200 classification=MIXED
+RESULT request=5 tid=140581738907328 before=105 after=200 classification=MIXED
+RESULT request=4 tid=140581747300032 before=104 after=200 classification=MIXED
+RESULT request=0 tid=140581780870848 before=100 after=200 classification=MIXED
+RESULT request=7 tid=140581722121920 before=107 after=200 classification=MIXED
+RESULT request=1 tid=140581772478144 before=101 after=200 classification=MIXED
+RESULT request=3 tid=140581755692736 before=103 after=200 classification=MIXED
+RESULT request=2 tid=140581764085440 before=102 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 8 ===
+Target PID 2340: 8 requests in flight; applying Gaia patch
+START pid=2340 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2340 active_business_requests=8
+RESULT request=2 tid=140073728718528 before=102 after=200 classification=MIXED
+RESULT request=1 tid=140073737111232 before=101 after=200 classification=MIXED
+RESULT request=4 tid=140073711933120 before=104 after=200 classification=MIXED
+RESULT request=3 tid=140073720325824 before=103 after=200 classification=MIXED
+RESULT request=7 tid=140073686755008 before=107 after=200 classification=MIXED
+RESULT request=0 tid=140073745503936 before=100 after=200 classification=MIXED
+RESULT request=5 tid=140073703540416 before=105 after=200 classification=MIXED
+RESULT request=6 tid=140073695147712 before=106 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 9 ===
+Target PID 2389: 8 requests in flight; applying Gaia patch
+START pid=2389 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2389 active_business_requests=8
+RESULT request=3 tid=140534010209984 before=103 after=200 classification=MIXED
+RESULT request=7 tid=140533976639168 before=107 after=200 classification=MIXED
+RESULT request=2 tid=140534018602688 before=102 after=200 classification=MIXED
+RESULT request=0 tid=140534035388096 before=100 after=200 classification=MIXED
+RESULT request=6 tid=140533985031872 before=106 after=200 classification=MIXED
+RESULT request=5 tid=140533993424576 before=105 after=200 classification=MIXED
+RESULT request=4 tid=140534001817280 before=104 after=200 classification=MIXED
+RESULT request=1 tid=140534026995392 before=101 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 10 ===
+Target PID 2437: 8 requests in flight; applying Gaia patch
+START pid=2437 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2437 active_business_requests=8
+RESULT request=0 tid=140586966193856 before=100 after=200 classification=MIXED
+RESULT request=1 tid=140586957801152 before=101 after=200 classification=MIXED
+RESULT request=7 tid=140586907444928 before=107 after=200 classification=MIXED
+RESULT request=5 tid=140586924230336 before=105 after=200 classification=MIXED
+RESULT request=4 tid=140586932623040 before=104 after=200 classification=MIXED
+RESULT request=6 tid=140586915837632 before=106 after=200 classification=MIXED
+RESULT request=3 tid=140586941015744 before=103 after=200 classification=MIXED
+RESULT request=2 tid=140586949408448 before=102 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 11 ===
+Target PID 2486: 8 requests in flight; applying Gaia patch
+START pid=2486 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2486 active_business_requests=8
+RESULT request=2 tid=139687082284736 before=102 after=200 classification=MIXED
+RESULT request=1 tid=139687090677440 before=101 after=200 classification=MIXED
+RESULT request=5 tid=139687057106624 before=105 after=200 classification=MIXED
+RESULT request=7 tid=139687040321216 before=107 after=200 classification=MIXED
+RESULT request=4 tid=139687065499328 before=104 after=200 classification=MIXED
+RESULT request=3 tid=139687073892032 before=103 after=200 classification=MIXED
+RESULT request=6 tid=139687048713920 before=106 after=200 classification=MIXED
+RESULT request=0 tid=139687099070144 before=100 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 12 ===
+Target PID 2535: 8 requests in flight; applying Gaia patch
+START pid=2535 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2535 active_business_requests=8
+RESULT request=6 tid=140246106257088 before=106 after=200 classification=MIXED
+RESULT request=7 tid=140246097864384 before=107 after=200 classification=MIXED
+RESULT request=2 tid=140246139827904 before=102 after=200 classification=MIXED
+RESULT request=3 tid=140246131435200 before=103 after=200 classification=MIXED
+RESULT request=5 tid=140246114649792 before=105 after=200 classification=MIXED
+RESULT request=1 tid=140246148220608 before=101 after=200 classification=MIXED
+RESULT request=4 tid=140246123042496 before=104 after=200 classification=MIXED
+RESULT request=0 tid=140246156613312 before=100 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 13 ===
+Target PID 2584: 8 requests in flight; applying Gaia patch
+START pid=2584 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2584 active_business_requests=8
+RESULT request=5 tid=139803765491392 before=105 after=200 classification=MIXED
+RESULT request=1 tid=139803799062208 before=101 after=200 classification=MIXED
+RESULT request=6 tid=139803757098688 before=106 after=200 classification=MIXED
+RESULT request=0 tid=139803807454912 before=100 after=200 classification=MIXED
+RESULT request=7 tid=139803748705984 before=107 after=200 classification=MIXED
+RESULT request=2 tid=139803790669504 before=102 after=200 classification=MIXED
+RESULT request=3 tid=139803782276800 before=103 after=200 classification=MIXED
+RESULT request=4 tid=139803773884096 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 14 ===
+Target PID 2633: 8 requests in flight; applying Gaia patch
+START pid=2633 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2633 active_business_requests=8
+RESULT request=1 tid=140312116852416 before=101 after=200 classification=MIXED
+RESULT request=4 tid=140312091674304 before=104 after=200 classification=MIXED
+RESULT request=7 tid=140312066496192 before=107 after=200 classification=MIXED
+RESULT request=2 tid=140312108459712 before=102 after=200 classification=MIXED
+RESULT request=5 tid=140312083281600 before=105 after=200 classification=MIXED
+RESULT request=6 tid=140312074888896 before=106 after=200 classification=MIXED
+RESULT request=3 tid=140312100067008 before=103 after=200 classification=MIXED
+RESULT request=0 tid=140312125245120 before=100 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 15 ===
+Target PID 2681: 8 requests in flight; applying Gaia patch
+START pid=2681 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2681 active_business_requests=8
+RESULT request=2 tid=139977755133632 before=102 after=200 classification=MIXED
+RESULT request=4 tid=139977738348224 before=104 after=200 classification=MIXED
+RESULT request=0 tid=139977771919040 before=100 after=200 classification=MIXED
+RESULT request=7 tid=139977713170112 before=107 after=200 classification=MIXED
+RESULT request=5 tid=139977729955520 before=105 after=200 classification=MIXED
+RESULT request=1 tid=139977763526336 before=101 after=200 classification=MIXED
+RESULT request=3 tid=139977746740928 before=103 after=200 classification=MIXED
+RESULT request=6 tid=139977721562816 before=106 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 16 ===
+Target PID 2729: 8 requests in flight; applying Gaia patch
+START pid=2729 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2729 active_business_requests=8
+RESULT request=1 tid=139926046348992 before=101 after=200 classification=MIXED
+RESULT request=3 tid=139926029563584 before=103 after=200 classification=MIXED
+RESULT request=6 tid=139926004385472 before=106 after=200 classification=MIXED
+RESULT request=7 tid=139925995992768 before=107 after=200 classification=MIXED
+RESULT request=4 tid=139926021170880 before=104 after=200 classification=MIXED
+RESULT request=2 tid=139926037956288 before=102 after=200 classification=MIXED
+RESULT request=0 tid=139926054741696 before=100 after=200 classification=MIXED
+RESULT request=5 tid=139926012778176 before=105 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 17 ===
+Target PID 2778: 8 requests in flight; applying Gaia patch
+START pid=2778 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2778 active_business_requests=8
+RESULT request=6 tid=140181049734848 before=106 after=200 classification=MIXED
+RESULT request=1 tid=140181091698368 before=101 after=200 classification=MIXED
+RESULT request=0 tid=140181100091072 before=100 after=200 classification=MIXED
+RESULT request=2 tid=140181083305664 before=102 after=200 classification=MIXED
+RESULT request=5 tid=140181058127552 before=105 after=200 classification=MIXED
+RESULT request=7 tid=140181041342144 before=107 after=200 classification=MIXED
+RESULT request=3 tid=140181074912960 before=103 after=200 classification=MIXED
+RESULT request=4 tid=140181066520256 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 18 ===
+Target PID 2832: 8 requests in flight; applying Gaia patch
+START pid=2832 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2832 active_business_requests=8
+RESULT request=6 tid=140207638636224 before=106 after=200 classification=MIXED
+RESULT request=4 tid=140207655421632 before=104 after=200 classification=MIXED
+RESULT request=5 tid=140207647028928 before=105 after=200 classification=MIXED
+RESULT request=2 tid=140207672207040 before=102 after=200 classification=MIXED
+RESULT request=0 tid=140207688992448 before=100 after=200 classification=MIXED
+RESULT request=3 tid=140207663814336 before=103 after=200 classification=MIXED
+RESULT request=7 tid=140207630243520 before=107 after=200 classification=MIXED
+RESULT request=1 tid=140207680599744 before=101 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 19 ===
+Target PID 2881: 8 requests in flight; applying Gaia patch
+START pid=2881 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2881 active_business_requests=8
+RESULT request=5 tid=139958672623296 before=105 after=200 classification=MIXED
+RESULT request=4 tid=139958681016000 before=104 after=200 classification=MIXED
+RESULT request=2 tid=139958697801408 before=102 after=200 classification=MIXED
+RESULT request=0 tid=139958714586816 before=100 after=200 classification=MIXED
+RESULT request=3 tid=139958689408704 before=103 after=200 classification=MIXED
+RESULT request=6 tid=139958664230592 before=106 after=200 classification=MIXED
+RESULT request=1 tid=139958706194112 before=101 after=200 classification=MIXED
+RESULT request=7 tid=139958655837888 before=107 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 20 ===
+Target PID 2929: 8 requests in flight; applying Gaia patch
+START pid=2929 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2929 active_business_requests=8
+RESULT request=0 tid=139950661265088 before=100 after=200 classification=MIXED
+RESULT request=4 tid=139950627694272 before=104 after=200 classification=MIXED
+RESULT request=6 tid=139950610908864 before=106 after=200 classification=MIXED
+RESULT request=7 tid=139950602516160 before=107 after=200 classification=MIXED
+RESULT request=3 tid=139950636086976 before=103 after=200 classification=MIXED
+RESULT request=2 tid=139950644479680 before=102 after=200 classification=MIXED
+RESULT request=1 tid=139950652872384 before=101 after=200 classification=MIXED
+RESULT request=5 tid=139950619301568 before=105 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 21 ===
+Target PID 2977: 8 requests in flight; applying Gaia patch
+START pid=2977 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=2977 active_business_requests=8
+RESULT request=0 tid=139723557811904 before=100 after=200 classification=MIXED
+RESULT request=1 tid=139723549419200 before=101 after=200 classification=MIXED
+RESULT request=7 tid=139723499062976 before=107 after=200 classification=MIXED
+RESULT request=2 tid=139723541026496 before=102 after=200 classification=MIXED
+RESULT request=6 tid=139723507455680 before=106 after=200 classification=MIXED
+RESULT request=5 tid=139723515848384 before=105 after=200 classification=MIXED
+RESULT request=3 tid=139723532633792 before=103 after=200 classification=MIXED
+RESULT request=4 tid=139723524241088 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 22 ===
+Target PID 3026: 8 requests in flight; applying Gaia patch
+START pid=3026 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3026 active_business_requests=8
+RESULT request=1 tid=139731174532800 before=101 after=200 classification=MIXED
+RESULT request=6 tid=139731132569280 before=106 after=200 classification=MIXED
+RESULT request=3 tid=139731157747392 before=103 after=200 classification=MIXED
+RESULT request=4 tid=139731149354688 before=104 after=200 classification=MIXED
+RESULT request=2 tid=139731166140096 before=102 after=200 classification=MIXED
+RESULT request=7 tid=139731124176576 before=107 after=200 classification=MIXED
+RESULT request=5 tid=139731140961984 before=105 after=200 classification=MIXED
+RESULT request=0 tid=139731182925504 before=100 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 23 ===
+Target PID 3074: 8 requests in flight; applying Gaia patch
+START pid=3074 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3074 active_business_requests=8
+RESULT request=5 tid=139828747785920 before=105 after=200 classification=MIXED
+RESULT request=4 tid=139828756178624 before=104 after=200 classification=MIXED
+RESULT request=0 tid=139828789749440 before=100 after=200 classification=MIXED
+RESULT request=2 tid=139828772964032 before=102 after=200 classification=MIXED
+RESULT request=3 tid=139828764571328 before=103 after=200 classification=MIXED
+RESULT request=6 tid=139828739393216 before=106 after=200 classification=MIXED
+RESULT request=1 tid=139828781356736 before=101 after=200 classification=MIXED
+RESULT request=7 tid=139828731000512 before=107 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 24 ===
+Target PID 3122: 8 requests in flight; applying Gaia patch
+START pid=3122 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3122 active_business_requests=8
+RESULT request=6 tid=140488464676544 before=106 after=200 classification=MIXED
+RESULT request=1 tid=140488506640064 before=101 after=200 classification=MIXED
+RESULT request=7 tid=140488456283840 before=107 after=200 classification=MIXED
+RESULT request=4 tid=140488481461952 before=104 after=200 classification=MIXED
+RESULT request=0 tid=140488515032768 before=100 after=200 classification=MIXED
+RESULT request=5 tid=140488473069248 before=105 after=200 classification=MIXED
+RESULT request=3 tid=140488489854656 before=103 after=200 classification=MIXED
+RESULT request=2 tid=140488498247360 before=102 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 25 ===
+Target PID 3171: 8 requests in flight; applying Gaia patch
+START pid=3171 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3171 active_business_requests=8
+RESULT request=5 tid=139818745050816 before=105 after=200 classification=MIXED
+RESULT request=7 tid=139818728265408 before=107 after=200 classification=MIXED
+RESULT request=6 tid=139818736658112 before=106 after=200 classification=MIXED
+RESULT request=3 tid=139818761836224 before=103 after=200 classification=MIXED
+RESULT request=1 tid=139818778621632 before=101 after=200 classification=MIXED
+RESULT request=2 tid=139818770228928 before=102 after=200 classification=MIXED
+RESULT request=0 tid=139818787014336 before=100 after=200 classification=MIXED
+RESULT request=4 tid=139818753443520 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 26 ===
+Target PID 3220: 8 requests in flight; applying Gaia patch
+START pid=3220 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3220 active_business_requests=8
+RESULT request=0 tid=140309529974464 before=100 after=200 classification=MIXED
+RESULT request=4 tid=140309496403648 before=104 after=200 classification=MIXED
+RESULT request=7 tid=140309471225536 before=107 after=200 classification=MIXED
+RESULT request=3 tid=140309504796352 before=103 after=200 classification=MIXED
+RESULT request=2 tid=140309513189056 before=102 after=200 classification=MIXED
+RESULT request=1 tid=140309521581760 before=101 after=200 classification=MIXED
+RESULT request=6 tid=140309479618240 before=106 after=200 classification=MIXED
+RESULT request=5 tid=140309488010944 before=105 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 27 ===
+Target PID 3268: 8 requests in flight; applying Gaia patch
+START pid=3268 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3268 active_business_requests=8
+RESULT request=1 tid=140661680391872 before=101 after=200 classification=MIXED
+RESULT request=6 tid=140661638428352 before=106 after=200 classification=MIXED
+RESULT request=2 tid=140661671999168 before=102 after=200 classification=MIXED
+RESULT request=3 tid=140661663606464 before=103 after=200 classification=MIXED
+RESULT request=4 tid=140661655213760 before=104 after=200 classification=MIXED
+RESULT request=5 tid=140661646821056 before=105 after=200 classification=MIXED
+RESULT request=0 tid=140661688784576 before=100 after=200 classification=MIXED
+RESULT request=7 tid=140661630035648 before=107 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 28 ===
+Target PID 3316: 8 requests in flight; applying Gaia patch
+START pid=3316 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3316 active_business_requests=8
+RESULT request=2 tid=139876002850496 before=102 after=200 classification=MIXED
+RESULT request=6 tid=139875969279680 before=106 after=200 classification=MIXED
+RESULT request=0 tid=139876019635904 before=100 after=200 classification=MIXED
+RESULT request=3 tid=139875994457792 before=103 after=200 classification=MIXED
+RESULT request=1 tid=139876011243200 before=101 after=200 classification=MIXED
+RESULT request=5 tid=139875977672384 before=105 after=200 classification=MIXED
+RESULT request=7 tid=139875960886976 before=107 after=200 classification=MIXED
+RESULT request=4 tid=139875986065088 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 29 ===
+Target PID 3364: 8 requests in flight; applying Gaia patch
+START pid=3364 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3364 active_business_requests=8
+RESULT request=0 tid=140423738443456 before=100 after=200 classification=MIXED
+RESULT request=2 tid=140423721658048 before=102 after=200 classification=MIXED
+RESULT request=6 tid=140423688087232 before=106 after=200 classification=MIXED
+RESULT request=1 tid=140423730050752 before=101 after=200 classification=MIXED
+RESULT request=5 tid=140423696479936 before=105 after=200 classification=MIXED
+RESULT request=3 tid=140423713265344 before=103 after=200 classification=MIXED
+RESULT request=7 tid=140423679694528 before=107 after=200 classification=MIXED
+RESULT request=4 tid=140423704872640 before=104 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+=== ROUND 30 ===
+Target PID 3413: 8 requests in flight; applying Gaia patch
+START pid=3413 threads=8 symbol=pricing_rule old_semantics=input+100
+READY pid=3413 active_business_requests=8
+RESULT request=3 tid=139909415044800 before=103 after=200 classification=MIXED
+RESULT request=7 tid=139909381473984 before=107 after=200 classification=MIXED
+RESULT request=5 tid=139909398259392 before=105 after=200 classification=MIXED
+RESULT request=2 tid=139909423437504 before=102 after=200 classification=MIXED
+RESULT request=0 tid=139909440222912 before=100 after=200 classification=MIXED
+RESULT request=4 tid=139909406652096 before=104 after=200 classification=MIXED
+RESULT request=6 tid=139909389866688 before=106 after=200 classification=MIXED
+RESULT request=1 tid=139909431830208 before=101 after=200 classification=MIXED
+DONE
+SUMMARY total=8 mixed=8
+PASS: an in-flight request observed old and new function semantics.
+REPEAT_SUMMARY rounds=30 mixed=240 total=240
