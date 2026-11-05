@@ -22,7 +22,6 @@ use aya::{
     maps::{Array as BpfArray, HashMap as BpfHashMap, MapData, ring_buf::RingBuf},
     programs::{CgroupAttachMode, CgroupSockAddr, KProbe, TracePoint, UProbe},
 };
-use aya::programs::uprobe::UProbeScope;
 use clap::Parser;
 use gaia_xdp_common::{
     EVENT_ACTION_ALERT, EVENT_ACTION_BLOCKED, EVENT_ACTION_RATE_LIMITED,
@@ -1031,13 +1030,9 @@ fn attach_hotpatch_targets(
     }
 
     for target in &enabled_targets {
-        let scope = match target.pid {
-            Some(pid) => UProbeScope::OneProcess(
-                std::num::NonZeroU32::new(pid)
-                    .context("hotpatch PID must not be 0")?
-            ),
-            None => UProbeScope::AllProcesses,
-        };
+        if target.pid == Some(0) {
+            anyhow::bail!("hotpatch PID must not be 0");
+        }
         let binary_path = Path::new(&target.binary);
         if !binary_path.exists() {
             warn!(
@@ -1055,7 +1050,7 @@ fn attach_hotpatch_targets(
                 .try_into()
                 .context("cast")?;
             entry
-                .attach([target.symbol.as_str()], &target.binary, scope)
+                .attach(target.symbol.as_str(), &target.binary, target.pid)
                 .context("attach")?;
             Ok(())
         })() {
@@ -1073,7 +1068,7 @@ fn attach_hotpatch_targets(
                 .context("missing")?
                 .try_into()
                 .context("cast")?;
-            exit.attach([target.symbol.as_str()], &target.binary, scope)
+            exit.attach(target.symbol.as_str(), &target.binary, target.pid)
                 .context("attach")?;
             Ok(())
         })() {
