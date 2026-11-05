@@ -35,7 +35,10 @@ fn main() -> anyhow::Result<()> {
             .as_str(),
         ..Default::default()
     };
-    aya_build::build_ebpf([ebpf_package], Toolchain::default())?;
+    aya_build::build_ebpf(
+        [ebpf_package],
+        Toolchain::Custom("nightly-2025-05-01"),
+    )?;
     println!("cargo:rustc-env=OUT_DIR={}", env::var("OUT_DIR").unwrap());
     Ok(())
 }

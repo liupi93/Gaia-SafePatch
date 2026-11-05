@@ -7,7 +7,7 @@
 | 操作系统 | openEuler 24.03 LTS SP4 服务器版 |
 | 架构 / 内核 | x86_64 / SP4 自带 6.6 系列内核 |
 | 虚拟机 | 4 vCPU、8 GB 内存、60 GB 动态磁盘 |
-| Rust / eBPF | 仓库锁定 nightly / Aya 原依赖 |
+| Rust / eBPF | `nightly-2025-05-01`（LLVM 20.1）/ Aya 原依赖 |
 | 构建工具 | LLVM、Clang、bpf-linker、GCC |
 | 前端 | Node.js 22 LTS、pnpm 9.x |
 | Git | 从 `origin/base` 建立 `dzz` |
@@ -24,8 +24,12 @@ sudo dnf install -y git curl gcc gcc-c++ make clang llvm lld elfutils-libelf-dev
   openssl-devel pkgconf-pkg-config jq binutils
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
-rustup toolchain install nightly --component rust-src clippy rustfmt
-cargo +nightly install bpf-linker --locked
+rustup toolchain install nightly-2025-05-01 --component rust-src clippy rustfmt
+# openEuler SP4 使用 LLVM 20 工具集；bpf-linker 与 Rust IR 版本必须一致。
+sudo dnf install -y llvm-toolset-20-llvm-devel libxml2-devel
+LLVM_SYS_201_PREFIX=/opt/openEuler/llvm-toolset-20/root/usr \
+  cargo +nightly-2025-05-01 install bpf-linker --version 0.9.15 --locked \
+  --no-default-features --features llvm-20
 # 安装 Node.js 22 LTS 后：
 sudo npm install -g pnpm@9
 git clone --branch base https://github.com/liupi93/Gaia-SafePatch.git
