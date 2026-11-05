@@ -265,8 +265,10 @@ fn handle_openat_enter(ctx: TracePointContext) -> Result<(), i32> {
     fill_base(event, EVENT_KIND_FILE_IO, EVENT_ACTION_ENTER);
 
     let filename_ptr: u64 = unsafe { ctx.read_at(OPENAT_FILENAME_OFFSET) }.map_err(|_| 1)?;
-    let bytes =
-        unsafe { bpf_probe_read_user_str_bytes(filename_ptr as *const u8, &mut event.detail) }?;
+    let bytes = unsafe {
+        bpf_probe_read_user_str_bytes(filename_ptr as *const u8, &mut event.detail)
+    }
+    .map_err(|_| 1)?;
 
     if is_sensitive_path(bytes) {
         event.action = EVENT_ACTION_ALERT;
@@ -303,7 +305,10 @@ fn handle_execve_enter(ctx: TracePointContext) -> Result<(), i32> {
     fill_base(event, EVENT_KIND_PROCESS, EVENT_ACTION_ENTER);
 
     let filename_ptr: u64 = unsafe { ctx.read_at(EXECVE_FILENAME_OFFSET) }.map_err(|_| 1)?;
-    let _ = unsafe { bpf_probe_read_user_str_bytes(filename_ptr as *const u8, &mut event.detail) }?;
+    let _ = unsafe {
+        bpf_probe_read_user_str_bytes(filename_ptr as *const u8, &mut event.detail)
+    }
+    .map_err(|_| 1)?;
 
     emit(event);
     Ok(())
