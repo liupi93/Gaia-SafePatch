@@ -49,6 +49,7 @@ use tower_http::cors::CorsLayer;
 mod ai;
 mod db;
 mod livepatch;
+mod safepatch;
 mod process;
 mod web;
 
@@ -1142,6 +1143,10 @@ fn apply_hotpatch_code_patches(
     targets: &[HotpatchTarget],
     patches: &mut Vec<PatchedFunction>,
 ) {
+    if !patches.is_empty() {
+        warn!("SafePatch: existing code patches must be restored successfully before applying a new set");
+        return;
+    }
     for target in targets {
         if !target.enabled {
             continue;
@@ -1923,227 +1928,41 @@ fn resolve_injected_symbol(pid: u32, lib_path: &Path, symbol: &str) -> Result<u6
 /// Apply a replace_function patch: inject the .so, resolve the new function,
 /// and write a trampoline at the original function's entry point.
 fn apply_replace_function_patch(
-    pid: u32,
-    target: &HotpatchTarget,
-    binary_path: &Path,
-    patches: &mut Vec<PatchedFunction>,
+    _pid: u32,
+    _target: &HotpatchTarget,
+    _binary_path: &Path,
+    _patches: &mut Vec<PatchedFunction>,
 ) {
-    let replace_lib = match &target.replace_lib {
-        Some(lib) => lib.clone(),
-        None => {
-            warn!(
-                "hotpatch replace_function target {}:{} has no replace_lib — skipping",
-                target.binary, target.symbol
-            );
-            return;
-        }
-    };
-
-    let lib_path = Path::new(&replace_lib);
-    if !lib_path.exists() {
-        warn!(
-            "replacement library not found: {} — skipping",
-            replace_lib
-        );
-        return;
-    }
-
-    // Resolve the original function address
-    let func_addr = match resolve_runtime_symbol(pid, binary_path, &target.symbol) {
-        Ok(addr) => addr,
-        Err(err) => {
-            warn!(
-                "cannot resolve {}:{} pid={} for replace_function: {err:#}",
-                target.binary, target.symbol, pid
-            );
-            return;
-        }
-    };
-
-    // Check if already patched
-    if patches.iter().any(|p| p.pid == pid && p.address == func_addr) {
-        info!(
-            "replace_function already applied at {}:{} pid={} addr=0x{:x}",
-            target.binary, target.symbol, pid, func_addr
-        );
-        return;
-    }
-
-    // Step 1: Inject the .so into the target process
-    if let Err(err) = inject_shared_library(pid, lib_path) {
-        warn!(
-            "failed to inject {} into pid={}: {err:#}",
-            replace_lib, pid
-        );
-        return;
-    }
-
-    // Give the target process a moment to finalize the dlopen mmap
-    std::thread::sleep(std::time::Duration::from_millis(100));
-
-    // Step 2: Resolve the replacement function's address in the target
-    let replace_sym = target
-        .replace_symbol
-        .as_deref()
-        .unwrap_or(&target.symbol);
-    let new_func_addr = match resolve_injected_symbol(pid, lib_path, replace_sym) {
-        Ok(addr) => addr,
-        Err(err) => {
-            warn!(
-                "cannot resolve replacement symbol {} in {} pid={}: {err:#}",
-                replace_sym, replace_lib, pid
-            );
-            return;
-        }
-    };
-
-    info!(
-        "replace_function: {}:{} pid={} original=0x{:x} replacement=0x{:x} (from {}:{})",
-        target.binary, target.symbol, pid, func_addr, new_func_addr, replace_lib, replace_sym
-    );
-
-    // Step 3: Generate trampoline and write it at the original function entry
-    let trampoline = generate_trampoline(new_func_addr);
-    let result = ptrace_read_and_write(pid, func_addr, &trampoline);
-    match result {
-        Ok(original_bytes) => {
-            patches.push(PatchedFunction {
-                pid,
-                address: func_addr,
-                original_bytes,
-            });
-            info!(
-                "replace_function patch applied: {}:{} pid={} addr=0x{:x} -> 0x{:x}",
-                target.binary, target.symbol, pid, func_addr, new_func_addr
-            );
-        }
-        Err(err) => {
-            warn!(
-                "failed to write trampoline at {}:{} pid={} addr=0x{:x}: {err:#}",
-                target.binary, target.symbol, pid, func_addr
-            );
-        }
-    }
+    warn!("SafePatch rejects replace_function: remote dlopen injection is outside the cooperative ABI");
 }
 
 /// Read original bytes and write new bytes at the given address in a single ptrace session.
 /// Supports arbitrary lengths (must be word-aligned for full-word writes).
 /// Returns the original bytes that were read before writing.
 fn ptrace_read_and_write(pid: u32, addr: u64, new_data: &[u8]) -> Result<Vec<u8>> {
-    let word_size = std::mem::size_of::<libc::c_long>();
-    let pid_t = pid as libc::pid_t;
-
-    assert!(
-        new_data.len() % word_size == 0,
-        "patch data length must be a multiple of {} bytes",
-        word_size
-    );
-
-    // Attach
-    let ret = unsafe { libc::ptrace(libc::PTRACE_ATTACH, pid_t, 0, 0) };
-    if ret < 0 {
-        return Err(anyhow!(
-            "ptrace ATTACH failed for pid={}: {}",
-            pid,
-            std::io::Error::last_os_error()
-        ));
-    }
-
-    // Wait for stop
-    let mut status: libc::c_int = 0;
-    let ret = unsafe { libc::waitpid(pid_t, &mut status, 0) };
-    if ret < 0 {
-        unsafe { libc::ptrace(libc::PTRACE_DETACH, pid_t, 0, 0) };
-        return Err(anyhow!(
-            "waitpid failed for pid={}: {}",
-            pid,
-            std::io::Error::last_os_error()
-        ));
-    }
-
-    // Read original bytes (word at a time)
-    let mut original_bytes = vec![0u8; new_data.len()];
-    let num_words = new_data.len() / word_size;
-    for i in 0..num_words {
-        let offset = (i * word_size) as u64;
-        unsafe { *libc::__errno_location() = 0 };
-        let word = unsafe {
-            libc::ptrace(
-                libc::PTRACE_PEEKTEXT,
-                pid_t,
-                (addr + offset) as *mut libc::c_void,
-                0,
-            )
-        };
-        let errno = unsafe { *libc::__errno_location() };
-        if errno != 0 {
-            unsafe { libc::ptrace(libc::PTRACE_DETACH, pid_t, 0, 0) };
-            return Err(anyhow!(
-                "ptrace PEEKTEXT failed for pid={} addr=0x{:x}: {}",
-                pid,
-                addr + offset,
-                std::io::Error::from_raw_os_error(errno)
-            ));
-        }
-        let start = i * word_size;
-        original_bytes[start..start + word_size].copy_from_slice(&word.to_ne_bytes());
-    }
-
-    // Write new data (word at a time)
-    for i in 0..num_words {
-        let offset = (i * word_size) as u64;
-        let start = i * word_size;
-        let new_word = libc::c_long::from_ne_bytes(
-            new_data[start..start + word_size].try_into().unwrap(),
-        );
-        let ret = unsafe {
-            libc::ptrace(
-                libc::PTRACE_POKETEXT,
-                pid_t,
-                (addr + offset) as *mut libc::c_void,
-                new_word as *mut libc::c_void,
-            )
-        };
-        if ret < 0 {
-            let err = std::io::Error::last_os_error();
-            unsafe { libc::ptrace(libc::PTRACE_DETACH, pid_t, 0, 0) };
-            return Err(anyhow!(
-                "ptrace POKETEXT failed for pid={} addr=0x{:x}: {}",
-                pid,
-                addr + offset,
-                err
-            ));
-        }
-    }
-
-    // Detach
-    let ret = unsafe { libc::ptrace(libc::PTRACE_DETACH, pid_t, 0, 0) };
-    if ret < 0 {
-        warn!(
-            "ptrace DETACH failed for pid={}: {}",
-            pid,
-            std::io::Error::last_os_error()
-        );
-    }
-
-    Ok(original_bytes)
+    let executable = fs::read_link(format!("/proc/{pid}/exe"))?;
+    let state = resolve_runtime_symbol(pid, &executable, "gaia_safepatch_state")
+        .context("target must implement the SafePatch cooperative ABI")?;
+    safepatch::exchange(pid, state, addr, new_data, Duration::from_secs(5))
 }
 
 /// Restore all previously applied code patches.
 fn restore_hotpatch_code_patches(patches: &mut Vec<PatchedFunction>) {
-    for patch in patches.drain(..) {
-        if let Err(err) = write_process_memory(patch.pid, patch.address, &patch.original_bytes) {
+    patches.retain(|patch| {
+        if let Err(err) = ptrace_read_and_write(patch.pid, patch.address, &patch.original_bytes) {
             warn!(
                 "failed to restore original code at pid={} addr=0x{:x}: {err:#}",
                 patch.pid, patch.address
             );
+            true
         } else {
             info!(
                 "hotpatch code restored at pid={} addr=0x{:x}",
                 patch.pid, patch.address
             );
+            false
         }
-    }
+    });
 }
 
 /// Generate aarch64 instructions to replace a function with `mov x0, #value; ret`.

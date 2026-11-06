@@ -7,7 +7,7 @@ use aya_ebpf::{
         bpf_probe_read_user, bpf_probe_read_user_str_bytes,
     },
     macros::{cgroup_sock_addr, kprobe, map, tracepoint, uprobe, uretprobe},
-    maps::{Array, HashMap, RingBuf},
+    maps::{Array, HashMap, PerCpuArray, RingBuf},
     programs::{ProbeContext, RetProbeContext, SockAddrContext, TracePointContext},
 };
 // Note: bpf_override_return only works with kprobes on error-injectable kernel
@@ -450,13 +450,35 @@ fn find_hotpatch_rule(pid: u32) -> Option<HotpatchRuleEntry> {
     None
 }
 
+// Observational only: key is full TGID/TID, value [nesting depth, last entry ns].
+// Map update failure and missed returns must never authorize a machine-code write.
+#[map]
+static SAFEPATCH_CALLS: HashMap<u64, [u64; 2]> = HashMap::with_max_entries(16384, 0);
+#[map]
+static SAFEPATCH_OBSERVATION_ERRORS: PerCpuArray<u64> = PerCpuArray::with_max_entries(1, 0);
+fn observe_call(enter: bool) {
+    let key = bpf_get_current_pid_tgid();
+    let previous = unsafe { SAFEPATCH_CALLS.get(&key).copied() }.unwrap_or([0, 0]);
+    let next = if enter {
+        [previous[0].saturating_add(1), unsafe { bpf_ktime_get_ns() }]
+    } else {
+        [previous[0].saturating_sub(1), previous[1]]
+    };
+    if SAFEPATCH_CALLS.insert(&key, &next, 0).is_err() || (!enter && previous[0] == 0) {
+        if let Some(ptr) = SAFEPATCH_OBSERVATION_ERRORS.get_ptr_mut(0) {
+            unsafe { *ptr = (*ptr).wrapping_add(1); }
+        }
+    }
+}
+
 #[uprobe]
 pub fn uprobe_hotpatch_entry(_ctx: ProbeContext) -> u32 {
+    observe_call(true);
     let Some(ptr) = get_scratch() else { return 0 };
     let event = unsafe { &mut *ptr };
     fill_base(event, EVENT_KIND_HOTPATCH, EVENT_ACTION_ENTER);
 
-    let pid = bpf_get_current_pid_tgid() as u32;
+    let pid = (bpf_get_current_pid_tgid() >> 32) as u32;
 
     // Legacy PID filter check (backward compat)
     if let Some(entry) = unsafe { HOTPATCH_PIDS.get(&pid) } {
@@ -534,11 +556,12 @@ pub fn uprobe_hotpatch_entry(_ctx: ProbeContext) -> u32 {
 
 #[uretprobe]
 pub fn uretprobe_hotpatch_exit(ctx: RetProbeContext) -> u32 {
+    observe_call(false);
     let Some(ptr) = get_scratch() else { return 0 };
     let event = unsafe { &mut *ptr };
     fill_base(event, EVENT_KIND_HOTPATCH, EVENT_ACTION_EXIT);
 
-    let pid = bpf_get_current_pid_tgid() as u32;
+    let pid = (bpf_get_current_pid_tgid() >> 32) as u32;
 
     // Legacy PID filter
     if let Some(entry) = unsafe { HOTPATCH_PIDS.get(&pid) } {

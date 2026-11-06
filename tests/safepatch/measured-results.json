@@ -1,0 +1,35 @@
+{
+  "successful_installs": 40,
+  "successful_restorations": 40,
+  "restoration_failures": 0,
+  "drain_measurements": {
+    "high_frequency": {
+      "successes": 40,
+      "wall_us": 1873378,
+      "completed_calls": 52768627,
+      "drain_mean_us": 19889,
+      "drain_max_us": 29155,
+      "restore_failures": 0
+    },
+    "long_running": {
+      "successes": 40,
+      "wall_us": 4619296,
+      "completed_calls": 409662,
+      "drain_mean_us": 177461,
+      "drain_max_us": 200935,
+      "restore_failures": 0
+    }
+  },
+  "calls_spanning_switches": 0,
+  "verified_writes": 80,
+  "unsafe_writes": 0,
+  "overlapping_intervals": 0,
+  "completed_long_calls": 409670,
+  "performance_overhead_vs_base_pct": 13.28389819091187,
+  "median_calls_per_second": {
+    "base": 30529801.90706977,
+    "safe": 26474254.103847552
+  },
+  "base_risk_overlapping_intervals": 338972,
+  "base_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326"
+}
