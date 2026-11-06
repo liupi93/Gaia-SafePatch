@@ -19,7 +19,8 @@ impl Drop for Child {
 fn main() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();
     let baseline = args.get(3).is_some_and(|s| s == "base");
-    let risk = args.get(3).is_some_and(|s| s == "risk");
+    let compat_risk = args.get(3).is_some_and(|s| s == "compat-risk");
+    let risk = compat_risk || args.get(3).is_some_and(|s| s == "risk");
     let mut command = Command::new(&args[1]);
     if risk {
         command.env("GAIA_RISK", "1");
@@ -53,14 +54,15 @@ fn main() -> Result<()> {
             ensure!(Instant::now() < deadline, "no old call");
         }
         let observed = active(pid, state)?;
-        let original = base::exchange(pid, address, &[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90])?;
+        let exchange = |bytes: &[u8]| if compat_risk { safepatch::exchange_compat(pid, address, bytes, Duration::from_secs(3)) } else { base::exchange(pid, address, bytes) };
+        let original = exchange(&[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90])?;
         let release = u64::from_str_radix(fields[4].trim_start_matches("0x"), 16)?;
         std::fs::OpenOptions::new()
             .write(true)
             .open(format!("/proc/{pid}/mem"))?
             .write_all_at(&1u64.to_ne_bytes(), release)?;
         std::thread::sleep(Duration::from_millis(300));
-        base::exchange(pid, address, &original)?;
+        exchange(&original)?;
         child.0.kill()?;
         child.0.wait()?;
         collector.join().unwrap();

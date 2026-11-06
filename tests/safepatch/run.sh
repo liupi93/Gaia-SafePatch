@@ -12,6 +12,7 @@ for test in high_frequency long_running; do
     target/debug/safepatch-validation "$output/$test" "$output/$test.calls" >"$output/$test.summary" 2>"$output/$test.runtime"
 done
 target/debug/safepatch-validation "$output/long_running" "$output/base-risk.calls" risk >"$output/base-risk.summary" 2>"$output/base-risk.runtime"
+target/debug/safepatch-validation "$output/long_running" "$output/compatible-risk.calls" compat-risk >"$output/compatible-risk.summary" 2>"$output/compatible-risk.runtime"
 for sample in 1 2 3; do
     for mode in base safe; do
         executable="$output/high_frequency"

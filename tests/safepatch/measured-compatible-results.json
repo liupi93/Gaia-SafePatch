@@ -1,0 +1,55 @@
+{
+  "successful_installs": 40,
+  "successful_restorations": 40,
+  "restoration_failures": 0,
+  "drain_measurements": {
+    "high_frequency": {
+      "successes": 40,
+      "wall_us": 1174697,
+      "completed_calls": 23217290,
+      "drain_mean_us": 3878,
+      "drain_max_us": 5564,
+      "restore_failures": 0
+    },
+    "long_running": {
+      "successes": 40,
+      "wall_us": 4670258,
+      "completed_calls": 341397,
+      "drain_mean_us": 178947,
+      "drain_max_us": 203825,
+      "restore_failures": 0
+    }
+  },
+  "calls_spanning_switches": 0,
+  "verified_writes": 80,
+  "unsafe_writes": 0,
+  "overlapping_intervals": 0,
+  "completed_long_calls": 341405,
+  "performance_overhead_vs_base_pct": 38.69682407854478,
+  "median_calls_per_second": {
+    "base": 34381852.805676885,
+    "safe": 21077167.710519888
+  },
+  "base_risk_overlapping_intervals": 107061,
+  "compatible_risk_overlapping_intervals": 90610,
+  "base_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326",
+  "compatible_independent": {
+    "successful_installs": 20,
+    "successful_restorations": 20,
+    "verified_writes": 40,
+    "stopped_threads_per_write": 9,
+    "rip_conflict_timeout": "passed",
+    "invalid_input_and_missing_strict_abi": "passed",
+    "partial_write_rollback": "passed",
+    "readback_mismatch_rollback": "passed",
+    "rollback_failure_kill_and_reap": "passed"
+  },
+  "environment": {
+    "date": "2026-11-07",
+    "kernel": "6.6.0-159.4.19.173.oe2403sp4.x86_64",
+    "arch": "x86_64",
+    "toolchain": "stable (installed)",
+    "full_bpf_rebuild": "blocked: nightly rustc unavailable after rustup update failure",
+    "userspace_cargo_check": "passed with AYA_BUILD_SKIP=1, reusing existing release BPF object"
+  }
+}

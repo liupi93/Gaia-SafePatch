@@ -9,3 +9,6 @@ libc = "0.2"
 [[bin]]
 name = "safepatch-validation"
 path = "driver.rs"
+[[bin]]
+name = "safepatch-compat-validation"
+path = "compat_driver.rs"

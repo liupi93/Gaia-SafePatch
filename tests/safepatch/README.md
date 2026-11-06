@@ -96,3 +96,5 @@ The runtime suite does not load the BPF object or issue HTTP requests to a runni
 Gaia daemon; verifier acceptance, live observation and HTTP integration have not
 been measured by this run. Existing remote dlopen replacement is deliberately
 rejected, so a replacement target cannot report a successful code installation.
+
+兼容模式新增入口：`RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run-compat.sh`。配置与三模式能力差异见 [原理说明](../../docs/safepatch-explained.md) 和 [测试文档](../../docs/safepatch-testing.md)；`run.sh` 现在也验证 compatible 的受控新旧重叠局限。
