@@ -1,0 +1,11 @@
+[package]
+name = "safepatch-validation"
+version = "0.1.0"
+edition = "2024"
+[workspace]
+[dependencies]
+anyhow = "1"
+libc = "0.2"
+[[bin]]
+name = "safepatch-validation"
+path = "driver.rs"

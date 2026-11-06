@@ -17,6 +17,10 @@
 
 ---
 
+## Gaia-SafePatch 入门文档
+
+安全热补丁的实现原理、协作协议、测试命令和实测结果解读，见 [docs 文档导航](docs/README.md)。
+
 ## 📖 项目简介
 
 `openeuler-service-monitor` 是一款专为 **OpenEuler** 操作系统量身定制的轻量级、高安全、低开销的系统关键服务监控与主动防御工具。

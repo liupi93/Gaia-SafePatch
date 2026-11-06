@@ -52,6 +52,7 @@ pub(crate) async fn run_http_server(shared: Shared, addr: String) -> Result<()> 
         .route("/api/v1/process/{pid}", get(crate::process::api_process_detail))
         .route("/api/v1/upload-lib", post(api_upload_lib))
         .route("/api/v1/reload-hotpatch", post(api_reload_hotpatch))
+        .route("/api/v1/hotpatch-observation", get(api_hotpatch_observation))
         .route("/api/v1/config/kernel-livepatch", get(api_get_kernel_livepatch).post(api_add_kernel_livepatch))
         .route("/api/v1/config/kernel-livepatch/{index}", axum::routing::delete(api_delete_kernel_livepatch).put(api_update_kernel_livepatch))
         .route("/api/v1/kernel-livepatch/status", get(api_kernel_livepatch_status))
@@ -429,11 +430,17 @@ async fn api_reload_hotpatch(State(shared): State<Shared>) -> Json<ReloadResult>
     sync_bpf_hotpatch_pids(&shared, &targets);
     sync_bpf_hotpatch_rules(&shared, &targets);
 
-    {
+    let result = result.and_then(|()| {
         let mut patches = shared.code_patches.lock().unwrap();
         restore_hotpatch_code_patches(&mut patches);
+        if !patches.is_empty() { return Err(anyhow!("code restoration failed; retained for retry")); }
         apply_hotpatch_code_patches(&targets, &mut patches);
-    }
+        let expected = targets.iter().filter(|t| t.enabled && t.patch_action != PatchAction::Monitor).count();
+        if patches.len() != expected {
+            return Err(anyhow!("machine-code patch failure: {} verified of {} requested", patches.len(), expected));
+        }
+        Ok(())
+    });
 
     match result {
         Ok(()) => Json(ReloadResult {
@@ -816,4 +823,25 @@ async fn persist_policy(shared: &Shared) {
         }
         Err(err) => warn!("failed to serialize config: {err:#}"),
     }
+}
+
+// Advisory snapshots may race with calls; they never authorize code modification.
+async fn api_hotpatch_observation(State(shared): State<Shared>) -> Json<serde_json::Value> {
+    let bpf = shared.bpf.lock().unwrap();
+    let mut calls = Vec::new();
+    if let Some(map) = bpf.map("SAFEPATCH_CALLS") {
+        if let Ok(map) = BpfHashMap::<_, u64, [u64; 2]>::try_from(map) {
+            for entry in map.iter() {
+                if let Ok((key, value)) = entry {
+                    calls.push(serde_json::json!({"tgid": key >> 32, "tid": key as u32,
+                        "depth": value[0], "last_entry_ns": value[1]}));
+                }
+            }
+        }
+    }
+    let errors = bpf.map("SAFEPATCH_OBSERVATION_ERRORS")
+        .and_then(|map| aya::maps::PerCpuArray::<_, u64>::try_from(map).ok())
+        .and_then(|map| map.get(&0, 0).ok())
+        .map(|values| values.iter().sum::<u64>());
+    Json(serde_json::json!({"advisory_only": true, "calls": calls, "errors": errors}))
 }
