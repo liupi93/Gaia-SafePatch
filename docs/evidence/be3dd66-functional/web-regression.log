@@ -1,0 +1,95 @@
+
+=== Connectivity ===
+[INFO] Target: http://127.0.0.1:17891
+[PASS] Daemon reachable at http://127.0.0.1:17891
+
+=== Setup ===
+[PASS] GET /config/kernel-livepatch returns 200 (HTTP 200)
+[INFO] Initial kernel_livepatch targets: 1
+[INFO] Setup: disabled existing target[0] (cmdline_proc_show
+    return 0;)
+
+=== POST /api/v1/config/kernel-livepatch — add target ===
+[PASS] POST adds target, returns 200 (HTTP 200)
+[PASS] Response array has one more entry (array length 2)
+[PASS] Response contains new old_func (found: cmdline_proc_show)
+[PASS] New target is enabled by default
+[INFO] New target index: 1
+
+=== GET /api/v1/config/kernel-livepatch — verify persisted ===
+[PASS] GET returns 200 after add (HTTP 200)
+[PASS] GET shows correct count after add (array length 2)
+[PASS] GET shows added target (found: cmdline_proc_show)
+[PASS] GET: target[1].enabled is true
+
+=== PUT /api/v1/config/kernel-livepatch/{index} — disable target ===
+[PASS] PUT disable returns 200 (HTTP 200)
+[PASS] PUT response still contains the target (found: cmdline_proc_show)
+[PASS] PUT: target[1].enabled is now false
+
+=== GET — verify disable persisted ===
+[PASS] GET after disable returns 200 (HTTP 200)
+[PASS] GET: disabled state persisted
+
+=== PUT /api/v1/config/kernel-livepatch/{index} — re-enable target ===
+[PASS] PUT re-enable returns 200 (HTTP 200)
+[PASS] PUT: target[1].enabled is true again
+
+=== PUT out-of-bounds index ===
+[PASS] PUT with out-of-bounds index returns 404 (HTTP 404)
+
+=== POST /api/v1/config/toggle — kernel_livepatch section ===
+[PASS] Toggle kernel_livepatch off returns 200 (HTTP 200)
+[PASS] Toggle: kernel_livepatch[1].enabled=false in policy response
+[PASS] Toggle kernel_livepatch on returns 200 (HTTP 200)
+[PASS] Toggle: kernel_livepatch[1].enabled=true in policy response
+
+=== POST /api/v1/config/toggle — invalid section ===
+[PASS] Toggle with unknown section returns 400 (HTTP 400)
+
+=== GET /api/v1/kernel-livepatch/status ===
+[PASS] GET /kernel-livepatch/status returns 200 (HTTP 200)
+[PASS] Status response is a JSON array
+
+=== POST /api/v1/kernel-livepatch/reload — with enabled targets disabled ===
+[PASS] Reload with no enabled targets returns 200 (HTTP 200)
+[PASS] Reload with no enabled targets reports success (found: "success":true)
+[PASS] Reload message explains no targets (found: no enabled)
+
+=== POST /api/v1/kernel-livepatch/reload — with enabled target ===
+[PASS] Reload with enabled target returns 200 (HTTP 200)
+[INFO] Reload result: success=True, message=kernel livepatch applied: 1 func(s)
+[PASS] Reload response has boolean 'success' field
+[PASS] Reload response has 'message' field
+
+=== Kernel patch effect — /proc/cmdline changes ===
+[PASS] Kernel patch active after reload (confirmed in /proc/cmdline)
+[PASS] sysfs /sys/kernel/livepatch/gaia_klp_0/enabled = 1 (patch enabled)
+[PASS] Status API: at least one module enabled=true
+[PASS] Status API: module 'gaia_klp_0' present in status list
+[PASS] Toggle off returns 200 (HTTP 200)
+[PASS] Patch auto-removed after toggle off (no explicit reload) (confirmed /proc/cmdline restored)
+[PASS] sysfs entry /sys/kernel/livepatch/gaia_klp_0/enabled removed after toggle off
+[PASS] Toggle on returns 200 (HTTP 200)
+[PASS] Patch auto-applied after toggle on (no explicit reload) (confirmed in /proc/cmdline)
+[PASS] PUT enabled=false returns 200 (HTTP 200)
+[PASS] Patch auto-removed after PUT enabled=false (confirmed /proc/cmdline restored)
+
+=== DELETE /api/v1/config/kernel-livepatch/{index} ===
+[PASS] DELETE returns 200 (HTTP 200)
+[PASS] Array length back to initial after delete (array length 1)
+[PASS] Deleted target no longer in response (length back to 1)
+
+=== GET — verify delete persisted ===
+[PASS] GET after delete returns 200 (HTTP 200)
+[PASS] GET shows original count after delete (array length 1)
+
+=== Regression — existing endpoints unaffected ===
+[PASS] GET /state still works (HTTP 200)
+[PASS] GET /config still works (HTTP 200)
+[PASS] Config still has sensitive_prefixes (found: sensitive_prefixes)
+[PASS] Config still has hotpatch section (found: hotpatch)
+[PASS] GET /config/hotpatch still works (HTTP 200)
+
+────────────────────────────────────────
+All 52 tests passed.

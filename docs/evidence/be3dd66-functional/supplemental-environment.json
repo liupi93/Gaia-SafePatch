@@ -1,0 +1,271 @@
+{
+  "batches": {
+    "formal": {
+      "commit": "be3dd66ecc1aa4479a490df8cfb8caefa9c2c836",
+      "kernel": "6.6.0-112.0.0.104.oe2403.x86_64",
+      "os_release": "NAME=\"openEuler\"\nVERSION=\"24.03 (LTS)\"\nID=\"openEuler\"\nVERSION_ID=\"24.03\"\nPRETTY_NAME=\"openEuler 24.03 (LTS)\"\nANSI_COLOR=\"0;31\"\n\n",
+      "binary_sha256": "5c495f59a9c7fb524672a1760f3777be1cff8f88ff6cf75c5c7d8ff0880fa754",
+      "core_pattern": "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d\n",
+      "utc": "2026-11-07T13:26:25Z",
+      "repeats": 10,
+      "source_status": {
+        "argv": [
+          "git",
+          "-C",
+          "<SOURCE>",
+          "status",
+          "--short"
+        ],
+        "rc": 0,
+        "output": ""
+      },
+      "tools": {
+        "gcc": {
+          "argv": [
+            "gcc",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "gcc (GCC) 12.3.1 (openEuler 12.3.1-38.oe2403)\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+        },
+        "python3": {
+          "argv": [
+            "python3",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "Python 3.11.6\n"
+        },
+        "gdb": {
+          "argv": [
+            "/usr/libexec/gdb",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "GNU gdb (GDB) openEuler 14.1-13.oe2403\nCopyright (C) 2023 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n"
+        },
+        "bpftool": {
+          "argv": [
+            "bpftool",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "bpftool v7.2.0\nusing libbpf v1.2\nfeatures: llvm, skeletons\n"
+        }
+      }
+    },
+    "reload-returns": {
+      "commit": "be3dd66ecc1aa4479a490df8cfb8caefa9c2c836",
+      "kernel": "6.6.0-112.0.0.104.oe2403.x86_64",
+      "os_release": "NAME=\"openEuler\"\nVERSION=\"24.03 (LTS)\"\nID=\"openEuler\"\nVERSION_ID=\"24.03\"\nPRETTY_NAME=\"openEuler 24.03 (LTS)\"\nANSI_COLOR=\"0;31\"\n\n",
+      "binary_sha256": "5c495f59a9c7fb524672a1760f3777be1cff8f88ff6cf75c5c7d8ff0880fa754",
+      "core_pattern": "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d\n",
+      "utc": "2026-11-07T13:28:54Z",
+      "repeats": 10,
+      "source_status": {
+        "argv": [
+          "git",
+          "-C",
+          "<SOURCE>",
+          "status",
+          "--short"
+        ],
+        "rc": 0,
+        "output": ""
+      },
+      "tools": {
+        "gcc": {
+          "argv": [
+            "gcc",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "gcc (GCC) 12.3.1 (openEuler 12.3.1-38.oe2403)\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+        },
+        "python3": {
+          "argv": [
+            "python3",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "Python 3.11.6\n"
+        },
+        "gdb": {
+          "argv": [
+            "/usr/libexec/gdb",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "GNU gdb (GDB) openEuler 14.1-13.oe2403\nCopyright (C) 2023 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n"
+        },
+        "bpftool": {
+          "argv": [
+            "bpftool",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "bpftool v7.2.0\nusing libbpf v1.2\nfeatures: llvm, skeletons\n"
+        }
+      }
+    },
+    "timestamp-validation": {
+      "commit": "be3dd66ecc1aa4479a490df8cfb8caefa9c2c836",
+      "kernel": "6.6.0-112.0.0.104.oe2403.x86_64",
+      "os_release": "NAME=\"openEuler\"\nVERSION=\"24.03 (LTS)\"\nID=\"openEuler\"\nVERSION_ID=\"24.03\"\nPRETTY_NAME=\"openEuler 24.03 (LTS)\"\nANSI_COLOR=\"0;31\"\n\n",
+      "binary_sha256": "5c495f59a9c7fb524672a1760f3777be1cff8f88ff6cf75c5c7d8ff0880fa754",
+      "core_pattern": "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d\n",
+      "utc": "2026-11-07T13:35:59Z",
+      "repeats": 10,
+      "source_status": {
+        "argv": [
+          "git",
+          "-C",
+          "<SOURCE>",
+          "status",
+          "--short"
+        ],
+        "rc": 0,
+        "output": ""
+      },
+      "tools": {
+        "gcc": {
+          "argv": [
+            "gcc",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "gcc (GCC) 12.3.1 (openEuler 12.3.1-38.oe2403)\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+        },
+        "python3": {
+          "argv": [
+            "python3",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "Python 3.11.6\n"
+        },
+        "gdb": {
+          "argv": [
+            "/usr/libexec/gdb",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "GNU gdb (GDB) openEuler 14.1-13.oe2403\nCopyright (C) 2023 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n"
+        },
+        "bpftool": {
+          "argv": [
+            "bpftool",
+            "--version"
+          ],
+          "rc": 0,
+          "output": "bpftool v7.2.0\nusing libbpf v1.2\nfeatures: llvm, skeletons\n"
+        }
+      }
+    }
+  },
+  "cleanup": {
+    "formal": {
+      "gaia": {
+        "argv": [
+          "pgrep",
+          "-x",
+          "gaia-xdp"
+        ],
+        "rc": 1,
+        "output": ""
+      },
+      "core_pattern": "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d\n"
+    },
+    "reload-returns": {
+      "gaia": {
+        "argv": [
+          "pgrep",
+          "-x",
+          "gaia-xdp"
+        ],
+        "rc": 1,
+        "output": ""
+      },
+      "core_pattern": "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d\n"
+    },
+    "timestamp-validation": {
+      "gaia": {
+        "argv": [
+          "pgrep",
+          "-x",
+          "gaia-xdp"
+        ],
+        "rc": 1,
+        "output": ""
+      },
+      "core_pattern": "|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %d\n"
+    }
+  },
+  "script_snapshots": [
+    {
+      "path": "formal/test-scripts/monitor_target.c",
+      "bytes": 1385,
+      "sha256": "d58139e232ffbfeabba4d5c547e3cc6612090024300d9bc876f1faab66e2d65b"
+    },
+    {
+      "path": "formal/test-scripts/return_target.c",
+      "bytes": 1342,
+      "sha256": "0fdc12683eb986232b4717a8d506edca43992b0b6996d53040d65e17e1db3d95"
+    },
+    {
+      "path": "formal/test-scripts/run.py",
+      "bytes": 18037,
+      "sha256": "7873ee15d2fa9961ac305e46355cc54da78c971ca9219448a977e3cd3ad5de34"
+    },
+    {
+      "path": "reload-returns/test-scripts/README.md",
+      "bytes": 4370,
+      "sha256": "daf9dafc6e0530ac27199781ef025f8252ae96fe13a1d482c584302882d837df"
+    },
+    {
+      "path": "reload-returns/test-scripts/monitor_target.c",
+      "bytes": 1385,
+      "sha256": "d58139e232ffbfeabba4d5c547e3cc6612090024300d9bc876f1faab66e2d65b"
+    },
+    {
+      "path": "reload-returns/test-scripts/return_target.c",
+      "bytes": 1342,
+      "sha256": "0fdc12683eb986232b4717a8d506edca43992b0b6996d53040d65e17e1db3d95"
+    },
+    {
+      "path": "reload-returns/test-scripts/run.py",
+      "bytes": 18363,
+      "sha256": "366f418dbf9a02d47d601ff61ded102f8d69df8b2965eca94f51669c00f07729"
+    },
+    {
+      "path": "timestamp-validation/test-scripts/monitor_target.c",
+      "bytes": 1385,
+      "sha256": "d58139e232ffbfeabba4d5c547e3cc6612090024300d9bc876f1faab66e2d65b"
+    },
+    {
+      "path": "timestamp-validation/test-scripts/return_target.c",
+      "bytes": 1634,
+      "sha256": "fb52fe030e8590ded875d15973af46fbdc72bf853b0446ec971fb579e7b7a6ae"
+    },
+    {
+      "path": "timestamp-validation/test-scripts/run.py",
+      "bytes": 18430,
+      "sha256": "44b976dd4e5cb2b9c8f6722cbc51696f33a59cae00d55ccbf14f2ff874fb6646"
+    }
+  ],
+  "cores_retained_on_server": [
+    {
+      "path": "smoke2/reload-original-01/target.core",
+      "bytes": 69623808,
+      "sha256": "137f96ff1f2be87ccf9b517916a07b257c4749c7b576a01e68f672a8d610a0ca",
+      "archived": false
+    },
+    {
+      "path": "formal/reload-original-01/target.core",
+      "bytes": 69623808,
+      "sha256": "3a90b48ed32db284df09fd33f27624b25353a6281cb64306811d6a4e65370485",
+      "archived": false
+    }
+  ],
+  "raw_archive_sha256": "41affd11e08f5f191d069a50e4dddbdc67ee8cf55f99fe5f800c31571a1a98df"
+}

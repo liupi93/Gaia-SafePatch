@@ -1,0 +1,7243 @@
+{
+  "note": "matched means scenario expectation, not all features passed; reload-original matches a crash",
+  "groups": [
+    {
+      "batch": "formal",
+      "case": "monitoring",
+      "runs": 1,
+      "matched": 0
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "runs": 10,
+      "matched": 10
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "runs": 10,
+      "matched": 9
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "runs": 10,
+      "matched": 10
+    }
+  ],
+  "rounds": [
+    {
+      "batch": "formal",
+      "case": "monitoring",
+      "checks": {
+        "baseline_bind_allowed": true,
+        "sensitive_file_high": true,
+        "custom_sensitive_file_high": false,
+        "exec_high": true,
+        "ordinary_setuid_high": true,
+        "ordinary_no_critical": true,
+        "service_setuid_high": true,
+        "service_setuid_critical": true,
+        "bind_blocked": true,
+        "connect_blocked": true,
+        "port_alert": true
+      },
+      "matched": false,
+      "ordinary_pid": 31870,
+      "service_pids": [
+        31853
+      ],
+      "custom_pid": 31871,
+      "custom_open_event_seen": true,
+      "cleanup_bind_allowed": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 1,
+      "before": {
+        "pid": 31883,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 31883,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 31883,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 31883,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 2,
+      "before": {
+        "pid": 31909,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 31909,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 31909,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 31909,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 3,
+      "before": {
+        "pid": 31929,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 31929,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 31929,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 31929,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 4,
+      "before": {
+        "pid": 31947,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 31947,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 31947,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 31947,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 5,
+      "before": {
+        "pid": 31967,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 31967,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 31967,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 31967,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 6,
+      "before": {
+        "pid": 31985,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 31985,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 31985,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 31985,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 7,
+      "before": {
+        "pid": 32019,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32019,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32019,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32019,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 8,
+      "before": {
+        "pid": 32037,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32037,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32037,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32037,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 9,
+      "before": {
+        "pid": 32055,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32055,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32055,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32055,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "monitor-control",
+      "repetition": 10,
+      "before": {
+        "pid": 32075,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32075,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32075,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32075,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "cc4889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 1,
+      "before": {
+        "pid": 32093,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32093,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32093,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32093,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32093/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 2,
+      "before": {
+        "pid": 32128,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32128,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32128,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32128,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32128/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 3,
+      "before": {
+        "pid": 32152,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32152,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32152,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32152,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32152/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 4,
+      "before": {
+        "pid": 32178,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32178,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32178,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32178,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32178/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 5,
+      "before": {
+        "pid": 32202,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32202,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32202,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32202,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32202/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 6,
+      "before": {
+        "pid": 32226,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32226,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32226,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32226,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32226/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 7,
+      "before": {
+        "pid": 32253,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32253,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32253,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32253,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32253/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 8,
+      "before": {
+        "pid": 32277,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32277,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32277,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32277,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32277/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 9,
+      "before": {
+        "pid": 32301,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32301,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32301,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32301,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32301/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "reload-original",
+      "repetition": 10,
+      "before": {
+        "pid": 32325,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "554889e5b80a0000005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_add": {
+        "pid": 32325,
+        "address": "0x401230",
+        "exit": null,
+        "entry": "b863000000c39090005dc3554889e548",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: code restoration failed; retained for retry",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32325,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": null,
+        "returns": {},
+        "sample_count": 0
+      },
+      "after_delete": {
+        "pid": 32325,
+        "address": "0x401230",
+        "exit": -11,
+        "entry": "",
+        "read_error": "[Errno 2] No such file or directory: '/proc/32325/mem'",
+        "returns": {},
+        "sample_count": 0
+      },
+      "expectation": "reproduce_known_failure",
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 1,
+      "before": {
+        "pid": 32351,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32351,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32351,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32351,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 2,
+      "before": {
+        "pid": 32366,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32366,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32366,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 550
+        },
+        "sample_count": 550
+      },
+      "after_delete": {
+        "pid": 32366,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 542
+        },
+        "sample_count": 542
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 3,
+      "before": {
+        "pid": 32440,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32440,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32440,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32440,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 4,
+      "before": {
+        "pid": 32454,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32454,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32454,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32454,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 5,
+      "before": {
+        "pid": 32468,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 545
+        },
+        "sample_count": 545
+      },
+      "after_add": {
+        "pid": 32468,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32468,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32468,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 6,
+      "before": {
+        "pid": 32482,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32482,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32482,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32482,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 7,
+      "before": {
+        "pid": 32496,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32496,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32496,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 32496,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 552
+        },
+        "sample_count": 552
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 8,
+      "before": {
+        "pid": 32510,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32510,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32510,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32510,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 9,
+      "before": {
+        "pid": 32524,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32524,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32524,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32524,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "missing-abi",
+      "repetition": 10,
+      "before": {
+        "pid": 32538,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 32538,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 32538,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 32538,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 1,
+      "before": {
+        "pid": 32552,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32552,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32552,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 2,
+      "before": {
+        "pid": 32566,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32566,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32566,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 3,
+      "before": {
+        "pid": 32580,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32580,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32580,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 4,
+      "before": {
+        "pid": 32594,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32594,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32594,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 5,
+      "before": {
+        "pid": 32606,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32606,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32606,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 6,
+      "before": {
+        "pid": 32620,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32620,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32620,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 7,
+      "before": {
+        "pid": 32634,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32634,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32634,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 549
+        },
+        "sample_count": 549
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 8,
+      "before": {
+        "pid": 32648,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32648,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32648,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 9,
+      "before": {
+        "pid": 32662,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32662,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32662,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "compatible",
+      "repetition": 10,
+      "before": {
+        "pid": 32676,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 32676,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32676,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 1,
+      "before": {
+        "pid": 32690,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32690,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32690,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 2,
+      "before": {
+        "pid": 32702,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_add": {
+        "pid": 32702,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32702,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 3,
+      "before": {
+        "pid": 32716,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32716,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32716,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 4,
+      "before": {
+        "pid": 32730,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 32730,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32730,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 5,
+      "before": {
+        "pid": 32744,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32744,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32744,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 6,
+      "before": {
+        "pid": 32758,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "after_add": {
+        "pid": 32758,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32758,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 7,
+      "before": {
+        "pid": 32770,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_add": {
+        "pid": 32770,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32770,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 8,
+      "before": {
+        "pid": 32784,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 32784,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 32784,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 9,
+      "before": {
+        "pid": 32798,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32798,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32798,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "cooperative",
+      "repetition": 10,
+      "before": {
+        "pid": 32812,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32812,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32812,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 1,
+      "before": {
+        "pid": 32826,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32826,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32826,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 2,
+      "before": {
+        "pid": 32840,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32840,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32840,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 3,
+      "before": {
+        "pid": 32856,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_add": {
+        "pid": 32856,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32856,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 4,
+      "before": {
+        "pid": 32870,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32870,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 561
+        },
+        "sample_count": 561
+      },
+      "after_delete": {
+        "pid": 32870,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 5,
+      "before": {
+        "pid": 32884,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 32884,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 32884,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 554
+        },
+        "sample_count": 554
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 6,
+      "before": {
+        "pid": 32898,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32898,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32898,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 7,
+      "before": {
+        "pid": 32912,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32912,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32912,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 8,
+      "before": {
+        "pid": 32926,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32926,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32926,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 9,
+      "before": {
+        "pid": 32940,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32940,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 561
+        },
+        "sample_count": 561
+      },
+      "after_delete": {
+        "pid": 32940,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "skip",
+      "repetition": 10,
+      "before": {
+        "pid": 32952,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32952,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b800000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "0": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 32952,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 1,
+      "before": {
+        "pid": 32966,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 563
+        },
+        "sample_count": 563
+      },
+      "after_add": {
+        "pid": 32966,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_put": {
+        "pid": 32966,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 561
+        },
+        "sample_count": 561
+      },
+      "after_delete": {
+        "pid": 32966,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 2,
+      "before": {
+        "pid": 32980,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 32980,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_put": {
+        "pid": 32980,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32980,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 3,
+      "before": {
+        "pid": 32994,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 32994,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_put": {
+        "pid": 32994,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 32994,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 4,
+      "before": {
+        "pid": 33008,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33008,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_put": {
+        "pid": 33008,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33008,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 5,
+      "before": {
+        "pid": 33030,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 550
+        },
+        "sample_count": 550
+      },
+      "after_add": {
+        "pid": 33030,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_put": {
+        "pid": 33030,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33030,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 6,
+      "before": {
+        "pid": 33050,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_add": {
+        "pid": 33050,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_put": {
+        "pid": 33050,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33050,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 7,
+      "before": {
+        "pid": 33064,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_add": {
+        "pid": 33064,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_put": {
+        "pid": 33064,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33064,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 8,
+      "before": {
+        "pid": 33078,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_add": {
+        "pid": 33078,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_put": {
+        "pid": 33078,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33078,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 9,
+      "before": {
+        "pid": 33094,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33094,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_put": {
+        "pid": 33094,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33094,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "put",
+      "repetition": 10,
+      "before": {
+        "pid": 33108,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 33108,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_put": {
+        "pid": 33108,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b84d000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "77": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33108,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 1,
+      "before": {
+        "pid": 33122,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33122,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33122,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33122,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 2,
+      "before": {
+        "pid": 33136,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33136,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33136,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 33136,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 3,
+      "before": {
+        "pid": 33150,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33150,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33150,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 33150,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 4,
+      "before": {
+        "pid": 33164,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33164,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33164,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "after_delete": {
+        "pid": 33164,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 5,
+      "before": {
+        "pid": 33178,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33178,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33178,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "after_delete": {
+        "pid": 33178,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 6,
+      "before": {
+        "pid": 33192,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "after_add": {
+        "pid": 33192,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33192,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 33192,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 7,
+      "before": {
+        "pid": 33206,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33206,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33206,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 33206,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 8,
+      "before": {
+        "pid": 33220,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 33220,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33220,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33220,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 554
+        },
+        "sample_count": 554
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 9,
+      "before": {
+        "pid": 33234,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33234,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33234,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "after_delete": {
+        "pid": 33234,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 552
+        },
+        "sample_count": 552
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-cooperative",
+      "repetition": 10,
+      "before": {
+        "pid": 33248,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 33248,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33248,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 552
+        },
+        "sample_count": 552
+      },
+      "after_delete": {
+        "pid": 33248,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 1,
+      "before": {
+        "pid": 33263,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33263,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33263,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 552
+        },
+        "sample_count": 552
+      },
+      "after_delete": {
+        "pid": 33263,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 2,
+      "before": {
+        "pid": 33277,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 33277,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33277,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33277,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 3,
+      "before": {
+        "pid": 33291,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33291,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33291,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 33291,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 4,
+      "before": {
+        "pid": 33305,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 33305,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33305,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33305,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 5,
+      "before": {
+        "pid": 33319,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33319,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33319,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 33319,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 6,
+      "before": {
+        "pid": 33333,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33333,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 544
+        },
+        "sample_count": 544
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33333,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "after_delete": {
+        "pid": 33333,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 555
+        },
+        "sample_count": 555
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 7,
+      "before": {
+        "pid": 33409,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "after_add": {
+        "pid": 33409,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33409,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 33409,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 8,
+      "before": {
+        "pid": 33423,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33423,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33423,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33423,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 552
+        },
+        "sample_count": 552
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 9,
+      "before": {
+        "pid": 33437,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33437,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33437,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 548
+        },
+        "sample_count": 548
+      },
+      "after_delete": {
+        "pid": 33437,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 553
+        },
+        "sample_count": 553
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "replace-compatible",
+      "repetition": 10,
+      "before": {
+        "pid": 33451,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "after_add": {
+        "pid": 33451,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 33451,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 555
+        },
+        "sample_count": 555
+      },
+      "after_delete": {
+        "pid": 33451,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 1,
+      "before": {
+        "pid": 33465,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_add": {
+        "pid": 33465,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 562
+        },
+        "sample_count": 562
+      },
+      "second_after_add": {
+        "pid": 33473,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33465,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 568
+        },
+        "sample_count": 568
+      },
+      "second_after_reload": {
+        "pid": 33473,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 33465,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 2,
+      "before": {
+        "pid": 33487,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33487,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "second_after_add": {
+        "pid": 33493,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33487,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "second_after_reload": {
+        "pid": 33493,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33487,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 3,
+      "before": {
+        "pid": 33509,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33509,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "second_after_add": {
+        "pid": 33517,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 570
+        },
+        "sample_count": 570
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33509,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 559
+        },
+        "sample_count": 559
+      },
+      "second_after_reload": {
+        "pid": 33517,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_delete": {
+        "pid": 33509,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 554
+        },
+        "sample_count": 554
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 4,
+      "before": {
+        "pid": 33531,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 555
+        },
+        "sample_count": 555
+      },
+      "after_add": {
+        "pid": 33531,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "second_after_add": {
+        "pid": 33539,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33531,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 566
+        },
+        "sample_count": 566
+      },
+      "second_after_reload": {
+        "pid": 33539,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_delete": {
+        "pid": 33531,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 550
+        },
+        "sample_count": 550
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 5,
+      "before": {
+        "pid": 33553,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33553,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "second_after_add": {
+        "pid": 33559,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33553,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 552
+        },
+        "sample_count": 552
+      },
+      "second_after_reload": {
+        "pid": 33559,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_delete": {
+        "pid": 33553,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 6,
+      "before": {
+        "pid": 33573,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33573,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "second_after_add": {
+        "pid": 33581,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33573,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 562
+        },
+        "sample_count": 562
+      },
+      "second_after_reload": {
+        "pid": 33581,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 33573,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 547
+        },
+        "sample_count": 547
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 7,
+      "before": {
+        "pid": 33595,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33595,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "second_after_add": {
+        "pid": 33603,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33595,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "second_after_reload": {
+        "pid": 33603,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 553
+        },
+        "sample_count": 553
+      },
+      "after_delete": {
+        "pid": 33595,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 8,
+      "before": {
+        "pid": 33617,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33617,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "second_after_add": {
+        "pid": 33623,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33617,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 557
+        },
+        "sample_count": 557
+      },
+      "second_after_reload": {
+        "pid": 33623,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_delete": {
+        "pid": 33617,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 9,
+      "before": {
+        "pid": 33639,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33639,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "second_after_add": {
+        "pid": 33645,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33639,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 561
+        },
+        "sample_count": 561
+      },
+      "second_after_reload": {
+        "pid": 33645,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "after_delete": {
+        "pid": 33639,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "partial",
+      "repetition": 10,
+      "before": {
+        "pid": 33659,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "after_add": {
+        "pid": 33659,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 562
+        },
+        "sample_count": 562
+      },
+      "second_after_add": {
+        "pid": 33667,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "reload": {
+        "success": false,
+        "message": "Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested",
+        "targets_count": 2
+      },
+      "after_reload": {
+        "pid": 33659,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "second_after_reload": {
+        "pid": 33667,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 562
+        },
+        "sample_count": 562
+      },
+      "after_delete": {
+        "pid": 33659,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 555
+        },
+        "sample_count": 555
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 1,
+      "before": {
+        "pid": 33681,
+        "address": "0x55b9345791a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33681,
+        "address": "0x55b9345791a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33681,
+        "address": "0x55b9345791a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 555
+        },
+        "sample_count": 555
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 2,
+      "before": {
+        "pid": 33695,
+        "address": "0x563f6747f1a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33695,
+        "address": "0x563f6747f1a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33695,
+        "address": "0x563f6747f1a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 3,
+      "before": {
+        "pid": 33709,
+        "address": "0x55d391b831a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33709,
+        "address": "0x55d391b831a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33709,
+        "address": "0x55d391b831a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 4,
+      "before": {
+        "pid": 33723,
+        "address": "0x555c92cf41a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 33723,
+        "address": "0x555c92cf41a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33723,
+        "address": "0x555c92cf41a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 5,
+      "before": {
+        "pid": 33735,
+        "address": "0x55c5297951a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_add": {
+        "pid": 33735,
+        "address": "0x55c5297951a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33735,
+        "address": "0x55c5297951a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 6,
+      "before": {
+        "pid": 33753,
+        "address": "0x55ab858c51a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33753,
+        "address": "0x55ab858c51a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33753,
+        "address": "0x55ab858c51a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 7,
+      "before": {
+        "pid": 33767,
+        "address": "0x555d4627d1a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 33767,
+        "address": "0x555d4627d1a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33767,
+        "address": "0x555d4627d1a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 8,
+      "before": {
+        "pid": 33781,
+        "address": "0x56462ead31a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33781,
+        "address": "0x56462ead31a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 33781,
+        "address": "0x56462ead31a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 9,
+      "before": {
+        "pid": 33795,
+        "address": "0x55ca2f6791a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33795,
+        "address": "0x55ca2f6791a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33795,
+        "address": "0x55ca2f6791a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "formal",
+      "case": "pie",
+      "repetition": 10,
+      "before": {
+        "pid": 33809,
+        "address": "0x55954b54d1a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 33809,
+        "address": "0x55954b54d1a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 33809,
+        "address": "0x55954b54d1a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 1,
+      "before": {
+        "pid": 34034,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34034,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34034,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "after_delete": {
+        "pid": 34034,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 2,
+      "before": {
+        "pid": 34048,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34048,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34048,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 558
+        },
+        "sample_count": 558
+      },
+      "after_delete": {
+        "pid": 34048,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 3,
+      "before": {
+        "pid": 34062,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34062,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 559
+        },
+        "sample_count": 559
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34062,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 565
+        },
+        "sample_count": 565
+      },
+      "after_delete": {
+        "pid": 34062,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 4,
+      "before": {
+        "pid": 34076,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34076,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 559
+        },
+        "sample_count": 559
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34076,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34076,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 5,
+      "before": {
+        "pid": 34090,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34090,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 558
+        },
+        "sample_count": 558
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34090,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34090,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 6,
+      "before": {
+        "pid": 34104,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 34104,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34104,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34104,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 7,
+      "before": {
+        "pid": 34118,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34118,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34118,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34118,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 563
+        },
+        "sample_count": 563
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 8,
+      "before": {
+        "pid": 34132,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34132,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34132,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 34132,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 9,
+      "before": {
+        "pid": 34146,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557
+      },
+      "after_add": {
+        "pid": 34146,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34146,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34146,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "compatible-reload",
+      "repetition": 10,
+      "before": {
+        "pid": 34160,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "after_add": {
+        "pid": 34160,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34160,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34160,
+        "address": "0x401180",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 559
+        },
+        "sample_count": 559
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 1,
+      "before": {
+        "pid": 34176,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34176,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34176,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34176,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 2,
+      "before": {
+        "pid": 34190,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 34190,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34190,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34190,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 558
+        },
+        "sample_count": 558
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 3,
+      "before": {
+        "pid": 34204,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34204,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34204,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 1,
+          "99": 564
+        },
+        "sample_count": 565
+      },
+      "after_delete": {
+        "pid": 34204,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": false
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 4,
+      "before": {
+        "pid": 34218,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34218,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34218,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 561
+        },
+        "sample_count": 561
+      },
+      "after_delete": {
+        "pid": 34218,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 5,
+      "before": {
+        "pid": 34232,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 561
+        },
+        "sample_count": 561
+      },
+      "after_add": {
+        "pid": 34232,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 567
+        },
+        "sample_count": 567
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34232,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34232,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 547
+        },
+        "sample_count": 547
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 6,
+      "before": {
+        "pid": 34246,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564
+      },
+      "after_add": {
+        "pid": 34246,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 561
+        },
+        "sample_count": 561
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34246,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34246,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 7,
+      "before": {
+        "pid": 34260,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34260,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34260,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34260,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 8,
+      "before": {
+        "pid": 34274,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34274,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34274,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34274,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 9,
+      "before": {
+        "pid": 34288,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34288,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34288,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "after_delete": {
+        "pid": 34288,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "reload-returns",
+      "case": "cooperative-reload",
+      "repetition": 10,
+      "before": {
+        "pid": 34302,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560
+      },
+      "after_add": {
+        "pid": 34302,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 34302,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560
+      },
+      "after_delete": {
+        "pid": 34302,
+        "address": "0x401190",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 1,
+      "before": {
+        "pid": 35483,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35483,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35483,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35483,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 554
+        },
+        "sample_count": 554,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 2,
+      "before": {
+        "pid": 35497,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35497,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35497,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35497,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 554
+        },
+        "sample_count": 554,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 3,
+      "before": {
+        "pid": 35511,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35511,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35511,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35511,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 4,
+      "before": {
+        "pid": 35525,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35525,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35525,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35525,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 552
+        },
+        "sample_count": 552,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 5,
+      "before": {
+        "pid": 35539,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35539,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35539,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35539,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 6,
+      "before": {
+        "pid": 35553,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 563
+        },
+        "sample_count": 563,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35553,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 561
+        },
+        "sample_count": 561,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35553,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 557
+        },
+        "sample_count": 557,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35553,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 7,
+      "before": {
+        "pid": 35567,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35567,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 561
+        },
+        "sample_count": 561,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35567,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35567,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 8,
+      "before": {
+        "pid": 35581,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35581,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35581,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35581,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 557
+        },
+        "sample_count": 557,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 9,
+      "before": {
+        "pid": 35595,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 563
+        },
+        "sample_count": 563,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35595,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 559
+        },
+        "sample_count": 559,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35595,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 563
+        },
+        "sample_count": 563,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35595,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    },
+    {
+      "batch": "timestamp-validation",
+      "case": "cooperative-reload",
+      "repetition": 10,
+      "before": {
+        "pid": 35609,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b80a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_add": {
+        "pid": 35609,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 560
+        },
+        "sample_count": 560,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "reload": {
+        "success": true,
+        "message": "Hotpatch reloaded: 1 target(s) processed",
+        "targets_count": 1
+      },
+      "after_reload": {
+        "pid": 35609,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "b863000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "99": 564
+        },
+        "sample_count": 564,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "after_delete": {
+        "pid": 35609,
+        "address": "0x4011a0",
+        "exit": null,
+        "entry": "cc0a000000c390909090909090909090",
+        "read_error": null,
+        "returns": {
+          "10": 556
+        },
+        "sample_count": 556,
+        "sample_clock": "target CLOCK_MONOTONIC call completion"
+      },
+      "matched": true
+    }
+  ]
+}

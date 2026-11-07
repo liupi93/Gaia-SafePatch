@@ -1,0 +1,32 @@
+{
+  "features": {
+    "file_io_agent": true,
+    "process_agent": true,
+    "network_agent": true,
+    "hotpatch_agent": true,
+    "anomaly_engine": true,
+    "symbol_resolver": true
+  },
+  "counters": {
+    "process": 44,
+    "hotpatch": 2,
+    "file_io": 1933,
+    "network": 5
+  },
+  "services": {
+    "sshd.service": {
+      "active_state": "active",
+      "sub_state": "running",
+      "state": "active (running)",
+      "pids": [
+        1457
+      ]
+    },
+    "nginx.service": {
+      "active_state": "inactive",
+      "sub_state": "dead",
+      "state": "inactive (dead)",
+      "pids": []
+    }
+  }
+}

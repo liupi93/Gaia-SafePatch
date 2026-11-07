@@ -1,0 +1,16 @@
+# release-build.log
+    Finished `release` profile [optimized] target(s) in 5m 26s
+
+# daemon.log - startup
+[INFO  gaia_xdp] eBPF object loaded
+[INFO  gaia_xdp] file I/O agent attached
+[INFO  gaia_xdp] process & privilege agent attached
+[INFO  gaia_xdp] network telemetry agent attached
+[INFO  gaia_xdp::web] web api listening on http://127.0.0.1:17891
+
+# daemon.log - cooperative reload
+SafePatch write verified pid=12551 threads=9 active=0 switch_ns=742633076430 drain_us=21968
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_DIR>/three-modes-offline/high_frequency:target_value pid=12551 addr=0x401230 override_return_value=99
+[INFO  gaia_xdp::web] reload-hotpatch requested: 2 target(s)
+[WARN  gaia_xdp] failed to restore original code at pid=12551 addr=0x401230: thread 12552 did not enter ptrace stop
+[WARN  gaia_xdp::web] Hotpatch reload error: code restoration failed; retained for retry

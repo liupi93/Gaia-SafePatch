@@ -1,0 +1,13 @@
+{
+  "tested_commit": "be3dd66ecc1aa4479a490df8cfb8caefa9c2c836",
+  "base_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326",
+  "successful_installs": 40,
+  "successful_restorations": 40,
+  "restoration_failures": 0,
+  "verified_writes": 80,
+  "unsafe_writes": 0,
+  "calls_spanning_switches": 0,
+  "overlapping_intervals": 0,
+  "base_risk_overlapping_intervals": 409105,
+  "compatible_risk_overlapping_intervals": 385777
+}

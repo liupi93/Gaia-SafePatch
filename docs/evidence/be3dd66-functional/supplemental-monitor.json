@@ -1,0 +1,984 @@
+{
+  "result": {
+    "case": "monitoring",
+    "checks": {
+      "baseline_bind_allowed": true,
+      "sensitive_file_high": true,
+      "custom_sensitive_file_high": false,
+      "exec_high": true,
+      "ordinary_setuid_high": true,
+      "ordinary_no_critical": true,
+      "service_setuid_high": true,
+      "service_setuid_critical": true,
+      "bind_blocked": true,
+      "connect_blocked": true,
+      "port_alert": true
+    },
+    "matched": false,
+    "ordinary_pid": 31870,
+    "service_pids": [
+      31853
+    ],
+    "custom_pid": 31871,
+    "custom_open_event_seen": true,
+    "cleanup_bind_allowed": true
+  },
+  "alerts": [
+    {
+      "level": "medium",
+      "reason": "monitored service [gaia-functional-31807.service] network activity: 0.0.0.0:45444",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered (cgroup:port-blocked)",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "medium",
+      "reason": "monitored service [gaia-functional-31807.service] network activity: 127.0.0.1:45444",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered ()",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "medium",
+      "reason": "monitored service [gaia-functional-31807.service] network activity: 0.0.0.0:45444",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered (cgroup:port-blocked)",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "medium",
+      "reason": "monitored service [gaia-functional-31807.service] network activity: 127.0.0.1:45444",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered ()",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        },
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "monitored service [gaia-functional-31807.service] privilege change: setuid:0",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "privilege",
+        "action": "alert",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "setuid:0",
+        "network": null,
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "high",
+      "reason": "privilege change detected",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "privilege",
+        "action": "alert",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "setuid:0",
+        "network": null,
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "high",
+      "reason": "monitored service [gaia-functional-31807.service] accessed sensitive file: /var/lib/gaia/functional-marker-31807",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "file_io",
+        "action": "alert",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "/var/lib/gaia/functional-marker-31807",
+        "network": null,
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "high",
+      "reason": "sensitive file accessed",
+      "event": {
+        "timestamp_ns": 1794057990743,
+        "kind": "file_io",
+        "action": "alert",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-service",
+        "detail": "/var/lib/gaia/functional-marker-31807",
+        "network": null,
+        "service": "gaia-functional-31807.service"
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered (cgroup:port-blocked)",
+      "event": {
+        "timestamp_ns": 1794057990677,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31871,
+        "tgid": 31871,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-custom",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        }
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered ()",
+      "event": {
+        "timestamp_ns": 1794057990677,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31871,
+        "tgid": 31871,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-custom",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        }
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered (cgroup:port-blocked)",
+      "event": {
+        "timestamp_ns": 1794057990677,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31871,
+        "tgid": 31871,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-custom",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        }
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered ()",
+      "event": {
+        "timestamp_ns": 1794057990677,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31871,
+        "tgid": 31871,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-custom",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        }
+      }
+    },
+    {
+      "level": "high",
+      "reason": "privilege change detected",
+      "event": {
+        "timestamp_ns": 1794057990677,
+        "kind": "privilege",
+        "action": "alert",
+        "pid": 31871,
+        "tgid": 31871,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-custom",
+        "detail": "setuid:0",
+        "network": null
+      }
+    },
+    {
+      "level": "high",
+      "reason": "execve target not in whitelist prefixes",
+      "event": {
+        "timestamp_ns": 1794057990677,
+        "kind": "process",
+        "action": "enter",
+        "pid": 31871,
+        "tgid": 31871,
+        "uid": 0,
+        "gid": 0,
+        "comm": "python3",
+        "detail": "<TEST_ROOT>/formal/monitor",
+        "network": null
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered (cgroup:port-blocked)",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-ordinary",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        }
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered ()",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-ordinary",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        }
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered (cgroup:port-blocked)",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-ordinary",
+        "detail": "cgroup:port-blocked",
+        "network": {
+          "port": 45444,
+          "address": "0.0.0.0"
+        }
+      }
+    },
+    {
+      "level": "critical",
+      "reason": "blocked port 45444 hit — active defense policy triggered ()",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "network",
+        "action": "blocked",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-ordinary",
+        "detail": "",
+        "network": {
+          "port": 45444,
+          "address": "127.0.0.1"
+        }
+      }
+    },
+    {
+      "level": "high",
+      "reason": "privilege change detected",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "privilege",
+        "action": "alert",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-ordinary",
+        "detail": "setuid:0",
+        "network": null
+      }
+    },
+    {
+      "level": "high",
+      "reason": "sensitive file accessed",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "file_io",
+        "action": "alert",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "gaia-ordinary",
+        "detail": "/var/lib/gaia/functional-marker-31807",
+        "network": null
+      }
+    },
+    {
+      "level": "high",
+      "reason": "execve target not in whitelist prefixes",
+      "event": {
+        "timestamp_ns": 1794057990676,
+        "kind": "process",
+        "action": "enter",
+        "pid": 31870,
+        "tgid": 31870,
+        "uid": 0,
+        "gid": 0,
+        "comm": "python3",
+        "detail": "<TEST_ROOT>/formal/monitor",
+        "network": null
+      }
+    },
+    {
+      "level": "high",
+      "reason": "execve target not in whitelist prefixes",
+      "event": {
+        "timestamp_ns": 1794057985639,
+        "kind": "process",
+        "action": "enter",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "(monitor)",
+        "detail": "<TEST_ROOT>/formal/monitor",
+        "network": null
+      }
+    },
+    {
+      "level": "high",
+      "reason": "execve target not in whitelist prefixes",
+      "event": {
+        "timestamp_ns": 1794057985633,
+        "kind": "process",
+        "action": "enter",
+        "pid": 31853,
+        "tgid": 31853,
+        "uid": 0,
+        "gid": 0,
+        "comm": "systemd",
+        "detail": "/proc/self/fd/9",
+        "network": null
+      }
+    }
+  ],
+  "events": [
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "cgroup:port-blocked",
+      "network": {
+        "port": 45444,
+        "address": "0.0.0.0"
+      },
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "",
+      "network": {
+        "port": 45444,
+        "address": "127.0.0.1"
+      },
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "cgroup:port-blocked",
+      "network": {
+        "port": 45444,
+        "address": "0.0.0.0"
+      },
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "",
+      "network": {
+        "port": 45444,
+        "address": "127.0.0.1"
+      },
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "privilege",
+      "action": "alert",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "setuid:0",
+      "network": null,
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "3",
+      "network": null,
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990743,
+      "kind": "file_io",
+      "action": "alert",
+      "pid": 31853,
+      "tgid": 31853,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-service",
+      "detail": "/var/lib/gaia/functional-marker-31807",
+      "network": null,
+      "service": "gaia-functional-31807.service"
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "cgroup:port-blocked",
+      "network": {
+        "port": 45444,
+        "address": "0.0.0.0"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "",
+      "network": {
+        "port": 45444,
+        "address": "127.0.0.1"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "cgroup:port-blocked",
+      "network": {
+        "port": 45444,
+        "address": "0.0.0.0"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "",
+      "network": {
+        "port": 45444,
+        "address": "127.0.0.1"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "privilege",
+      "action": "alert",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "setuid:0",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "3",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "file_io",
+      "action": "enter",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-custom",
+      "detail": "<TEST_ROOT>/formal/monitoring/custom-sensitive-marker",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "3",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "file_io",
+      "action": "enter",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "/usr/lib64/libc.so.6",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "3",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "file_io",
+      "action": "enter",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "/etc/ld.so.cache",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990677,
+      "kind": "process",
+      "action": "enter",
+      "pid": 31871,
+      "tgid": 31871,
+      "uid": 0,
+      "gid": 0,
+      "comm": "python3",
+      "detail": "<TEST_ROOT>/formal/monitor",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "cgroup:port-blocked",
+      "network": {
+        "port": 45444,
+        "address": "0.0.0.0"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "",
+      "network": {
+        "port": 45444,
+        "address": "127.0.0.1"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "cgroup:port-blocked",
+      "network": {
+        "port": 45444,
+        "address": "0.0.0.0"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "network",
+      "action": "blocked",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "",
+      "network": {
+        "port": 45444,
+        "address": "127.0.0.1"
+      }
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "privilege",
+      "action": "alert",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "setuid:0",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "3",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "file_io",
+      "action": "alert",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "gaia-ordinary",
+      "detail": "/var/lib/gaia/functional-marker-31807",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "3",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "file_io",
+      "action": "enter",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "/usr/lib64/libc.so.6",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "file_io",
+      "action": "exit",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "3",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "file_io",
+      "action": "enter",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "monitor",
+      "detail": "/etc/ld.so.cache",
+      "network": null
+    },
+    {
+      "timestamp_ns": 1794057990676,
+      "kind": "process",
+      "action": "enter",
+      "pid": 31870,
+      "tgid": 31870,
+      "uid": 0,
+      "gid": 0,
+      "comm": "python3",
+      "detail": "<TEST_ROOT>/formal/monitor",
+      "network": null
+    }
+  ],
+  "config": "rate_limit_rules = []\nsensitive_prefixes = [{\"value\" = \"/var/lib/gaia/functional-marker-31807\", \"enabled\" = true}, {\"value\" = \"<TEST_ROOT>/formal/monitoring/custom-sensitive-marker\", \"enabled\" = true}]\nmonitored_services = [{\"value\" = \"gaia-functional-31807.service\", \"enabled\" = true}]\nexec_whitelist_prefixes = [{\"value\" = \"/usr/bin\", \"enabled\" = true}, {\"value\" = \"/bin\", \"enabled\" = true}, {\"value\" = \"/usr/sbin\", \"enabled\" = true}]\nblocked_ports = [{port = 45444, enabled = true}]\n[baseline_thresholds]\nfile_io = 1000000\nprocess = 1000000\nnetwork = 1000000\nprivilege = 1000000\nhotpatch = 1000000\n[hotpatch]\ntargets = []\nkernel_livepatch = []\n",
+  "process_outputs": {
+    "baseline": {
+      "argv": [
+        "<TEST_ROOT>/formal/monitor",
+        "gaia-ordinary",
+        "-",
+        "/var/lib/gaia/functional-marker-31807",
+        "45444"
+      ],
+      "rc": 0,
+      "output": "{\"pid\":31843,\"file_open\":true,\"setuid_rc\":0,\"setuid_errno\":0,\"bind_rc\":0,\"bind_errno\":0,\"connect_rc\":-1,\"connect_errno\":111}\n"
+    },
+    "ordinary": {
+      "argv": [
+        "<TEST_ROOT>/formal/monitor",
+        "gaia-ordinary",
+        "-",
+        "/var/lib/gaia/functional-marker-31807",
+        "45444"
+      ],
+      "rc": 0,
+      "output": "{\"pid\":31870,\"file_open\":true,\"setuid_rc\":0,\"setuid_errno\":0,\"bind_rc\":-1,\"bind_errno\":1,\"connect_rc\":-1,\"connect_errno\":1}\n"
+    },
+    "custom-prefix": {
+      "argv": [
+        "<TEST_ROOT>/formal/monitor",
+        "gaia-custom",
+        "-",
+        "<TEST_ROOT>/formal/monitoring/custom-sensitive-marker",
+        "45444"
+      ],
+      "rc": 0,
+      "output": "{\"pid\":31871,\"file_open\":true,\"setuid_rc\":0,\"setuid_errno\":0,\"bind_rc\":-1,\"bind_errno\":1,\"connect_rc\":-1,\"connect_errno\":1}\n"
+    },
+    "after-cleanup": {
+      "argv": [
+        "<TEST_ROOT>/formal/monitor",
+        "gaia-ordinary",
+        "-",
+        "/var/lib/gaia/functional-marker-31807",
+        "45444"
+      ],
+      "rc": 0,
+      "output": "{\"pid\":31877,\"file_open\":true,\"setuid_rc\":0,\"setuid_errno\":0,\"bind_rc\":0,\"bind_errno\":0,\"connect_rc\":-1,\"connect_errno\":111}\n"
+    }
+  }
+}

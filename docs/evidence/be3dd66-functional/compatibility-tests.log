@@ -1,0 +1,17 @@
+     Locking 2 packages to highest Rust 1.101.0-nightly compatible versions
+   Compiling libc v0.2.191
+   Compiling anyhow v1.0.104
+   Compiling safepatch-validation v0.1.0 (<TEST_DIR>/src/tests/safepatch)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.02s
+40 verified writes, all 9 threads stopped and RIP clear
+20 installs/restores, original bytes, readback, invalid input verified
+RIP conflict retries/timeout verified
+   Compiling safepatch-validation v0.1.0 (<TEST_DIR>/src/tests/safepatch)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.76s
+     Running unittests compat_driver.rs (target/debug/build/safepatch-validation/06dfc02fc520dafa/out/safepatch_compat_validation-06dfc02fc520dafa)
+
+running 1 test
+test safepatch::tests::partial_write_rollback_and_fatal_rollback ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

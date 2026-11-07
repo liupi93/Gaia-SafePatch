@@ -1,0 +1,6 @@
+OBSERVATION_API {'advisory_only': True, 'calls': [], 'errors': 0}
+AFTER_ADD cooperative b863000000c39090 exit= None
+{"mode": "cooperative", "pid": 12551, "reload": {"success": false, "message": "Hotpatch reload error: code restoration failed; retained for retry", "targets_count": 2}, "before": "554889e5b80a0000", "after": "", "restored": "", "observation_errors": 0, "observed_threads": 8, "target_exit": -11}
+Traceback (most recent call last):
+  File "<stdin>", line 78, in <module>
+AssertionError: [False]

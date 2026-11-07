@@ -4,8 +4,10 @@
 
 建议按下面的顺序阅读：
 
+0. [项目说明](project-guide.md)：项目全貌，包括本组工作、安装运行、测试与性能结果、已知问题和分工。**第一次阅读从这里开始。**
 1. [从零理解安全热补丁](safepatch-explained.md)：为什么会出问题，门禁、排空和暂停分别解决什么问题，以及代码如何实现。
 2. [运行测试与解读结果](safepatch-testing.md)：一键测试、日志含义、原版风险对照、性能数据和排错方法。
+3. [功能测试与边界分析报告](functional-test-report.md)：在 `be3dd66` 上的首轮与服务器补测结果、reload core 分析、自定义敏感路径漏报和剩余验收项。证据在 [evidence/be3dd66-functional](evidence/be3dd66-functional/README.md)，复现入口见 [功能测试脚本](../tests/functional/README.md)。
 
 如果只想找到代码，从这些文件入手：
 

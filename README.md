@@ -19,7 +19,9 @@
 
 ## Gaia-SafePatch 入门文档
 
-安全热补丁的实现原理、协作协议、测试命令和实测结果解读，见 [docs 文档导航](docs/README.md)。
+项目全貌、安装运行、测试结果和已知问题，见 [项目说明](docs/project-guide.md)。安全热补丁的实现原理、协作协议和测试命令，见 [docs 文档导航](docs/README.md)。
+
+> 下文的架构和特性说明来自原项目 Gaia。其中 ARM64 指监控部分的设计目标；本组新增的 SafePatch 热补丁写入路径目前只支持 Linux x86_64。
 
 ## 📖 项目简介
 

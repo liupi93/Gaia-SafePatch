@@ -1,0 +1,59 @@
+{
+  "before": {
+    "link": {
+      "argv": [
+        "bpftool",
+        "-j",
+        "link",
+        "show"
+      ],
+      "rc": 0,
+      "output": "[{\"id\":1,\"type\":\"perf_event\",\"prog_id\":32},{\"id\":2,\"type\":\"perf_event\",\"prog_id\":34},{\"id\":3,\"type\":\"perf_event\",\"prog_id\":35},{\"id\":4,\"type\":\"raw_tracepoint\",\"prog_id\":64,\"tp_name\":\"sched_process_fork\"},{\"id\":5,\"type\":\"raw_tracepoint\",\"prog_id\":65,\"tp_name\":\"sched_process_exec\"},{\"id\":6,\"type\":\"raw_tracepoint\",\"prog_id\":66,\"tp_name\":\"sched_process_exit\"},{\"id\":433,\"type\":\"perf_event\",\"prog_id\":569},{\"id\":434,\"type\":\"perf_event\",\"prog_id\":571},{\"id\":435,\"type\":\"perf_event\",\"prog_id\":572},{\"id\":436,\"type\":\"perf_event\",\"prog_id\":573},{\"id\":437,\"type\":\"perf_event\",\"prog_id\":574},{\"id\":438,\"type\":\"perf_event\",\"prog_id\":575},{\"id\":439,\"type\":\"perf_event\",\"prog_id\":576},{\"id\":440,\"type\":\"perf_event\",\"prog_id\":577},{\"id\":441,\"type\":\"cgroup\",\"prog_id\":578,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet4_connect\"},{\"id\":442,\"type\":\"cgroup\",\"prog_id\":579,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet4_bind\"},{\"id\":443,\"type\":\"cgroup\",\"prog_id\":580,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet6_connect\"},{\"id\":444,\"type\":\"cgroup\",\"prog_id\":581,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet6_bind\"},{\"id\":445,\"type\":\"perf_event\",\"prog_id\":582},{\"id\":446,\"type\":\"perf_event\",\"prog_id\":583}]\n"
+    },
+    "perf": {
+      "argv": [
+        "bpftool",
+        "-j",
+        "perf",
+        "show"
+      ],
+      "rc": 0,
+      "output": "[{\"pid\":1695,\"fd\":83,\"prog_id\":32,\"fd_type\":\"kprobe\",\"func\":\"security_path_mknod\",\"offset\":0},{\"pid\":1695,\"fd\":85,\"prog_id\":34,\"fd_type\":\"kprobe\",\"func\":\"security_path_unlink\",\"offset\":0},{\"pid\":1695,\"fd\":87,\"prog_id\":35,\"fd_type\":\"kprobe\",\"func\":\"security_path_rename\",\"offset\":0},{\"pid\":1695,\"fd\":89,\"prog_id\":64,\"fd_type\":\"raw_tracepoint\",\"tracepoint\":\"sched_process_fork\"},{\"pid\":1695,\"fd\":90,\"prog_id\":65,\"fd_type\":\"raw_tracepoint\",\"tracepoint\":\"sched_process_exec\"},{\"pid\":1695,\"fd\":91,\"prog_id\":66,\"fd_type\":\"raw_tracepoint\",\"tracepoint\":\"sched_process_exit\"}]\n"
+    }
+  },
+  "after": {
+    "link": {
+      "argv": [
+        "bpftool",
+        "-j",
+        "link",
+        "show"
+      ],
+      "rc": 0,
+      "output": "[{\"id\":1,\"type\":\"perf_event\",\"prog_id\":32},{\"id\":2,\"type\":\"perf_event\",\"prog_id\":34},{\"id\":3,\"type\":\"perf_event\",\"prog_id\":35},{\"id\":4,\"type\":\"raw_tracepoint\",\"prog_id\":64,\"tp_name\":\"sched_process_fork\"},{\"id\":5,\"type\":\"raw_tracepoint\",\"prog_id\":65,\"tp_name\":\"sched_process_exec\"},{\"id\":6,\"type\":\"raw_tracepoint\",\"prog_id\":66,\"tp_name\":\"sched_process_exit\"},{\"id\":433,\"type\":\"perf_event\",\"prog_id\":569},{\"id\":434,\"type\":\"perf_event\",\"prog_id\":571},{\"id\":435,\"type\":\"perf_event\",\"prog_id\":572},{\"id\":436,\"type\":\"perf_event\",\"prog_id\":573},{\"id\":437,\"type\":\"perf_event\",\"prog_id\":574},{\"id\":438,\"type\":\"perf_event\",\"prog_id\":575},{\"id\":439,\"type\":\"perf_event\",\"prog_id\":576},{\"id\":440,\"type\":\"perf_event\",\"prog_id\":577},{\"id\":441,\"type\":\"cgroup\",\"prog_id\":578,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet4_connect\"},{\"id\":442,\"type\":\"cgroup\",\"prog_id\":579,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet4_bind\"},{\"id\":443,\"type\":\"cgroup\",\"prog_id\":580,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet6_connect\"},{\"id\":444,\"type\":\"cgroup\",\"prog_id\":581,\"cgroup_id\":1,\"attach_type\":\"cgroup_inet6_bind\"},{\"id\":445,\"type\":\"perf_event\",\"prog_id\":582},{\"id\":446,\"type\":\"perf_event\",\"prog_id\":583},{\"id\":447,\"type\":\"perf_event\",\"prog_id\":582},{\"id\":448,\"type\":\"perf_event\",\"prog_id\":583}]\n"
+    },
+    "perf": {
+      "argv": [
+        "bpftool",
+        "-j",
+        "perf",
+        "show"
+      ],
+      "rc": 0,
+      "output": "[{\"pid\":1695,\"fd\":83,\"prog_id\":32,\"fd_type\":\"kprobe\",\"func\":\"security_path_mknod\",\"offset\":0},{\"pid\":1695,\"fd\":85,\"prog_id\":34,\"fd_type\":\"kprobe\",\"func\":\"security_path_unlink\",\"offset\":0},{\"pid\":1695,\"fd\":87,\"prog_id\":35,\"fd_type\":\"kprobe\",\"func\":\"security_path_rename\",\"offset\":0},{\"pid\":1695,\"fd\":89,\"prog_id\":64,\"fd_type\":\"raw_tracepoint\",\"tracepoint\":\"sched_process_fork\"},{\"pid\":1695,\"fd\":90,\"prog_id\":65,\"fd_type\":\"raw_tracepoint\",\"tracepoint\":\"sched_process_exec\"},{\"pid\":1695,\"fd\":91,\"prog_id\":66,\"fd_type\":\"raw_tracepoint\",\"tracepoint\":\"sched_process_exit\"}]\n"
+    }
+  },
+  "new_links": [
+    {
+      "id": 447,
+      "type": "perf_event",
+      "prog_id": 582
+    },
+    {
+      "id": 448,
+      "type": "perf_event",
+      "prog_id": 583
+    }
+  ],
+  "limitation": "bpftool 7.2 perf show did not expose Gaia uprobes here; link show adds two perf_event links. Do not infer absence from perf output."
+}

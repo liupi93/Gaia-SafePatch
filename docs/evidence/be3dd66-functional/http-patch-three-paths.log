@@ -1,0 +1,7 @@
+OBSERVATION_API {'advisory_only': True, 'calls': [], 'errors': 0}
+{"mode": "cooperative-missing-abi", "pid": 12182, "reload": {"success": false, "message": "Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested", "targets_count": 2}, "before": "b80a000000c39090", "after": "cc0a000000c39090", "restored": "cc0a000000c39090", "observation_errors": 0, "observed_threads": 8, "target_alive": true}
+{"mode": "compatible", "pid": 12192, "reload": {"success": true, "message": "Hotpatch reloaded: 2 target(s) processed", "targets_count": 2}, "before": "b80a000000c39090", "after": "b863000000c39090", "restored": "cc0a000000c39090", "observation_errors": 58, "observed_threads": 8, "target_alive": true}
+{"mode": "cooperative", "pid": 12202, "reload": {"success": false, "message": "Hotpatch reload error: code restoration failed; retained for retry", "targets_count": 2}, "before": "554889e5b80a0000", "after": "", "restored": "", "observation_errors": 92, "observed_threads": 8, "target_alive": false}
+Traceback (most recent call last):
+  File "<stdin>", line 72, in <module>
+AssertionError: [True, True, False]

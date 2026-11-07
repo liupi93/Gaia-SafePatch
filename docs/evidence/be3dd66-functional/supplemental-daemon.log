@@ -1,0 +1,191 @@
+# formal/reload-original-01/daemon.log
+[INFO  gaia_xdp] policy loaded from <TEST_ROOT>/formal/reload-original-01/gaia.toml
+[INFO  gaia_xdp] eBPF object loaded
+[INFO  gaia_xdp] file I/O agent attached
+[INFO  gaia_xdp] process & privilege agent attached
+[INFO  gaia_xdp] network telemetry agent attached
+[INFO  gaia_xdp] hot-patch kprobe guard attached on tcp_connect
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect6 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind6 on /sys/fs/cgroup
+[INFO  gaia_xdp] blocked ports configured: [] (0 enabled / 0 total)
+[INFO  gaia_xdp] rate limit rules configured: 0 rule(s)
+[INFO  gaia_xdp] AI analysis system: enabled=false
+[INFO  gaia_xdp] ktime anchor: unix_epoch_ms=1794058007291, ktime_ns=8367820000000
+[INFO  gaia_xdp] event history db opened: <TEST_ROOT>/formal/reload-original-01/events.db
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+[INFO  gaia_xdp::web] serving embedded WebUI (5 files)
+[INFO  gaia_xdp::web] web api listening on http://127.0.0.1:17892
+[INFO  gaia_xdp] gaia controller started — press Ctrl-C to stop
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/original:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/original:target_value pid=32093 => 0x401230
+SafePatch write verified pid=32093 threads=9 active=0 switch_ns=8368158379502 drain_us=46126
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/formal/original:target_value pid=32093 addr=0x401230 override_return_value=99
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/reload-original-01/gaia.toml
+[INFO  gaia_xdp::web] reload-hotpatch requested: 1 target(s)
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/original:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/original:target_value pid=32093 => 0x401230
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+[WARN  gaia_xdp] failed to restore original code at pid=32093 addr=0x401230: thread 32096 did not enter ptrace stop
+[WARN  gaia_xdp::web] Hotpatch reload error: code restoration failed; retained for retry
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+[WARN  gaia_xdp] failed to restore original code at pid=32093 addr=0x401230: No such file or directory (os error 2)
+[WARN  gaia_xdp] SafePatch: existing code patches must be restored successfully before applying a new set
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/reload-original-01/gaia.toml
+[INFO  gaia_xdp] gaia controller exiting
+
+# formal/replace-cooperative-01/daemon.log
+[INFO  gaia_xdp] policy loaded from <TEST_ROOT>/formal/replace-cooperative-01/gaia.toml
+[INFO  gaia_xdp] eBPF object loaded
+[INFO  gaia_xdp] file I/O agent attached
+[INFO  gaia_xdp] process & privilege agent attached
+[INFO  gaia_xdp] network telemetry agent attached
+[INFO  gaia_xdp] hot-patch kprobe guard attached on tcp_connect
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect6 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind6 on /sys/fs/cgroup
+[INFO  gaia_xdp] blocked ports configured: [] (0 enabled / 0 total)
+[INFO  gaia_xdp] rate limit rules configured: 0 rule(s)
+[INFO  gaia_xdp] AI analysis system: enabled=false
+[INFO  gaia_xdp] ktime anchor: unix_epoch_ms=1794058066817, ktime_ns=8427350000000
+[INFO  gaia_xdp] event history db opened: <TEST_ROOT>/formal/replace-cooperative-01/events.db
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+[INFO  gaia_xdp::web] serving embedded WebUI (5 files)
+[INFO  gaia_xdp::web] web api listening on http://127.0.0.1:17892
+[INFO  gaia_xdp] gaia controller started — press Ctrl-C to stop
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/return:target_value pid=33122 => 0x401190
+[WARN  gaia_xdp] SafePatch rejects replace_function: remote dlopen injection is outside the cooperative ABI
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/replace-cooperative-01/gaia.toml
+[INFO  gaia_xdp::web] reload-hotpatch requested: 1 target(s)
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/return:target_value pid=33122 => 0x401190
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+[WARN  gaia_xdp] SafePatch rejects replace_function: remote dlopen injection is outside the cooperative ABI
+[WARN  gaia_xdp::web] Hotpatch reload error: machine-code patch failure: 0 verified of 1 requested
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/replace-cooperative-01/gaia.toml
+[INFO  gaia_xdp] gaia controller exiting
+
+# formal/partial-01/daemon.log
+[INFO  gaia_xdp] policy loaded from <TEST_ROOT>/formal/partial-01/gaia.toml
+[INFO  gaia_xdp] eBPF object loaded
+[INFO  gaia_xdp] file I/O agent attached
+[INFO  gaia_xdp] process & privilege agent attached
+[INFO  gaia_xdp] network telemetry agent attached
+[INFO  gaia_xdp] hot-patch kprobe guard attached on tcp_connect
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect6 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind6 on /sys/fs/cgroup
+[INFO  gaia_xdp] blocked ports configured: [] (0 enabled / 0 total)
+[INFO  gaia_xdp] rate limit rules configured: 0 rule(s)
+[INFO  gaia_xdp] AI analysis system: enabled=false
+[INFO  gaia_xdp] ktime anchor: unix_epoch_ms=1794058087609, ktime_ns=8448139999999
+[INFO  gaia_xdp] event history db opened: <TEST_ROOT>/formal/partial-01/events.db
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+[INFO  gaia_xdp::web] serving embedded WebUI (5 files)
+[INFO  gaia_xdp::web] web api listening on http://127.0.0.1:17892
+[INFO  gaia_xdp] gaia controller started — press Ctrl-C to stop
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/return:target_value pid=33465 => 0x401190
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8448398319237 drain_us=104
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/formal/return:target_value pid=33465 addr=0x401190 override_return_value=99
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/partial-01/gaia.toml
+[INFO  gaia_xdp] hotpatch PID filter updated: 2 enabled / 2 total
+[INFO  gaia_xdp] hotpatch rules synced: 2 total, 2 active override/skip rules
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/return:target_value pid=33465 => 0x401190
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/noabi:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/noabi:target_value pid=33473 => 0x401180
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8448557459963 drain_us=145
+[INFO  gaia_xdp] hotpatch code restored at pid=33465 addr=0x401190
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8448557631485 drain_us=84
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/formal/return:target_value pid=33465 addr=0x401190 override_return_value=99
+[WARN  gaia_xdp] failed to apply code patch at <TEST_ROOT>/formal/noabi:target_value pid=33473 addr=0x401180: target must implement the SafePatch cooperative ABI: symbol gaia_safepatch_state not found in <TEST_ROOT>/formal/noabi
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/partial-01/gaia.toml
+[INFO  gaia_xdp::web] reload-hotpatch requested: 2 target(s)
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/return:target_value pid=33465 => 0x401190
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/formal/noabi:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/formal/noabi:target_value pid=33473 => 0x401180
+[INFO  gaia_xdp] hotpatch PID filter updated: 2 enabled / 2 total
+[INFO  gaia_xdp] hotpatch rules synced: 2 total, 2 active override/skip rules
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8448718298109 drain_us=104
+[INFO  gaia_xdp] hotpatch code restored at pid=33465 addr=0x401190
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8448718435264 drain_us=65
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/formal/return:target_value pid=33465 addr=0x401190 override_return_value=99
+[WARN  gaia_xdp] failed to apply code patch at <TEST_ROOT>/formal/noabi:target_value pid=33473 addr=0x401180: target must implement the SafePatch cooperative ABI: symbol gaia_safepatch_state not found in <TEST_ROOT>/formal/noabi
+[WARN  gaia_xdp::web] Hotpatch reload error: machine-code patch failure: 1 verified of 2 requested
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8449020753508 drain_us=160
+[INFO  gaia_xdp] hotpatch code restored at pid=33465 addr=0x401190
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8449020909363 drain_us=87
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/formal/return:target_value pid=33465 addr=0x401190 override_return_value=99
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/partial-01/gaia.toml
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+SafePatch write verified pid=33465 threads=5 active=0 switch_ns=8449021952162 drain_us=80
+[INFO  gaia_xdp] hotpatch code restored at pid=33465 addr=0x401190
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/formal/partial-01/gaia.toml
+[INFO  gaia_xdp] gaia controller exiting
+
+# reload-returns/cooperative-reload-03/daemon.log
+[INFO  gaia_xdp] policy loaded from <TEST_ROOT>/reload-returns/cooperative-reload-03/gaia.toml
+[INFO  gaia_xdp] eBPF object loaded
+[INFO  gaia_xdp] file I/O agent attached
+[INFO  gaia_xdp] process & privilege agent attached
+[INFO  gaia_xdp] network telemetry agent attached
+[INFO  gaia_xdp] hot-patch kprobe guard attached on tcp_connect
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind4 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/connect6 on /sys/fs/cgroup
+[INFO  gaia_xdp] port blocking agent attached: cgroup/bind6 on /sys/fs/cgroup
+[INFO  gaia_xdp] blocked ports configured: [] (0 enabled / 0 total)
+[INFO  gaia_xdp] rate limit rules configured: 0 rule(s)
+[INFO  gaia_xdp] AI analysis system: enabled=false
+[INFO  gaia_xdp] ktime anchor: unix_epoch_ms=1794058146790, ktime_ns=8507320000000
+[INFO  gaia_xdp] event history db opened: <TEST_ROOT>/reload-returns/cooperative-reload-03/events.db
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+[INFO  gaia_xdp::web] serving embedded WebUI (5 files)
+[INFO  gaia_xdp::web] web api listening on http://127.0.0.1:17892
+[INFO  gaia_xdp] gaia controller started — press Ctrl-C to stop
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/reload-returns/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/reload-returns/return:target_value pid=34204 => 0x401190
+SafePatch write verified pid=34204 threads=5 active=0 switch_ns=8507578422275 drain_us=73
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/reload-returns/return:target_value pid=34204 addr=0x401190 override_return_value=99
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/reload-returns/cooperative-reload-03/gaia.toml
+[INFO  gaia_xdp::web] reload-hotpatch requested: 1 target(s)
+[INFO  gaia_xdp] hotpatch uprobe/uretprobe attached: <TEST_ROOT>/reload-returns/return:target_value
+[INFO  gaia_xdp] symbol resolved <TEST_ROOT>/reload-returns/return:target_value pid=34204 => 0x401190
+[INFO  gaia_xdp] hotpatch PID filter updated: 1 enabled / 1 total
+[INFO  gaia_xdp] hotpatch rules synced: 1 total, 1 active override/skip rules
+SafePatch write verified pid=34204 threads=5 active=0 switch_ns=8507734321451 drain_us=86
+[INFO  gaia_xdp] hotpatch code restored at pid=34204 addr=0x401190
+SafePatch write verified pid=34204 threads=5 active=0 switch_ns=8507734440093 drain_us=54
+[INFO  gaia_xdp] hotpatch code patch applied: <TEST_ROOT>/reload-returns/return:target_value pid=34204 addr=0x401190 override_return_value=99
+[INFO  gaia_xdp] hotpatch PID filter updated: 0 enabled / 0 total
+[INFO  gaia_xdp] hotpatch rules synced: 0 total, 0 active override/skip rules
+SafePatch write verified pid=34204 threads=5 active=0 switch_ns=8507886167361 drain_us=84
+[INFO  gaia_xdp] hotpatch code restored at pid=34204 addr=0x401190
+[INFO  gaia_xdp::web] config persisted to <TEST_ROOT>/reload-returns/cooperative-reload-03/gaia.toml
+[INFO  gaia_xdp] gaia controller exiting
