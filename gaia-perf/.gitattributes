@@ -1,0 +1,2 @@
+# Preserve recorded artifacts byte-for-byte so SHA256SUMS remains valid.
+recorded/** -text

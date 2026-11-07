@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "synthetic": false,
+  "variants": {
+    "original": {"binary": null, "build_manifest": null, "expected_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326", "extra_argv": [], "env": {}},
+    "optimized": {
+      "binary": null, "build_manifest": null, "extra_argv": [], "env": {},
+      "mechanisms": {"monitoring_enabled": true, "coordination_enabled": true, "activation_description": null}
+    }
+  },
+  "workload": {
+    "launch_argv": [], "binary": null, "target_symbol": null,
+    "control_protocol": "stdin-lines-v1", "ready_timeout_s": 8,
+    "process_model": "single-process-multithread", "metrics_format": "requests-v1", "env": {}
+  },
+  "patch": {
+    "library": null, "replacement_symbol": null, "target_index": 0,
+    "http_timeout_s": 8, "events_adapter": null
+  },
+  "experiment": {
+    "cases": [
+      {"id": "G1", "variant": "original", "mode": "steady"},
+      {"id": "G2", "variant": "original", "mode": "patch"},
+      {"id": "G3", "variant": "optimized", "mode": "steady"},
+      {"id": "G4", "variant": "optimized", "mode": "patch"}
+    ],
+    "threads": [4, 8], "repeats": 2, "warmup_s": 3, "duration_s": 20,
+    "patch_at_s": 8, "sample_interval_s": 1, "startup_budget_s": 8,
+    "drain_timeout_s": 2, "cleanup_budget_s": 4,
+    "suite_budget_s": 600, "suite_reserve_s": 40, "seed": 20261104,
+    "measure_lead_s": 0.15
+  },
+  "gaia": {"listen": "127.0.0.1:17890", "config_template": "templates/monitor.toml", "log_level": "warn"},
+  "environment_lock": null,
+  "environment": {"min_free_mib": 512, "expected_cgroup2": "/run/gaia-cgroup2"},
+  "output_root": "results"
+}

@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "suite_id": "20261107T035419Z-8ec480dc",
+  "synthetic": false,
+  "config": {
+    "schema_version": 1,
+    "synthetic": false,
+    "variants": {
+      "original": {
+        "binary": "/root/gaia-formal.4RaoIf/base/target/release/gaia-xdp",
+        "build_manifest": "/root/gaia-formal.4RaoIf/collector/base-build.json",
+        "expected_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326",
+        "extra_argv": [],
+        "env": {}
+      },
+      "optimized": {
+        "binary": "/root/gaia-formal.4RaoIf/main/target/release/gaia-xdp",
+        "build_manifest": "/root/gaia-formal.4RaoIf/collector/main-build.json",
+        "extra_argv": [],
+        "env": {},
+        "mechanisms": {
+          "monitoring_enabled": true,
+          "coordination_enabled": true,
+          "activation_description": "main cooperative patch mode and workload opt-in ABI, verified with target observations"
+        },
+        "expected_commit": "be3dd66ecc1aa4479a490df8cfb8caefa9c2c836"
+      }
+    },
+    "workload": {
+      "launch_argv": [
+        "{binary}"
+      ],
+      "binary": "/root/gaia-formal.4RaoIf/collector/workload",
+      "target_symbol": "target_value",
+      "control_protocol": "stdin-lines-v1",
+      "ready_timeout_s": 8,
+      "process_model": "single-process-multithread",
+      "metrics_format": "requests-v1",
+      "env": {},
+      "safepatch_abi": true
+    },
+    "patch": {
+      "library": null,
+      "replacement_symbol": null,
+      "target_index": 0,
+      "http_timeout_s": 8,
+      "events_adapter": "csv-v1",
+      "action": "override_return",
+      "override_return_value": 99
+    },
+    "experiment": {
+      "cases": [
+        {
+          "id": "G1",
+          "variant": "original",
+          "mode": "steady"
+        },
+        {
+          "id": "G2",
+          "variant": "original",
+          "mode": "patch"
+        },
+        {
+          "id": "G3",
+          "variant": "optimized",
+          "mode": "steady"
+        },
+        {
+          "id": "G4",
+          "variant": "optimized",
+          "mode": "patch"
+        }
+      ],
+      "threads": [
+        4,
+        8
+      ],
+      "repeats": 2,
+      "warmup_s": 3,
+      "duration_s": 20,
+      "patch_at_s": 8,
+      "sample_interval_s": 1,
+      "startup_budget_s": 8,
+      "drain_timeout_s": 2,
+      "cleanup_budget_s": 4,
+      "suite_budget_s": 600,
+      "suite_reserve_s": 40,
+      "seed": 20261104,
+      "measure_lead_s": 0.15
+    },
+    "gaia": {
+      "listen": "127.0.0.1:17890",
+      "config_template": "/root/gaia-formal.4RaoIf/collector/templates/monitor.toml",
+      "log_level": "warn"
+    },
+    "environment_lock": "/root/gaia-formal.4RaoIf/collector/environment.lock.json",
+    "environment": {
+      "min_free_mib": 512,
+      "expected_cgroup2": "/run/gaia-cgroup2"
+    },
+    "output_root": "/root/gaia-formal.4RaoIf/collector/results",
+    "_config_dir": "/root/gaia-formal.4RaoIf/collector"
+  },
+  "plan": [
+    {
+      "case_id": "G3",
+      "variant": "optimized",
+      "mode": "steady",
+      "threads": 4,
+      "repeat": 1,
+      "workload_seed": 1387151110,
+      "run_id": "01-G3-t4-r1"
+    },
+    {
+      "case_id": "G1",
+      "variant": "original",
+      "mode": "steady",
+      "threads": 4,
+      "repeat": 1,
+      "workload_seed": 1387151110,
+      "run_id": "02-G1-t4-r1"
+    },
+    {
+      "case_id": "G1",
+      "variant": "original",
+      "mode": "steady",
+      "threads": 4,
+      "repeat": 2,
+      "workload_seed": 2142219592,
+      "run_id": "03-G1-t4-r2"
+    },
+    {
+      "case_id": "G3",
+      "variant": "optimized",
+      "mode": "steady",
+      "threads": 4,
+      "repeat": 2,
+      "workload_seed": 2142219592,
+      "run_id": "04-G3-t4-r2"
+    },
+    {
+      "case_id": "G3",
+      "variant": "optimized",
+      "mode": "steady",
+      "threads": 8,
+      "repeat": 1,
+      "workload_seed": 979432203,
+      "run_id": "05-G3-t8-r1"
+    },
+    {
+      "case_id": "G1",
+      "variant": "original",
+      "mode": "steady",
+      "threads": 8,
+      "repeat": 1,
+      "workload_seed": 979432203,
+      "run_id": "06-G1-t8-r1"
+    },
+    {
+      "case_id": "G1",
+      "variant": "original",
+      "mode": "steady",
+      "threads": 8,
+      "repeat": 2,
+      "workload_seed": 27984743,
+      "run_id": "07-G1-t8-r2"
+    },
+    {
+      "case_id": "G3",
+      "variant": "optimized",
+      "mode": "steady",
+      "threads": 8,
+      "repeat": 2,
+      "workload_seed": 27984743,
+      "run_id": "08-G3-t8-r2"
+    },
+    {
+      "case_id": "G4",
+      "variant": "optimized",
+      "mode": "patch",
+      "threads": 4,
+      "repeat": 1,
+      "workload_seed": 1964552273,
+      "run_id": "09-G4-t4-r1"
+    },
+    {
+      "case_id": "G2",
+      "variant": "original",
+      "mode": "patch",
+      "threads": 4,
+      "repeat": 1,
+      "workload_seed": 1964552273,
+      "run_id": "10-G2-t4-r1"
+    },
+    {
+      "case_id": "G2",
+      "variant": "original",
+      "mode": "patch",
+      "threads": 4,
+      "repeat": 2,
+      "workload_seed": 121713292,
+      "run_id": "11-G2-t4-r2"
+    },
+    {
+      "case_id": "G4",
+      "variant": "optimized",
+      "mode": "patch",
+      "threads": 4,
+      "repeat": 2,
+      "workload_seed": 121713292,
+      "run_id": "12-G4-t4-r2"
+    },
+    {
+      "case_id": "G2",
+      "variant": "original",
+      "mode": "patch",
+      "threads": 8,
+      "repeat": 1,
+      "workload_seed": 688212631,
+      "run_id": "13-G2-t8-r1"
+    },
+    {
+      "case_id": "G4",
+      "variant": "optimized",
+      "mode": "patch",
+      "threads": 8,
+      "repeat": 1,
+      "workload_seed": 688212631,
+      "run_id": "14-G4-t8-r1"
+    },
+    {
+      "case_id": "G2",
+      "variant": "original",
+      "mode": "patch",
+      "threads": 8,
+      "repeat": 2,
+      "workload_seed": 1027863760,
+      "run_id": "15-G2-t8-r2"
+    },
+    {
+      "case_id": "G4",
+      "variant": "optimized",
+      "mode": "patch",
+      "threads": 8,
+      "repeat": 2,
+      "workload_seed": 1027863760,
+      "run_id": "16-G4-t8-r2"
+    }
+  ],
+  "seed": 20261104,
+  "started_ns": 2587328215152,
+  "wall_started_utc": "2026-11-07T03:54:19.027207+00:00",
+  "status": "complete",
+  "warnings": [],
+  "python": "3.11.6 (main, Sep 23 2025, 18:31:41) [GCC 12.3.1 (openEuler 12.3.1-38.oe2403)]",
+  "clock": {
+    "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+    "monotonic": true,
+    "adjustable": false,
+    "resolution": 1e-09
+  },
+  "preflight": {
+    "free_mib": 50326.21484375,
+    "environment_lock": {
+      "schema_version": 1,
+      "distribution": {
+        "ID": "openEuler",
+        "VERSION_ID": "24.03",
+        "PRETTY_NAME": "openEuler 24.03 (LTS)"
+      },
+      "architecture": "x86_64",
+      "kernel": "6.6.0-112.0.0.104.oe2403.x86_64",
+      "cpu_count": 4,
+      "toolchain": {
+        "rustc": "rustc 1.101.0-nightly (1c3a65069 2026-11-02)\nbinary: rustc\ncommit-hash: 1c3a6506966e21845b31de0b075d2527660db132\ncommit-date: 2026-11-02\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.5",
+        "cargo": "cargo 1.101.0-nightly (31d3246e0 2026-10-27)"
+      },
+      "cargo_lock_path": "/root/gaia-formal.4RaoIf/base/Cargo.lock",
+      "cargo_lock_sha256": "0769bab16ecd77dd81a8786240512fe668c37a8aee06f0d41909b079f3eab13c"
+    },
+    "builds": {
+      "optimized": {
+        "profile": "release",
+        "source_commit": "be3dd66ecc1aa4479a490df8cfb8caefa9c2c836",
+        "binary_sha256": "54cbd475cd6d92335e1feaa6825509cdca460f022240ed7bd3a32e669bbea4e4",
+        "toolchain": {
+          "rustc": "rustc 1.101.0-nightly (1c3a65069 2026-11-02)\nbinary: rustc\ncommit-hash: 1c3a6506966e21845b31de0b075d2527660db132\ncommit-date: 2026-11-02\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.5",
+          "cargo": "cargo 1.101.0-nightly (31d3246e0 2026-10-27)"
+        },
+        "cargo_lock_sha256": "0769bab16ecd77dd81a8786240512fe668c37a8aee06f0d41909b079f3eab13c",
+        "instrumentation_sha256": "6d437d9a70c2667732b1880c8a5c2504c5cf2432e212e18e48759331ebf0d3bf",
+        "instrumentation_diff": "/root/gaia-formal.4RaoIf/main-instrumentation.diff",
+        "build_log": "/root/gaia-formal.4RaoIf/main-release.log"
+      },
+      "original": {
+        "profile": "release",
+        "source_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326",
+        "binary_sha256": "2c421f52aeba459a18c9ea077c38994c4f502c2da1f5645539dc7eaa124a099e",
+        "toolchain": {
+          "rustc": "rustc 1.101.0-nightly (1c3a65069 2026-11-02)\nbinary: rustc\ncommit-hash: 1c3a6506966e21845b31de0b075d2527660db132\ncommit-date: 2026-11-02\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.5",
+          "cargo": "cargo 1.101.0-nightly (31d3246e0 2026-10-27)"
+        },
+        "cargo_lock_sha256": "0769bab16ecd77dd81a8786240512fe668c37a8aee06f0d41909b079f3eab13c",
+        "instrumentation_sha256": "0935a7522ed979d19bad0cf4de8e89f5853c6693503894a8b9e59129bae10e18",
+        "instrumentation_diff": "/root/gaia-formal.4RaoIf/base-instrumentation.diff",
+        "build_log": "/root/gaia-formal.4RaoIf/base-release.log"
+      }
+    },
+    "environment": {
+      "schema_version": 1,
+      "distribution": {
+        "ID": "openEuler",
+        "VERSION_ID": "24.03",
+        "PRETTY_NAME": "openEuler 24.03 (LTS)"
+      },
+      "architecture": "x86_64",
+      "kernel": "6.6.0-112.0.0.104.oe2403.x86_64",
+      "cpu_count": 4,
+      "toolchain": {
+        "rustc": "rustc 1.101.0-nightly (1c3a65069 2026-11-02)\nbinary: rustc\ncommit-hash: 1c3a6506966e21845b31de0b075d2527660db132\ncommit-date: 2026-11-02\nhost: x86_64-unknown-linux-gnu\nrelease: 1.101.0-nightly\nLLVM version: 23.1.5",
+        "cargo": "cargo 1.101.0-nightly (31d3246e0 2026-10-27)"
+      },
+      "cargo_lock_path": "/root/gaia-formal.4RaoIf/base/Cargo.lock",
+      "cargo_lock_sha256": "0769bab16ecd77dd81a8786240512fe668c37a8aee06f0d41909b079f3eab13c"
+    },
+    "cgroup2_mounts": [
+      "/run/gaia-cgroup2"
+    ]
+  },
+  "hashes": {
+    "workload": "927ef4c1e2842873cd7e875f087fc442118562e97065d93fde5e179e44432f6f",
+    "tool_scripts": {
+      "adapters.py": "9982d47e1bd93c578cd4ceb8d75373127f519c300cc6be9c5ecef57f2c916f66",
+      "analyze.py": "d7e43213b9487a8a8f5a01ef8af66ae97066eec9ba7e107a682d43b69443db20",
+      "common.py": "cfce97cc939b3ff9f86b9d02bad894c4d4012c91bf2aff3b424c3e05e7d92c7e",
+      "environment.py": "c2c65f0139a631aabf4eb893ca028960df158fda5c6150f019feab42c3d9e595",
+      "resources.py": "4788d3bf37771736dcb276667b583e30ad4912040f67a214e689bed5cecd311a",
+      "runner.py": "0be06e0833fb5c322fe3d9a8d6787fbcb9c657c673c6f27f5e1ab2e9c622554e"
+    },
+    "original": "2c421f52aeba459a18c9ea077c38994c4f502c2da1f5645539dc7eaa124a099e",
+    "optimized": "54cbd475cd6d92335e1feaa6825509cdca460f022240ed7bd3a32e669bbea4e4"
+  },
+  "collection_finished_ns": 2966080780413,
+  "valid_formal_runs": 16,
+  "measurement_valid_runs": 16,
+  "not_executed_runs": 0,
+  "finished_ns": 2968864132423,
+  "elapsed_s": 381.535917271,
+  "suite_budget_exceeded": false
+}

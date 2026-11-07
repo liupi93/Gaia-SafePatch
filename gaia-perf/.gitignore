@@ -1,0 +1,9 @@
+__pycache__/
+results/
+smoke-results/
+synthetic-results/
+synthetic.local.json
+formal/session/
+formal/reports/
+server-runs/
+*.exe
