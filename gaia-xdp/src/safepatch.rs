@@ -1,4 +1,4 @@
-//! Linux x86_64 cooperative stop/drain/write runtime. See tests/safepatch/README.md.
+//! Linux x86_64 stop/write runtimes (cooperative drain or compatible RIP check). See tests/safepatch/README.md.
 use anyhow::{Context, Result, bail};
 use std::{
     fs,
@@ -6,6 +6,17 @@ use std::{
 };
 
 fn trace(request: u32, tid: i32, address: u64, data: u64) -> Result<i64> {
+    #[cfg(test)]
+    if request == libc::PTRACE_POKETEXT {
+        FAULT.with(|f| {
+            let (count, fail_from, persistent) = f.get();
+            f.set((count + 1, fail_from, persistent));
+            if count == fail_from || (persistent && count >= fail_from) {
+                bail!("injected POKETEXT failure");
+            }
+            Ok(())
+        })?;
+    }
     unsafe {
         *libc::__errno_location() = 0;
         let value = libc::ptrace(
@@ -31,24 +42,36 @@ fn tasks(pid: u32) -> Result<Vec<i32>> {
 struct Stopped {
     tids: Vec<i32>,
     signals: std::collections::HashMap<i32, i32>,
+    confirmed: std::collections::HashSet<i32>,
+    poisoned: bool,
 }
 impl Stopped {
     fn all(pid: u32) -> Result<Self> {
+        anyhow::ensure!(pid > 0 && pid <= i32::MAX as u32, "invalid pid");
         let expected = tasks(pid)?;
+        anyhow::ensure!(!expected.is_empty(), "empty thread set");
         let mut stopped = Self {
             tids: Vec::new(),
             signals: Default::default(),
+            confirmed: Default::default(),
+            poisoned: false,
         };
         for &tid in &expected {
             trace(libc::PTRACE_SEIZE, tid, 0, 0)?;
             stopped.tids.push(tid);
             trace(libc::PTRACE_INTERRUPT, tid, 0, 0)?;
             let mut status = 0;
-            if unsafe { libc::waitpid(tid, &mut status, libc::__WALL) } != tid
-                || !libc::WIFSTOPPED(status)
-            {
+            let waited = loop {
+                let rc = unsafe { libc::waitpid(tid, &mut status, libc::__WALL) };
+                if rc < 0 && std::io::Error::last_os_error().raw_os_error() == Some(libc::EINTR) {
+                    continue;
+                }
+                break rc;
+            };
+            if waited != tid || !libc::WIFSTOPPED(status) {
                 bail!("thread {tid} did not enter ptrace stop");
             }
+            stopped.confirmed.insert(tid);
             // Do not suppress pending real signals or operate on group-stopped processes.
             if status >> 16 != libc::PTRACE_EVENT_STOP || libc::WSTOPSIG(status) != libc::SIGTRAP {
                 stopped.signals.insert(tid, libc::WSTOPSIG(status));
@@ -56,11 +79,13 @@ impl Stopped {
             }
         }
         if tasks(pid)? != expected {
-            bail!("thread set changed: cooperative fixed-thread model required");
+            bail!("thread set changed: fixed-thread model required");
         }
         Ok(stopped)
     }
     fn read(&self, addr: u64, length: usize) -> Result<Vec<u8>> {
+        addr.checked_add(length.checked_add(7).context("length overflow")? as u64 & !7)
+            .context("address overflow")?;
         let mut out = Vec::new();
         for offset in (0..length).step_by(8) {
             out.extend_from_slice(
@@ -71,6 +96,8 @@ impl Stopped {
         Ok(out)
     }
     fn write(&self, addr: u64, bytes: &[u8]) -> Result<()> {
+        addr.checked_add(bytes.len() as u64)
+            .context("address overflow")?;
         if bytes.len() % 8 != 0 {
             bail!("write must contain complete words");
         }
@@ -82,14 +109,40 @@ impl Stopped {
                 u64::from_ne_bytes(word.try_into()?),
             )?;
         }
-        if self.read(addr, bytes.len())? != bytes {
+        let readback = self.read(addr, bytes.len())?;
+        #[cfg(test)]
+        if READBACK_FAIL.with(|flag| flag.replace(false)) {
+            bail!("injected machine-code readback mismatch");
+        }
+        if readback != bytes {
             bail!("machine-code readback mismatch");
         }
         Ok(())
     }
 }
-impl Drop for Stopped {
-    fn drop(&mut self) {
+impl Stopped {
+    fn release(&mut self) -> Result<()> {
+        let mut errors = Vec::new();
+        if self.poisoned || self.tids.iter().any(|tid| !self.confirmed.contains(tid)) {
+            for &tid in &self.tids {
+                unsafe {
+                    libc::kill(tid, libc::SIGKILL);
+                }
+            }
+            for &tid in self.tids.iter().rev() {
+                let mut status = 0;
+                loop {
+                    let rc = unsafe { libc::waitpid(tid, &mut status, libc::__WALL) };
+                    if rc < 0 && std::io::Error::last_os_error().raw_os_error() == Some(libc::EINTR)
+                    {
+                        continue;
+                    }
+                    break;
+                }
+            }
+            self.tids.clear();
+            return Ok(());
+        }
         for &tid in self.tids.iter().rev() {
             if let Err(error) = trace(
                 libc::PTRACE_DETACH,
@@ -97,9 +150,93 @@ impl Drop for Stopped {
                 0,
                 self.signals.get(&tid).copied().unwrap_or(0) as u64,
             ) {
-                eprintln!("SafePatch detach failed: {error:#}");
+                unsafe {
+                    libc::kill(tid, libc::SIGKILL);
+                }
+                errors.push(format!("tid={tid}: {error:#}"));
+                break;
             }
         }
+        if !errors.is_empty() {
+            self.poisoned = true;
+            self.release()?;
+        }
+        self.tids.clear();
+        anyhow::ensure!(
+            errors.is_empty(),
+            "detach failed (target killed): {}",
+            errors.join("; ")
+        );
+        Ok(())
+    }
+}
+impl Drop for Stopped {
+    fn drop(&mut self) {
+        if let Err(error) = self.release() {
+            eprintln!("SafePatch cleanup: {error:#}");
+        }
+    }
+}
+
+/// No admission protocol is required. This checks only the overwritten interval,
+/// not old stack frames or pending returns into that interval.
+pub fn exchange_compat(pid: u32, address: u64, bytes: &[u8], timeout: Duration) -> Result<Vec<u8>> {
+    anyhow::ensure!(
+        cfg!(all(target_os = "linux", target_arch = "x86_64")),
+        "compatible mode requires Linux x86_64"
+    );
+    anyhow::ensure!(
+        !bytes.is_empty() && bytes.len() % 8 == 0,
+        "nonempty complete machine words required"
+    );
+    let end = address
+        .checked_add(bytes.len() as u64)
+        .context("patch address overflow")?;
+    let start = Instant::now();
+    let expected = tasks(pid)?;
+    let mut retried = false;
+    loop {
+        anyhow::ensure!(
+            !retried || start.elapsed() < timeout,
+            "SafePatch RIP conflict timeout"
+        );
+        let mut stopped = Stopped::all(pid)?;
+        anyhow::ensure!(
+            stopped.tids == expected,
+            "thread set changed between retries"
+        );
+        let mut conflict = false;
+        #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+        for &tid in &stopped.tids {
+            let mut regs: libc::user_regs_struct = unsafe { std::mem::zeroed() };
+            trace(libc::PTRACE_GETREGS, tid, 0, &mut regs as *mut _ as u64)?;
+            conflict |= (address..end).contains(&regs.rip);
+        }
+        if conflict {
+            stopped.release()?;
+            retried = true;
+            anyhow::ensure!(start.elapsed() < timeout, "SafePatch RIP conflict timeout");
+            std::thread::sleep(Duration::from_millis(2));
+            continue;
+        }
+        anyhow::ensure!(
+            !retried || start.elapsed() < timeout,
+            "SafePatch RIP conflict timeout"
+        );
+        let original = stopped.read(address, bytes.len())?;
+        if let Err(error) = stopped.write(address, bytes) {
+            if let Err(rollback) = stopped.write(address, &original) {
+                stopped.poisoned = true;
+                bail!("write failed: {error:#}; rollback failed; target killed: {rollback:#}");
+            }
+            return Err(error).context("compatible write failed; rollback verified");
+        }
+        eprintln!(
+            "SafePatch compatible write verified pid={pid} threads={} rip_clear=true",
+            stopped.tids.len()
+        );
+        stopped.release()?;
+        return Ok(original);
     }
 }
 /// ABI: [magic, gate, active], all aligned sequentially-consistent atomic u64.
@@ -117,6 +254,10 @@ pub fn exchange(
     if bytes.is_empty() || bytes.len() % 8 != 0 || state % 8 != 0 {
         bail!("SafePatch requires aligned ABI and nonempty complete machine words");
     }
+    address
+        .checked_add(bytes.len() as u64)
+        .context("patch address overflow")?;
+    state.checked_add(24).context("ABI address overflow")?;
     let start = Instant::now();
     let mut holder = Some(Stopped::all(pid)?);
     let stopped = holder.as_ref().unwrap();
@@ -161,7 +302,7 @@ pub fn exchange(
             if start.elapsed() >= timeout {
                 bail!("SafePatch drain timeout active={active}");
             }
-            drop(holder.take());
+            holder.take().unwrap().release()?;
             std::thread::sleep(Duration::from_millis(2));
             holder = Some(Stopped::all(pid)?);
         }
@@ -182,5 +323,64 @@ pub fn exchange(
         }
         return Err(release).context("release cooperative gate; code rolled back");
     }
+    holder.as_mut().unwrap().release()?;
     result
+}
+
+#[cfg(test)]
+thread_local! {
+    static READBACK_FAIL: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+    static FAULT: std::cell::Cell<(usize, usize, bool)> = const { std::cell::Cell::new((0, usize::MAX, false)) };
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::{
+        io::{BufRead, BufReader},
+        process::{Command, Stdio},
+    };
+    #[test]
+    fn partial_write_rollback_and_fatal_rollback() -> Result<()> {
+        let executable = std::env::var("GAIA_COMPAT_TARGET")
+            .context("set GAIA_COMPAT_TARGET to compiled compatible.c")?;
+        for (persistent, readback_failure) in [(false, false), (true, false), (false, true)] {
+            let mut child = Command::new(&executable).stdout(Stdio::piped()).spawn()?;
+            let result = (|| -> Result<()> {
+                let mut line = String::new();
+                BufReader::new(child.stdout.take().unwrap()).read_line(&mut line)?;
+                let fields: Vec<_> = line.split_whitespace().collect();
+                let addr = u64::from_str_radix(fields[2].trim_start_matches("0x"), 16)?;
+                // Save 16 bytes: fail the second word after the first has changed.
+                let stopped = Stopped::all(child.id())?;
+                let original = stopped.read(addr, 16)?;
+                drop(stopped);
+                FAULT.with(|f| {
+                    f.set((0, if readback_failure { usize::MAX } else { 1 }, persistent))
+                });
+                READBACK_FAIL.with(|flag| flag.set(readback_failure));
+                let mut patch = vec![0x90; 16];
+                patch[..8].copy_from_slice(&[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90]);
+                let error =
+                    exchange_compat(child.id(), addr, &patch, Duration::from_secs(3)).unwrap_err();
+                FAULT.with(|f| f.set((0, usize::MAX, false)));
+                if persistent {
+                    anyhow::ensure!(error.to_string().contains("rollback failed"));
+                    anyhow::ensure!(
+                        !std::path::Path::new(&format!("/proc/{}", child.id())).exists()
+                    );
+                } else {
+                    anyhow::ensure!(error.to_string().contains("rollback verified"));
+                    let stopped = Stopped::all(child.id())?;
+                    anyhow::ensure!(stopped.read(addr, 16)? == original);
+                }
+                Ok(())
+            })();
+            FAULT.with(|f| f.set((0, usize::MAX, false)));
+            let _ = child.kill();
+            let _ = child.wait();
+            result?;
+        }
+        Ok(())
+    }
 }

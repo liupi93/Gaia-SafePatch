@@ -1,0 +1,9 @@
+# Merge this target into Gaia's configuration; use the actual executable/PID/symbol.
+[[hotpatch.targets]]
+binary = "/opt/service/bin/server"
+symbol = "target_value"
+pid = 12345
+enabled = false
+patch_action = "override_return" # or "skip_call"
+override_return_value = 99
+patch_mode = "compatible" # explicit opt-in; omitted => "cooperative"

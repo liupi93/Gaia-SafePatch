@@ -206,6 +206,8 @@ struct HotpatchTarget {
     /// What the uprobe should do: "monitor", "override_return", "skip_call", or "replace_function".
     #[serde(default = "default_patch_action")]
     patch_action: PatchAction,
+    #[serde(default)]
+    patch_mode: PatchMode,
     /// The return value to force when patch_action is override_return or skip_call.
     /// Interpreted as a signed i64 (e.g. -1 for -EPERM, -22 for -EINVAL, 0 for success).
     #[serde(default)]
@@ -235,6 +237,14 @@ enum PatchAction {
     /// Patch a kernel function using the Linux livepatch API (klp_patch).
     /// Requires root, CONFIG_LIVEPATCH=y, and kernel-devel headers.
     KernelLivepatch,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize, Default, PartialEq)]
+#[serde(rename_all = "snake_case")]
+enum PatchMode {
+    Compatible,
+    #[default]
+    Cooperative,
 }
 
 fn default_patch_action() -> PatchAction {
@@ -1130,6 +1140,7 @@ struct PatchedFunction {
     /// - override_return/skip_call: 8 bytes (2 aarch64 instructions)
     /// - replace_function: 16 bytes (4 aarch64 instructions for trampoline)
     original_bytes: Vec<u8>,
+    mode: PatchMode,
 }
 
 /// Apply runtime code patches for hotpatch targets that use override_return, skip_call,
@@ -1171,7 +1182,10 @@ fn apply_hotpatch_code_patches(
 
         if target.patch_action == PatchAction::ReplaceFunction {
             apply_replace_function_patch(pid, target, binary_path, patches);
-        } else {
+        } else if matches!(
+            target.patch_action,
+            PatchAction::OverrideReturn | PatchAction::SkipCall
+        ) {
             let patch_bytes = generate_patch_instructions(target.override_return_value);
             apply_single_code_patch(pid, target, binary_path, &patch_bytes, patches);
         }
@@ -1208,13 +1222,14 @@ fn apply_single_code_patch(
     }
 
     // Read original instructions and write patch in a single ptrace session
-    let result = ptrace_read_and_write(pid, func_addr, patch_bytes);
+    let result = ptrace_read_and_write(pid, func_addr, patch_bytes, target.patch_mode);
     match result {
         Ok(original_bytes) => {
             patches.push(PatchedFunction {
                 pid,
                 address: func_addr,
                 original_bytes,
+                mode: target.patch_mode,
             });
             info!(
                 "hotpatch code patch applied: {}:{} pid={} addr=0x{:x} override_return_value={}",
@@ -1939,7 +1954,15 @@ fn apply_replace_function_patch(
 /// Read original bytes and write new bytes at the given address in a single ptrace session.
 /// Supports arbitrary lengths (must be word-aligned for full-word writes).
 /// Returns the original bytes that were read before writing.
-fn ptrace_read_and_write(pid: u32, addr: u64, new_data: &[u8]) -> Result<Vec<u8>> {
+fn ptrace_read_and_write(
+    pid: u32,
+    addr: u64,
+    new_data: &[u8],
+    mode: PatchMode,
+) -> Result<Vec<u8>> {
+    if mode == PatchMode::Compatible {
+        return safepatch::exchange_compat(pid, addr, new_data, Duration::from_secs(5));
+    }
     let executable = fs::read_link(format!("/proc/{pid}/exe"))?;
     let state = resolve_runtime_symbol(pid, &executable, "gaia_safepatch_state")
         .context("target must implement the SafePatch cooperative ABI")?;
@@ -1949,7 +1972,9 @@ fn ptrace_read_and_write(pid: u32, addr: u64, new_data: &[u8]) -> Result<Vec<u8>
 /// Restore all previously applied code patches.
 fn restore_hotpatch_code_patches(patches: &mut Vec<PatchedFunction>) {
     patches.retain(|patch| {
-        if let Err(err) = ptrace_read_and_write(patch.pid, patch.address, &patch.original_bytes) {
+        if let Err(err) =
+            ptrace_read_and_write(patch.pid, patch.address, &patch.original_bytes, patch.mode)
+        {
             warn!(
                 "failed to restore original code at pid={} addr=0x{:x}: {err:#}",
                 patch.pid, patch.address
