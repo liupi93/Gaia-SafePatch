@@ -4,13 +4,16 @@ mod base {
     include!(concat!(env!("OUT_DIR"), "/base.rs"));
 }
 use std::{
-    io::{BufRead, BufReader},
-    os::unix::{fs::FileExt, process::ExitStatusExt},
+    fs,
+    io::{BufRead, BufReader, Write},
+    os::unix::fs::FileExt,
     process::{Command, Stdio},
+    sync::mpsc,
     time::{Duration, Instant},
 };
 
 use anyhow::{Context, Result, ensure};
+
 struct Target(std::process::Child);
 impl Drop for Target {
     fn drop(&mut self) {
@@ -18,173 +21,234 @@ impl Drop for Target {
         let _ = self.0.wait();
     }
 }
-fn read(pid: u32, addr: u64) -> Result<u64> {
-    let mut b = [0; 8];
-    std::fs::File::open(format!("/proc/{pid}/mem"))?.read_exact_at(&mut b, addr)?;
-    Ok(u64::from_ne_bytes(b))
-}
-fn wait_value(pid: u32, addr: u64, want: u64) -> Result<()> {
-    let end = Instant::now() + Duration::from_secs(6);
-    while read(pid, addr)? != want {
-        ensure!(Instant::now() < end, "等待订单进度超时：演示未达到预期状态");
-        std::thread::sleep(Duration::from_millis(5));
+fn now_ns() -> u64 {
+    let mut time = libc::timespec {
+        tv_sec: 0,
+        tv_nsec: 0,
+    };
+    unsafe {
+        libc::clock_gettime(libc::CLOCK_MONOTONIC, &mut time);
     }
-    Ok(())
+    time.tv_sec as u64 * 1_000_000_000 + time.tv_nsec as u64
+}
+fn read_code(pid: u32, address: u64) -> Result<[u8; 8]> {
+    let mut bytes = [0; 8];
+    fs::File::open(format!("/proc/{pid}/mem"))?.read_exact_at(&mut bytes, address)?;
+    Ok(bytes)
 }
 fn main() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();
     ensure!(
         args.len() == 4,
-        "用法：驱动程序 目标程序 entry（入口冲突）或 orders（订单结算） base（原版）或 compatible（兼容）或 cooperative（协作）"
+        "用法：驱动 目标程序 control|base|compatible|cooperative 输出目录"
     );
-    let scene = &args[2];
-    let mode = &args[3];
-    ensure!(["base", "compatible", "cooperative"].contains(&mode.as_str()));
-    let mut cmd = Command::new(&args[1]);
-    if scene == "entry" {
-        cmd.arg("entry");
-    }
-    let mut target = Target(cmd.stdout(Stdio::piped()).spawn()?);
-    let mut out = BufReader::new(target.0.stdout.take().unwrap());
-    let mut line = String::new();
-    out.read_line(&mut line)?;
-    let f: Vec<_> = line.split_whitespace().collect();
-    ensure!(f.first() == Some(&"READY"), "{line}");
-    let pid: u32 = f[1].parse()?;
-    let addr: Vec<u64> = f[2..]
-        .iter()
-        .map(|s| {
-            if *s == "(nil)" {
-                Ok(0)
-            } else {
-                u64::from_str_radix(s.trim_start_matches("0x"), 16)
-            }
-        })
-        .collect::<std::result::Result<_, _>>()?;
-    let scene_name = if scene == "entry" {
-        "入口指令冲突"
+    let mode = args[2].as_str();
+    ensure!(
+        ["control", "base", "compatible", "cooperative"].contains(&mode),
+        "未知模式"
+    );
+    let directory = std::path::Path::new(&args[3]);
+    ensure!(
+        !directory.exists(),
+        "输出目录已存在，请换一个目录以免混入旧文件"
+    );
+    fs::create_dir_all(directory)?;
+    let directory = fs::canonicalize(directory)?;
+    let mut target = Target(
+        Command::new(&args[1])
+            .arg(&directory)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .spawn()?,
+    );
+    let mut input = target.0.stdin.take().unwrap();
+    let mut output = BufReader::new(target.0.stdout.take().unwrap());
+    let mut ready = String::new();
+    output.read_line(&mut ready)?;
+    let fields: Vec<_> = ready.split_whitespace().collect();
+    ensure!(
+        fields.len() == 4 && fields[0] == "READY",
+        "文档服务未正确启动：{ready}"
+    );
+    let pid: u32 = fields[1].parse()?;
+    ensure!(pid == target.0.id());
+    let address = u64::from_str_radix(fields[2].trim_start_matches("0x"), 16)?;
+    let state = if fields[3] == "(nil)" {
+        0
     } else {
-        "订单结算切换"
+        u64::from_str_radix(fields[3].trim_start_matches("0x"), 16)?
     };
-    let mode_name = match mode.as_str() {
+    let name = match mode {
+        "control" => "不打补丁（对照）",
         "base" => "原版 Gaia",
         "compatible" => "兼容模式",
         _ => "协作模式",
     };
-    println!("【演示开始】场景：{scene_name}｜补丁方式：{mode_name}");
-    println!("目标进程编号：{pid}｜工作线程：8 个（另有 1 个主线程）");
+    println!("【文档导出服务】{name}｜8 个工作线程，1 个主线程");
+    println!("【业务要求】进入维护状态之后，输出目录不应再新增文档。");
+    println!("【输出目录】{}", directory.display());
+    let (sender, receiver) = mpsc::channel();
     let collector = std::thread::spawn(move || {
-        for line in out.lines() {
-            println!("  {}", line.unwrap());
+        for line in output.lines() {
+            match line {
+                Ok(line) => {
+                    if let Some((_, text)) = line.split_once('\t') {
+                        println!("  {text}");
+                    }
+                    if sender.send(line).is_err() {
+                        break;
+                    }
+                }
+                Err(error) => {
+                    let _ = sender.send(format!("读取日志失败：{error}"));
+                    break;
+                }
+            }
         }
     });
-    wait_value(pid, addr[3], 1)?;
-    let patch = [0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90];
-    let exchange = |data: &[u8]| match mode.as_str() {
-        "base" => base::exchange(pid, addr[0], data),
-        "compatible" => safepatch::exchange_compat(pid, addr[0], data, Duration::from_millis(400)),
-        _ => safepatch::exchange(pid, addr[1], addr[0], data, Duration::from_secs(4)),
-    };
-    if scene == "entry" {
-        // Observe the actual worker RIP, without changing registers or code.
-        std::thread::sleep(Duration::from_millis(30));
-        let tids = std::fs::read_dir(format!("/proc/{pid}/task"))?;
-        let mut found = false;
-        for tid in tids {
-            let tid: i32 = tid?.file_name().to_string_lossy().parse()?;
-            if tid == pid as i32 {
-                continue;
-            }
-            unsafe {
-                ensure!(libc::ptrace(libc::PTRACE_SEIZE, tid, 0, 0) == 0);
-                ensure!(libc::ptrace(libc::PTRACE_INTERRUPT, tid, 0, 0) == 0);
-                let mut status = 0;
-                ensure!(
-                    libc::waitpid(tid, &mut status, libc::__WALL) == tid
-                        && libc::WIFSTOPPED(status)
-                );
-                let mut regs: libc::user_regs_struct = std::mem::zeroed();
-                ensure!(libc::ptrace(libc::PTRACE_GETREGS, tid, 0, &mut regs) == 0);
-                found |= regs.rip == addr[0] + 2;
-                ensure!(libc::ptrace(libc::PTRACE_DETACH, tid, 0, 0) == 0);
-            }
+    // 通过正常作业输入提交文档，不读取或改写业务控制变量。
+    writeln!(input, "0")?;
+    input.flush()?;
+    loop {
+        let event = receiver.recv_timeout(Duration::from_secs(5))?;
+        if event.starts_with("LAYOUT") {
+            break;
         }
-        ensure!(found, "工作线程尚未进入预定位置，不能继续本次演示");
+    }
+    let original = read_code(pid, address)?;
+    // 与现有 override_return 相同的 8 字节编码，这次返回 0（暂停导出）。
+    let patch = [0xb8, 0, 0, 0, 0, 0xc3, 0x90, 0x90];
+    let exchange = |bytes: &[u8]| match mode {
+        "base" => base::exchange(pid, address, bytes),
+        "compatible" => safepatch::exchange_compat(pid, address, bytes, Duration::from_secs(3)),
+        "cooperative" => safepatch::exchange(pid, state, address, bytes, Duration::from_secs(3)),
+        _ => unreachable!(),
+    };
+    let started = Instant::now();
+    if mode != "control" {
+        println!("【切换维护状态】新版本的导出函数将直接返回“暂不导出”。");
+        ensure!(exchange(&patch)? == original, "安装时保存的原始代码不一致");
+    }
+    let cutoff = now_ns();
+    if mode != "control" {
+        ensure!(read_code(pid, address)? == patch, "补丁读回检查失败");
         println!(
-            "【已确认】工作线程正在入口第 3 个字节处循环；这就是稍后要覆盖的位置。\n原版写入器保持原样，演示驱动没有修改线程的执行位置。"
+            "【切换已返回成功】耗时 {} 毫秒；现在提交第二个文档。",
+            started.elapsed().as_millis()
         );
-        if mode == "base" {
-            exchange(&patch)?;
-            let end = Instant::now() + Duration::from_secs(3);
-            let status = loop {
-                if let Some(s) = target.0.try_wait()? {
-                    break s;
-                }
-                ensure!(Instant::now() < end, "目标没有按预期崩溃：本次异常复现失败");
-                std::thread::sleep(Duration::from_millis(5));
-            };
-            ensure!(
-                status.signal() == Some(libc::SIGSEGV),
-                "目标退出方式不符合预期：{status}"
-            );
+    } else {
+        println!("【正常对照】保持原程序不变，现在提交第二个文档。");
+    }
+    writeln!(input, "1")?;
+    input.flush()?;
+    let mut done = Vec::new();
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while done.len() < 2 {
+        let event = receiver.recv_timeout(deadline.saturating_duration_since(Instant::now()))?;
+        if event.starts_with("DONE ") {
+            let data: Vec<_> = event
+                .split_once('\t')
+                .context("作业日志格式不正确")?
+                .0
+                .split_whitespace()
+                .collect();
+            done.push((
+                data[1].parse::<u32>()?,
+                data[2] == "1",
+                data[3].parse::<u64>()?,
+                data[4].parse::<u64>()?,
+            ));
+        }
+    }
+    let old = done
+        .iter()
+        .find(|row| row.0 == 0)
+        .context("缺少旧作业记录")?;
+    let new = done
+        .iter()
+        .find(|row| row.0 == 1)
+        .context("缺少新作业记录")?;
+    ensure!(
+        old.1 && directory.join("document-0.txt").is_file(),
+        "旧作业没有实际生成文件"
+    );
+    ensure!(new.1 == (mode == "control"), "新作业行为不符合预期");
+    ensure!(
+        directory.join("document-1.txt").exists() == (mode == "control"),
+        "新作业文件不符合预期"
+    );
+    if mode == "control" {
+        println!("【对照通过】两个文档均正常生成，程序本身未出现异常。");
+    } else {
+        if mode == "cooperative" {
+            ensure!(old.3 < cutoff, "旧文件提交跨过维护完成时间");
+            println!("【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。");
+        } else {
+            ensure!(old.2 > cutoff, "本次未复现维护完成后新增文件，不能记为通过");
+            println!("【异常已复现】维护切换已经返回成功，旧作业却在之后新增了 document-0.txt！");
+        }
+        if old.2 > cutoff {
             println!(
-                "【异常已复现】工作线程从新指令的中间继续执行，访问了无效地址。\n操作系统已终止目标进程（SIGSEGV：非法内存访问）。\n【检查通过】收到真实崩溃信号，不是演示程序伪造的报错。"
+                "【时间对照】切换返回成功之后，又过了 {} 毫秒，旧文件才开始写入。",
+                (old.2 - cutoff) / 1_000_000
             );
         } else {
-            ensure!(mode == "compatible", "入口冲突场景仅比较原版与兼容模式");
-            let error = exchange(&patch).unwrap_err();
-            ensure!(
-                error.to_string().contains("RIP conflict timeout"),
-                "{error:#}"
-            );
-            ensure!(target.0.try_wait()?.is_none());
-            ensure!(read(pid, addr[0])? == 0x90909090feebc031);
-            println!(
-                "【保护生效】线程仍在准备覆盖的位置，兼容模式等待 400 毫秒后拒绝修改。\n【检查通过】原代码没有改变，目标进程仍然存活。\n本次没有安装补丁：拒绝危险操作正是预期结果。"
-            );
+            println!("【时间对照】先写完旧文件，再报告切换完成。具体时间戳已保存供核对。");
         }
-    } else {
-        ensure!(scene == "orders");
-        println!(
-            "【旧订单已进入】订单 0 正在执行旧策略：约需 1.2 秒，返回折扣值 10。\n【开始安装】补丁让后续调用直接返回折扣值 99。"
-        );
-        let start = Instant::now();
-        let original = exchange(&patch).context("安装补丁失败")?;
-        ensure!(
-            read(pid, addr[0])? == u64::from_ne_bytes(patch),
-            "读回检查失败：实际机器码与补丁不一致"
-        );
-        println!(
-            "【安装完成】耗时 {} 毫秒，已重新读取机器码并确认正确。\n【放行新订单】现在让另外 7 个线程处理订单。",
-            start.elapsed().as_millis()
-        );
-        std::fs::OpenOptions::new()
-            .write(true)
-            .open(format!("/proc/{pid}/mem"))?
-            .write_all_at(&1u64.to_ne_bytes(), addr[2])?;
-        wait_value(pid, addr[4], 8)?;
-        let late = read(pid, addr[5])?;
-        ensure!(
-            late == if mode == "cooperative" { 0 } else { 1 },
-            "迟到旧结果数量不符合预期：{late}"
-        );
         ensure!(
             exchange(&original)? == patch,
-            "恢复检查失败：修改前的内容不是已安装的补丁"
+            "恢复前的机器码不是已安装补丁"
         );
         ensure!(
-            read(pid, addr[0])? == u64::from_ne_bytes(original.try_into().unwrap()),
-            "恢复检查失败：原始机器码未正确恢复"
+            read_code(pid, address)? == original,
+            "恢复原始代码后的检查失败"
         );
-        println!("【结果汇总】8 个订单全部完成；迟到的旧结果：{late} 个。");
-        if late == 0 {
-            println!("【协作效果】旧订单先提交完毕，随后才切换策略；没有出现新旧结果交错。");
-        } else {
-            println!("【业务顺序异常】新策略结果已经提交，之后却又提交了旧策略结果！");
-            println!("本演示要求：新策略结果开始提交后，不再提交旧策略结果。");
+        println!("【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。");
+        writeln!(input, "2")?;
+        input.flush()?;
+        loop {
+            let event = receiver.recv_timeout(Duration::from_secs(5))?;
+            if event.starts_with("DONE 2 ") {
+                ensure!(
+                    event.starts_with("DONE 2 1 "),
+                    "恢复后第三个文档没有成功导出"
+                );
+                ensure!(
+                    directory.join("document-2.txt").is_file(),
+                    "恢复后缺少真实输出文件"
+                );
+                println!("【恢复后试运行】第三个文档已正常生成，服务恢复导出。");
+                break;
+            }
         }
-        println!("【恢复完成】已恢复原始代码；安装、读回检查和恢复检查均通过。");
     }
+    ensure!(
+        fs::read_to_string(directory.join("document-0.txt"))? == "文档 0：20 页排版完成。\n",
+        "旧文档内容不符合预期"
+    );
+    let report = format!(
+        "{{\n  \"mode\": \"{mode}\",\n  \"switch_return_ns\": {cutoff},\n  \"old_file_begin_ns\": {},\n  \"old_file_end_ns\": {},\n  \"new_file_exists\": {},\n  \"restored_file_exists\": {}\n}}\n",
+        old.2,
+        old.3,
+        directory.join("document-1.txt").exists(),
+        directory.join("document-2.txt").exists()
+    );
+    for id in 0..=2 {
+        let expected = id == 0 || (id == 1 && mode == "control") || (id == 2 && mode != "control");
+        let file = directory.join(format!("document-{id}.txt"));
+        if expected {
+            ensure!(
+                fs::read_to_string(file)? == format!("文档 {id}：20 页排版完成。\n"),
+                "文档 {id} 内容不符合预期"
+            );
+        } else {
+            ensure!(!file.exists(), "不应生成文档 {id}");
+        }
+    }
+    let mut report_path = directory.as_os_str().to_os_string();
+    report_path.push(".result.json");
+    fs::write(std::path::PathBuf::from(report_path), report)?;
+    println!("【实物证据】{}", directory.join("document-0.txt").display());
     let _ = target.0.kill();
     let _ = target.0.wait();
     collector.join().unwrap();

@@ -1,82 +1,127 @@
 #define _GNU_SOURCE
+#include <errno.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <stdatomic.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 #include <sys/prctl.h>
-#include <sys/resource.h>
 
-// 协作模式
-#ifdef COOPERATIVE
-// 协作接口结构体
-struct { _Atomic uint64_t magic, gate, active; } gaia_safepatch_state={0x4741494153503031,0,0};
+#include "cooperative.h"
 
-// >> 接口宏定义
-#define STATE ((void*)&gaia_safepatch_state)
-#else
-#define STATE ((void*)0)
-#endif
-// << 接口宏定义
+static sem_t jobs[8];
+static const char *output_dir;
 
-// 状态量
-_Atomic uint64_t release_orders, old_started, completed, late_old, new_seen;
-static int entry_scene;
-// Deliberate adversarial entry: after xor, RIP stays exactly at entry+2.
-// Before patch it is a valid infinite loop, with no memory access or crash.
-__attribute__((naked,noinline,aligned(16))) int entry_policy(void) {
-    __asm__("xor %eax,%eax; 1: jmp 1b; nop; nop; nop; nop");
+static uint64_t now_ns(void)
+{
+    struct timespec time;
+    clock_gettime(CLOCK_MONOTONIC, &time);
+    return time.tv_sec * 1000000000ULL + time.tv_nsec;
 }
-// Eight entry NOPs ensure the long-call scene does not mix in instruction conflicts.
-__attribute__((noinline,noclone,patchable_function_entry(8,0),aligned(16)))
-int discount_policy(void) {
-    atomic_store(&old_started,1);
-    usleep(1200000);
-    return 10;
-}
-static void enter(void) {
-#ifdef COOPERATIVE
-    for (;;) {
-        while(atomic_load(&gaia_safepatch_state.gate)) sched_yield();
-        atomic_fetch_add(&gaia_safepatch_state.active,1);
-        if (!atomic_load(&gaia_safepatch_state.gate)) break;
-        atomic_fetch_sub(&gaia_safepatch_state.active,1);
+
+/* 用本地替身模拟排版服务的正常处理耗时，不参与补丁安全判断。 */
+__attribute__((noinline))
+static int layout_document(int pages)
+{
+    puts("LAYOUT\t【排版中】已收到文档，预计处理 800 毫秒。");
+    struct timespec delay = {0, 800000000};
+    while (nanosleep(&delay, &delay) != 0)
+    {
+        if (errno != EINTR)
+        {
+            perror("排版等待失败");
+            exit(1);
+        }
+        /* 被信号打断时继续等待剩余时间。 */
     }
-#endif
+    return pages * 40;
 }
-static void *worker(void *arg) {
-    long id=(long)arg;
-    if(entry_scene) {
-        if(id==0) { atomic_store(&old_started,1); entry_policy(); }
-    } else {
-        if(id) while(!atomic_load(&release_orders)) usleep(1000);
-        enter();
-        int discount=discount_policy();
-        // All commit logic stays inside the cooperative region.
-        if(discount==99) atomic_store(&new_seen,1);
-        if(discount==10 && atomic_load(&new_seen)) atomic_fetch_add(&late_old,1);
-        if(discount!=10 && discount!=99) abort();
-        printf("订单 %ld｜折扣值 %d｜%s\n",id,discount,
-            discount==10 && atomic_load(&new_seen)?"警告：旧结果迟到了！":"提交完成");
-#ifdef COOPERATIVE
-        atomic_fetch_sub(&gaia_safepatch_state.active,1);
-#endif
-        atomic_fetch_add(&completed,1);
+
+/* Gaia 修改此普通 C 函数：维护版本直接返回 0，表示不再导出。 */
+__attribute__((noinline))
+int render_document(int pages)
+{
+    int lines = layout_document(pages);
+    return lines > 0;
+}
+
+static void *worker(void *arg)
+{
+    long id = (long)arg;
+    char path[512];
+    snprintf(path, sizeof(path), "%s/document-%ld.txt", output_dir, id);
+
+    for (;;)
+    {
+        while (sem_wait(&jobs[id]) != 0)
+        {
+            if (errno != EINTR)
+            {
+                perror("读取作业队列失败");
+                exit(1);
+            }
+        }
+
+        enter_region();
+        int exported = render_document(20);
+        uint64_t begin = now_ns();
+        if (exported)
+        {
+            FILE *file = fopen(path, "w");
+            if (file == NULL)
+            {
+                perror("无法创建输出文件");
+                exit(1);
+            }
+            if (fprintf(file, "文档 %ld：20 页排版完成。\n", id) < 0 || fclose(file) != 0)
+            {
+                perror("无法完成输出文件");
+                exit(1);
+            }
+        }
+        uint64_t end = now_ns();
+        printf("DONE %ld %d %lu %lu\t作业 %ld：%s\n",
+               id, exported, begin, end, id,
+               exported ? "已生成文档文件" : "维护中，未生成文件");
+        leave_region();
     }
-    for(;;) pause(); // Keep a fixed thread set even after each order finishes.
-    return 0;
+    return NULL;
 }
-int main(int argc,char **argv) {
-    struct rlimit core={0,0}; setrlimit(RLIMIT_CORE,&core);
-    prctl(PR_SET_PTRACER,getppid(),0,0,0);
-    setvbuf(stdout,0,_IOLBF,0);
-    entry_scene=argc>1;
+
+int main(int argc, char **argv)
+{
+    if (argc != 2)
+    {
+        fprintf(stderr, "用法：文档服务 输出目录\n");
+        return 1;
+    }
+    output_dir = argv[1];
+    prctl(PR_SET_PTRACER, getppid(), 0, 0, 0);
+    setvbuf(stdout, NULL, _IOLBF, 0);
+
     pthread_t threads[8];
-    for(long i=0;i<8;i++) if(pthread_create(&threads[i],0,worker,(void*)i)) return 1;
-    printf("READY %d %p %p %p %p %p %p\n",getpid(),
-        entry_scene?(void*)entry_policy:(void*)discount_policy,
-        STATE,(void*)&release_orders,(void*)&old_started,
-        (void*)&completed,(void*)&late_old);
-    for(;;) pause();
+    for (long id = 0; id < 8; id++)
+    {
+        if (sem_init(&jobs[id], 0, 0) != 0 ||
+            pthread_create(&threads[id], NULL, worker, (void *)id) != 0)
+        {
+            fprintf(stderr, "无法启动工作线程\n");
+            return 1;
+        }
+    }
+    printf("READY %d %p %p\n", getpid(), (void *)render_document, DEMO_STATE);
+
+    /* 输入作业编号即可提交文档；主线程仅负责分发，不代替工作线程排版。 */
+    int job;
+    while (scanf("%d", &job) == 1)
+    {
+        if (job >= 0 && job < 8)
+        {
+            sem_post(&jobs[job]);
+        }
+    }
+    return 0;
 }

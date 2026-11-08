@@ -98,3 +98,5 @@ been measured by this run. Existing remote dlopen replacement is deliberately
 rejected, so a replacement target cannot report a successful code installation.
 
 兼容模式新增入口：`bash tests/safepatch/run-compat.sh`。配置与三模式能力差异见 [原理说明](../../docs/safepatch-explained.md) 和 [测试文档](../../docs/safepatch-testing.md)；`run.sh` 现在也验证 compatible 的受控新旧重叠局限。
+
+用于课程录屏的纯 C 文档导出示例见 [demo/README.md](demo/README.md)：通过真实文件的生成顺序比较原版、兼容模式与协作模式，另有不打补丁的正常对照。

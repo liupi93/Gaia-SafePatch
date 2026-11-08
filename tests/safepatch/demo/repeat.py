@@ -1,26 +1,46 @@
-"""Run after demo/run.sh; exits on any missing crash or incorrect outcome."""
+"""对四种运行方式重复实测；任何时间顺序或文件检查不符都会失败。"""
 import json
 import pathlib
 import subprocess
 import sys
+import tempfile
 
-out = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else '/tmp/gaia-video-demo').resolve()
+out = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else '/tmp/gaia-document-demo').resolve()
+count = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+if count < 1:
+    raise ValueError('重复次数必须大于零')
 driver = pathlib.Path(__file__).resolve().parents[1] / 'target/debug/safepatch-video-demo'
 results = []
-for scene, count, modes in [('entry', 20, ['base', 'compatible']),
-                            ('orders', 5, ['base', 'compatible', 'cooperative'])]:
-    for mode in modes:
-        for i in range(count):
-            exe = out / ('cooperative' if mode == 'cooperative' else 'plain')
-            p = subprocess.run([str(driver), str(exe), scene, mode], capture_output=True,
-                               text=True, timeout=10)
-            (out / f'repeat-{scene}-{mode}-{i}.log').write_text(p.stdout + p.stderr)
-            if p.returncode:
-                raise RuntimeError(("重复测试失败", scene, mode, i, p.stdout, p.stderr))
-        results.append(dict(scene=scene, mode=mode, passed=count))
-(out / 'repeat-results.json').write_text(json.dumps(results, indent=2) + '\n')
-for row in results:
-    scene = {'entry': '入口指令冲突', 'orders': '订单结算'}[row['scene']]
-    mode = {'base': '原版', 'compatible': '兼容模式', 'cooperative': '协作模式'}[row['mode']]
-    print(f"【重复验证通过】{scene}｜{mode}｜{row['passed']} 次全部符合预期")
-print("完整记录已保存到：", out / 'repeat-results.json')
+for mode in ['control', 'base', 'compatible', 'cooperative']:
+    cases = []
+    for i in range(count):
+        directory = pathlib.Path(tempfile.mkdtemp(prefix=f'repeat-{mode}-', dir=out))
+        exe = out / ('cooperative' if mode == 'cooperative' else 'plain')
+        run = subprocess.run([str(driver), str(exe), mode, str(directory / 'files')],
+                             capture_output=True, text=True, timeout=12)
+        (directory / 'runtime.log').write_text(run.stdout + run.stderr)
+        if run.returncode:
+            raise RuntimeError(('重复验证失败', mode, i, run.stdout, run.stderr))
+        report = json.loads((directory / 'files.result.json').read_text())
+        assert (directory / 'files/document-0.txt').read_text() == '文档 0：20 页排版完成。\n'
+        if mode == 'control':
+            assert report['new_file_exists']
+        else:
+            assert not report['new_file_exists'] and report['restored_file_exists']
+            if mode == 'cooperative':
+                assert report['old_file_end_ns'] < report['switch_return_ns']
+            else:
+                assert report['old_file_begin_ns'] > report['switch_return_ns']
+        for job in range(3):
+            expected = job == 0 or (job == 1 and mode == 'control') or (job == 2 and mode != 'control')
+            document = directory / f'files/document-{job}.txt'
+            if expected:
+                assert document.read_text() == f'文档 {job}：20 页排版完成。\n'
+            else:
+                assert not document.exists()
+        cases.append(report)
+    results.append(dict(mode=mode, passed=count, cases=cases))
+    name = {'control': '正常对照', 'base': '原版', 'compatible': '兼容模式', 'cooperative': '协作模式'}[mode]
+    print(f'【重复验证通过】{name}｜{count} 次全部符合预期', flush=True)
+(out / 'repeat-results.json').write_text(json.dumps(results, ensure_ascii=False, indent=2) + '\n')
+print('真实文件、每轮日志和时间戳记录均保存在：', out)

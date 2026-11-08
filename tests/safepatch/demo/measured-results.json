@@ -1,27 +1,346 @@
 [
   {
-    "scene": "entry",
+    "mode": "control",
+    "passed": 10,
+    "cases": [
+      {
+        "mode": "control",
+        "switch_return_ns": 3658870334211,
+        "old_file_begin_ns": 3659671166792,
+        "old_file_end_ns": 3659671285087,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3659708954819,
+        "old_file_begin_ns": 3660509685899,
+        "old_file_end_ns": 3660509709340,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3660525695763,
+        "old_file_begin_ns": 3661325996049,
+        "old_file_end_ns": 3661326099773,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3661330790725,
+        "old_file_begin_ns": 3662132061563,
+        "old_file_end_ns": 3662132111856,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3662183668020,
+        "old_file_begin_ns": 3662984464766,
+        "old_file_end_ns": 3662984598150,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3663000861723,
+        "old_file_begin_ns": 3663801342589,
+        "old_file_end_ns": 3663801368843,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3663807849367,
+        "old_file_begin_ns": 3664607499679,
+        "old_file_end_ns": 3664607587217,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3664611991441,
+        "old_file_begin_ns": 3665411405995,
+        "old_file_end_ns": 3665411502751,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3665415167132,
+        "old_file_begin_ns": 3666215564856,
+        "old_file_end_ns": 3666215703374,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      },
+      {
+        "mode": "control",
+        "switch_return_ns": 3666218551381,
+        "old_file_begin_ns": 3667018611369,
+        "old_file_end_ns": 3667018700742,
+        "new_file_exists": true,
+        "restored_file_exists": false
+      }
+    ]
+  },
+  {
     "mode": "base",
-    "passed": 20
+    "passed": 10,
+    "cases": [
+      {
+        "mode": "base",
+        "switch_return_ns": 3667021914056,
+        "old_file_begin_ns": 3667822755269,
+        "old_file_end_ns": 3667822855811,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3668657234973,
+        "old_file_begin_ns": 3669457524502,
+        "old_file_end_ns": 3669457684600,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3670261398750,
+        "old_file_begin_ns": 3671061615160,
+        "old_file_end_ns": 3671061715989,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3671865965345,
+        "old_file_begin_ns": 3672666047197,
+        "old_file_end_ns": 3672666164824,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3673471181174,
+        "old_file_begin_ns": 3674270545473,
+        "old_file_end_ns": 3674270647129,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3675074644985,
+        "old_file_begin_ns": 3675875286892,
+        "old_file_end_ns": 3675875386903,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3676678648824,
+        "old_file_begin_ns": 3677479149487,
+        "old_file_end_ns": 3677479242112,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3678282694136,
+        "old_file_begin_ns": 3679082946490,
+        "old_file_end_ns": 3679083034787,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3679887696437,
+        "old_file_begin_ns": 3680688189418,
+        "old_file_end_ns": 3680688296915,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "base",
+        "switch_return_ns": 3681509220191,
+        "old_file_begin_ns": 3682308979400,
+        "old_file_end_ns": 3682309058567,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      }
+    ]
   },
   {
-    "scene": "entry",
     "mode": "compatible",
-    "passed": 20
+    "passed": 10,
+    "cases": [
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3683113378015,
+        "old_file_begin_ns": 3683912869080,
+        "old_file_end_ns": 3683912971377,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3684729878316,
+        "old_file_begin_ns": 3685530012310,
+        "old_file_end_ns": 3685530110659,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3686336193412,
+        "old_file_begin_ns": 3687136213073,
+        "old_file_end_ns": 3687136328498,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3687942972318,
+        "old_file_begin_ns": 3688743772616,
+        "old_file_end_ns": 3688743868207,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3689581278626,
+        "old_file_begin_ns": 3690381184733,
+        "old_file_end_ns": 3690381293780,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3691186299209,
+        "old_file_begin_ns": 3691986039579,
+        "old_file_end_ns": 3691986140915,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3692791898646,
+        "old_file_begin_ns": 3693591533214,
+        "old_file_end_ns": 3693591634505,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3694398982603,
+        "old_file_begin_ns": 3695196628351,
+        "old_file_end_ns": 3695196772209,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3696016398488,
+        "old_file_begin_ns": 3696816442640,
+        "old_file_end_ns": 3696816637432,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "compatible",
+        "switch_return_ns": 3697625462242,
+        "old_file_begin_ns": 3698424954183,
+        "old_file_end_ns": 3698425047044,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      }
+    ]
   },
   {
-    "scene": "orders",
-    "mode": "base",
-    "passed": 5
-  },
-  {
-    "scene": "orders",
-    "mode": "compatible",
-    "passed": 5
-  },
-  {
-    "scene": "orders",
     "mode": "cooperative",
-    "passed": 5
+    "passed": 10,
+    "cases": [
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3700043112270,
+        "old_file_begin_ns": 3700041520458,
+        "old_file_end_ns": 3700041611311,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3701650010455,
+        "old_file_begin_ns": 3701647984378,
+        "old_file_end_ns": 3701648051451,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3703265504704,
+        "old_file_begin_ns": 3703262081646,
+        "old_file_end_ns": 3703262467111,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3704872984747,
+        "old_file_begin_ns": 3704871079968,
+        "old_file_end_ns": 3704871147484,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3706486908917,
+        "old_file_begin_ns": 3706484431057,
+        "old_file_end_ns": 3706484499733,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3708093425045,
+        "old_file_begin_ns": 3708092013407,
+        "old_file_end_ns": 3708092120012,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3709706997761,
+        "old_file_begin_ns": 3709704472079,
+        "old_file_end_ns": 3709704556409,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3711316823647,
+        "old_file_begin_ns": 3711314915657,
+        "old_file_end_ns": 3711314998744,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3712925633816,
+        "old_file_begin_ns": 3712922071061,
+        "old_file_end_ns": 3712922187676,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      },
+      {
+        "mode": "cooperative",
+        "switch_return_ns": 3714533381543,
+        "old_file_begin_ns": 3714530490402,
+        "old_file_end_ns": 3714530596052,
+        "new_file_exists": false,
+        "restored_file_exists": true
+      }
+    ]
   }
 ]
