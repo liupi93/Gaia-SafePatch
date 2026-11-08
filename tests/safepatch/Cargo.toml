@@ -21,3 +21,7 @@ path = "demo/driver.rs"
 [[bin]]
 name = "safepatch-single-story"
 path = "single-thread-story/driver.rs"
+
+[[bin]]
+name = "safepatch-interactive-demo"
+path = "demo/interactive.rs"

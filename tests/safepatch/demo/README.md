@@ -1,6 +1,8 @@
 # 多线程文档导出对比
 
-业务源码 target.c 和 cooperative.h 保持原样。8 个 worker 和 1 个主线程运行真实文件导出。
+业务流程保持原样，8 个 worker 和 1 个主线程运行真实文件导出。
+新增的 [交互视频入口](INTERACTIVE.md) 按 Enter 分步执行，默认任务时长 30 秒；
+原自动入口仍使用默认 800 ms。target.c 仅提取了时长参数，协作接口未修改。
 
 ```sh
 bash tests/safepatch/demo/run.sh /tmp/gaia-syscare-demo

@@ -159,6 +159,18 @@ pub(super) fn exchange(
     timeout: Duration,
     related: &[u64],
 ) -> Result<Vec<u8>> {
+    exchange_observed(pid, address, bytes, timeout, related, &mut |_, _| {})
+}
+
+// Read-only observation; the callback must not block or mutate the target.
+pub(super) fn exchange_observed(
+    pid: u32,
+    address: u64,
+    bytes: &[u8],
+    timeout: Duration,
+    related: &[u64],
+    observe: &mut dyn FnMut(u64, i32),
+) -> Result<Vec<u8>> {
     ensure!(pid > 0 && pid <= i32::MAX as u32, "invalid pid");
     ensure!(
         !bytes.is_empty() && bytes.len() % 8 == 0,
@@ -213,6 +225,7 @@ pub(super) fn exchange(
             checks += 1;
             let rc =
                 unsafe { gaia_upatch_check(snapshot.ctx, bounds.as_ptr(), bounds.len(), fault) };
+            observe(checks, rc);
             ensure!(rc >= 0, "SysCare stack check failed closed: {rc}");
             if rc > 0 {
                 snapshot.release()?;

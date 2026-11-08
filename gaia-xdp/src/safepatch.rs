@@ -228,6 +228,27 @@ pub fn exchange_compat_related(
         bail!("Compatible requires Linux x86_64")
     }
 }
+/// Read-only progress from actual SysCare checks: count and result
+/// (0 = clean, positive = busy, negative = inspection error).
+/// Callback must not block or modify the target. Safety decisions are unchanged.
+pub fn exchange_compat_observed(
+    pid: u32,
+    address: u64,
+    bytes: &[u8],
+    timeout: Duration,
+    observe: &mut dyn FnMut(u64, i32),
+) -> Result<Vec<u8>> {
+    #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+    {
+        compatible::exchange_observed(pid, address, bytes, timeout, &[], observe)
+    }
+    #[cfg(not(all(target_os = "linux", target_arch = "x86_64")))]
+    {
+        let _ = (pid, address, bytes, timeout, observe);
+        bail!("Compatible requires Linux x86_64")
+    }
+}
+
 /// ABI: [magic, gate, active], all aligned sequentially-consistent atomic u64.
 /// The caller must serialize coordinators for a process. Unknown targets fail closed.
 pub fn exchange(

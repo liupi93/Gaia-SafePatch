@@ -12,6 +12,10 @@
 
 #include "cooperative.h"
 
+#ifndef DEMO_TASK_MS
+#define DEMO_TASK_MS 800
+#endif
+
 static sem_t jobs[8];
 static const char *output_dir;
 
@@ -26,8 +30,8 @@ static uint64_t now_ns(void)
 __attribute__((noinline))
 static int layout_document(int pages)
 {
-    puts("LAYOUT\t【排版中】已收到文档，预计处理 800 毫秒。");
-    struct timespec delay = {0, 800000000};
+    printf("LAYOUT\t【排版中】已收到文档，预计处理 %d 毫秒。\n", DEMO_TASK_MS);
+    struct timespec delay = {DEMO_TASK_MS / 1000, (DEMO_TASK_MS % 1000) * 1000000L};
     while (nanosleep(&delay, &delay) != 0)
     {
         if (errno != EINTR)
