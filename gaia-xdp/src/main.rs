@@ -208,6 +208,9 @@ struct HotpatchTarget {
     patch_action: PatchAction,
     #[serde(default)]
     patch_mode: PatchMode,
+    /// Additional complete functions checked by Compatible during install and restore.
+    #[serde(default)]
+    related_functions: Vec<String>,
     /// The return value to force when patch_action is override_return or skip_call.
     /// Interpreted as a signed i64 (e.g. -1 for -EPERM, -22 for -EINVAL, 0 for success).
     #[serde(default)]
@@ -242,6 +245,7 @@ enum PatchAction {
 #[derive(Debug, Clone, Copy, Deserialize, Serialize, Default, PartialEq)]
 #[serde(rename_all = "snake_case")]
 enum PatchMode {
+    /// Restricted native ELF subset with verified complete frame chains.
     Compatible,
     #[default]
     Cooperative,
@@ -1141,6 +1145,7 @@ struct PatchedFunction {
     /// - replace_function: 16 bytes (4 aarch64 instructions for trampoline)
     original_bytes: Vec<u8>,
     mode: PatchMode,
+    related_functions: Vec<u64>,
 }
 
 /// Apply runtime code patches for hotpatch targets that use override_return, skip_call,
@@ -1221,8 +1226,22 @@ fn apply_single_code_patch(
         return;
     }
 
-    // Read original instructions and write patch in a single ptrace session
-    let result = ptrace_read_and_write(pid, func_addr, patch_bytes, target.patch_mode);
+    let related = if target.patch_mode == PatchMode::Compatible {
+        match target.related_functions.iter()
+            .map(|name| resolve_runtime_symbol(pid, binary_path, name))
+            .collect::<Result<Vec<_>>>()
+        {
+            Ok(addresses) => addresses,
+            Err(err) => {
+                warn!("cannot resolve complete related-function scope: {err:#}");
+                return;
+            }
+        }
+    } else {
+        Vec::new()
+    };
+    // Read original instructions and write patch in a single ptrace session.
+    let result = ptrace_read_and_write(pid, func_addr, patch_bytes, target.patch_mode, &related);
     match result {
         Ok(original_bytes) => {
             patches.push(PatchedFunction {
@@ -1230,6 +1249,7 @@ fn apply_single_code_patch(
                 address: func_addr,
                 original_bytes,
                 mode: target.patch_mode,
+                related_functions: related,
             });
             info!(
                 "hotpatch code patch applied: {}:{} pid={} addr=0x{:x} override_return_value={}",
@@ -1959,9 +1979,12 @@ fn ptrace_read_and_write(
     addr: u64,
     new_data: &[u8],
     mode: PatchMode,
+    related: &[u64],
 ) -> Result<Vec<u8>> {
     if mode == PatchMode::Compatible {
-        return safepatch::exchange_compat(pid, addr, new_data, Duration::from_secs(5));
+        return safepatch::exchange_compat_related(
+            pid, addr, new_data, Duration::from_secs(5), related,
+        );
     }
     let executable = fs::read_link(format!("/proc/{pid}/exe"))?;
     let state = resolve_runtime_symbol(pid, &executable, "gaia_safepatch_state")
@@ -1972,9 +1995,9 @@ fn ptrace_read_and_write(
 /// Restore all previously applied code patches.
 fn restore_hotpatch_code_patches(patches: &mut Vec<PatchedFunction>) {
     patches.retain(|patch| {
-        if let Err(err) =
-            ptrace_read_and_write(patch.pid, patch.address, &patch.original_bytes, patch.mode)
-        {
+        if let Err(err) = ptrace_read_and_write(
+            patch.pid, patch.address, &patch.original_bytes, patch.mode, &patch.related_functions,
+        ) {
             warn!(
                 "failed to restore original code at pid={} addr=0x{:x}: {err:#}",
                 patch.pid, patch.address

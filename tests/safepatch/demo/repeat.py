@@ -23,7 +23,9 @@ for mode in ['control', 'base', 'compatible', 'cooperative']:
             raise RuntimeError(('重复验证失败', mode, i, run.stdout, run.stderr))
         report = json.loads((directory / 'files.result.json').read_text())
         assert (directory / 'files/document-0.txt').read_text() == '文档 0：20 页排版完成。\n'
-        if mode == 'control':
+        if mode == 'compatible':
+            assert not report['code_installed'] and not report['consistency_complete']
+        if mode in ('control', 'compatible'):
             assert report['new_file_exists']
         else:
             assert not report['new_file_exists'] and report['restored_file_exists']
@@ -32,7 +34,7 @@ for mode in ['control', 'base', 'compatible', 'cooperative']:
             else:
                 assert report['old_file_begin_ns'] > report['switch_return_ns']
         for job in range(3):
-            expected = job == 0 or (job == 1 and mode == 'control') or (job == 2 and mode != 'control')
+            expected = job == 0 or (job == 1 and mode in ('control', 'compatible')) or (job == 2 and mode not in ('control', 'compatible'))
             document = directory / f'files/document-{job}.txt'
             if expected:
                 assert document.read_text() == f'文档 {job}：20 页排版完成。\n'

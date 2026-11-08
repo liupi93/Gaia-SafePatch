@@ -6,37 +6,73 @@
 `patch_mode = "compatible"`，示例见 [compatible-example.toml](../tests/safepatch/compatible-example.toml)。
 严格模式失败不会自动降级。下文门禁、ABI、排空和零重叠说明均针对 cooperative。
 
-| 能力 | base 原版写入器（仅测试对照） | compatible | cooperative（默认） |
-|---|---|---|---|
-| 目标需要协议改造 | 否 | 否 | 是 |
-| 逐个确认全部线程停止，核对线程集合 | 否，只暂停一个线程 | 是 | 是 |
-| 当前覆盖区间 RIP 冲突 | 不检查 | GETREGS 检查、释放后限时重试 | 通过协作排空约束 |
-| 读回校验、失败回滚 | 无完整保障 | 是 | 是 |
-| 排空旧调用、避免新旧调用重叠 | 否 | **不保证** | 正确遵守协议时保证 |
-| 安装和恢复使用同一安全流程 | 否 | 是，保存安装时的模式 | 是 |
+Compatible 已有可成功安装的**受限用户态子集**。它不读取协作 ABI，不修改 RIP，
+不通过杀线程完成切换。旧 RIP-only 写入路径已经删除，Cooperative、Base 保持原有行为。
 
-`exchange_compat()` 不解析 `gaia_safepatch_state`，也不需要 gate 或 active。
-它复用 `Stopped::all()`，通过 SEIZE、INTERRUPT、waitpid 确认每个线程停止，
-检查固定线程集合；每次重试还与初始集合比较。对所有线程使用 PTRACE_GETREGS，
-只要 RIP 在 `[address, address + length)` 就解除暂停，等待约 2 ms 再试。
-Gaia 使用 5 秒冲突重试期限，冲突持续时拒绝写入。停止等待本身仍为阻塞 waitpid，
-因此这不是整个操作的硬时间上限。
+### Compatible 支持条件及实际验证
 
-通过检查后才读取原始机器码、逐字写入并读回比较。非空整字长度与地址溢出均先检查。
-写入或读回失败时，保持全部线程停止，恢复原始字节并再次校验；回滚失败则 SIGKILL
-并回收追踪线程，禁止恢复可能损坏的代码。明确释放失败会返回错误；未确认停止的中途
-失败采用终止目标的保守清理策略。异常信号停止拒绝写入，正常解除追踪时转交原信号。
-安装成功记录保留模式，恢复时使用该模式；恢复错误保留记录，供排查或重试。
+当前只接受 Linux x86_64 **静态、非 PIE、单线程、无 libc 的 ET_EXEC**，使用固定
+`rbp` 栈帧和直接调用。需要完整带大小的函数符号、无可执行间隙、已知 `_start`。
+示例是 [restricted.c](../tests/safepatch/restricted.c)，构建命令见
+[run-compat.sh](../tests/safepatch/run-compat.sh)。其中启动汇编和原始 syscall 是普通
+freestanding 程序实现，不是预埋补丁协议；没有 gate、活动计数、补丁通知或协作停车点。
 
-**RIP 不在覆盖区间不能证明旧调用结束。** 线程可能在被调用函数、系统调用、
-信号处理程序中，也可能以后返回覆盖区间。这一模式仅降低当前写入冲突风险；
-不适合依赖新旧数据结构一致性或零重叠切换的用途。极热函数可能始终找不到无冲突窗口。
-固定线程模型还要求操作期间不创建/退出线程、fork/exec、更换映射或自行修改代码，
-两次线程快照不能检测瞬时变化或 TID 重用。没有其他调试器或写入协调者是共同前提。
+编译参数不是可靠性的证明。运行时另外逐项验证：
 
-第一版仅允许 Linux x86_64 的现有 override_return / skip_call 入口补丁，
-不验证任意函数入口覆盖的语义适用性，也不新增远程注入能力。`replace_function`
-在两个模式均拒绝。eBPF 始终只作辅助观测，不参与兼容模式安全判断。
+- 用 `object` 读取完整函数边界；将同一 ELF 字节快照封入 sealed memfd，由系统
+  `objdump` 解码。全部可执行字节必须有明确函数归属。
+- 验证每个函数的标准序言、固定栈分配和唯一标准尾声，禁止其他栈寄存器修改、
+  间接调用、尾跳转及未知指令。分支只能落在本函数已解码的允许指令边界。
+- 内存写指令仅允许有界的本帧局部变量写入；拒绝任意地址写、段覆盖、未知栈操作。
+  当前 syscall 白名单只有 stdout/stderr `write`、`nanosleep`（剩余时间指针必须为零）
+  和 `exit`；验证立即数设置与分支不能绕过设置。拒绝 clone/fork/exec、mmap、
+  信号处理安装、上下文切换等调用。输出 fd 也不能是可写目标内存等特殊设备。
+- 暂停后逐字核对实际可执行内存与已验证 ELF，只允许受控入口为原始字节或固定
+  `mov eax,imm32; ret; nop; nop`。拒绝其他执行映射、W+X、自定义处理器和待处理信号。
+- 持有 pidfd 确认原进程未退出，防止重试期间 PID 重用。用 SEIZE/INTERRUPT、带截止时间
+  的 wait 确认唯一线程停止，再核对任务集合。
+  启用 clone/fork/vfork/exec/exit 事件跟踪；异常事件拒绝，自动追踪到的子任务纳入
+  清理。多线程目标直接拒绝。安全性依赖“完整代码验证排除线程创建”，而非两次快照
+  恰好相同；本轮没有开放一般动态多线程支持。
+- 对实际寄存器及每个栈帧，验证 PC 属于帧已建立且尚未拆除的指令位置、RSP/RBP
+  与静态分配量严格相符、栈地址在内核标记的原生栈内、父帧严格递增且间距恰好
+  等于调用者分配量加 16。每个返回地址必须对应直接 call 的下一条指令，且被调函数
+  与当前帧一致。最终必须闭合到已验证的 `_start -> main`，保存 RBP 为零，并匹配
+  `/proc/PID/stat` 的初始栈地址。未知帧、截断、损坏、超深栈、序言/尾声暂停均拒绝。
+
+因此，可靠性来自受限代码的逐条约束、实际代码校验和运行时栈链闭合三者共同成立，
+并非仅凭帧指针链走到零。这里不使用通用 best-effort 回溯器，也不声称提供任意 ELF 的
+可靠栈服务。假设内核、objdump 及 ELF/栈内存未受外部恶意篡改，没有其他协调者或
+外部写内存的参与者；不承诺对抗能伪造代码、寄存器和完整栈链的攻击者。
+
+### 检查、重试和安装
+
+`exchange_compat()` 自动从 ELF 获取目标**完整函数**范围。
+`exchange_compat_related()` 还接受相关函数入口；Gaia 配置用
+`related_functions = ["other_function"]` 声明符号，安装和恢复保留同一范围。
+任一边界未知或不是函数入口都拒绝。
+
+栈中有受影响函数时，日志记录函数、帧深度及地址，释放线程，约 2ms 后重新暂停和
+检查，直到截止时间。不会因为当前 RIP 在子函数或 syscall 中就批准切换。
+只有完整栈安全时，才在同一次暂停窗口读取旧字节、写入 8 字节返回值补丁、读回验证。
+成功日志有 `checks>0`、`root=verified`、完整函数范围和线程数。
+
+写入校验与操作完成分别记录。`install_verified` 时恢复状态仍是 `pending_resume`；
+成功 detach 后才报告 `result=success function_consistency_complete=true`。
+日志始终标记 `business_consistency=unclaimed`。函数级排空不等于异步队列、其他线程
+或函数返回后业务动作排空。普通文档 demo 不符合该子集，明确拒绝，不能声称维护完成。
+
+写入/读回失败时，在停止窗口恢复原字节并验证；detach 失败且仍可确认停止时也尝试
+回滚。回滚无法完成则报告 `code_state=indeterminate` 和 `target retained stopped`，
+保留 ptrace 停止供人工处理，绝不打印恢复成功或发送 SIGKILL。跟踪/恢复失败均报告
+异常与未恢复状态；控制器退出可能解除内核追踪关系，因此必须在退出前处理保留的
+目标。这不是崩溃后自动恢复系统。
+
+参考 [klp_check_stack()](https://github.com/torvalds/linux/blob/master/kernel/livepatch/transition.c)、
+[官方一致性模型](https://docs.kernel.org/6.15/livepatch/livepatch.html#consistency-model)
+及[可靠栈要求](https://docs.kernel.org/6.9/livepatch/reliable-stacktrace.html)。
+本实现没有移植完整 Linux Livepatch，未支持动态链接库、pthread、JIT、协程、信号栈、
+尾调用、任意替换函数或任意长度机器码补丁；遇到这些条件拒绝，不自动退回 Base。
 
 ## 1. 我们到底在修改什么？
 

@@ -54,7 +54,18 @@ fn main() -> Result<()> {
             ensure!(Instant::now() < deadline, "no old call");
         }
         let observed = active(pid, state)?;
-        let exchange = |bytes: &[u8]| if compat_risk { safepatch::exchange_compat(pid, address, bytes, Duration::from_secs(3)) } else { base::exchange(pid, address, bytes) };
+        if compat_risk {
+            let error = safepatch::exchange_compat(pid, address, &[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90], Duration::from_secs(3)).unwrap_err();
+            ensure!(error.to_string().contains("unsupported ELF"), "{error:#}");
+            ensure!(child.0.try_wait()?.is_none(), "refusal killed target");
+            child.0.kill()?;
+            child.0.wait()?;
+            collector.join().unwrap();
+            println!("COMPAT_REFUSED code_installed=false consistency_complete=false checks=0 reason={error:#}");
+            return Ok(());
+        }
+
+        let exchange = |bytes: &[u8]| base::exchange(pid, address, bytes);
         let original = exchange(&[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90])?;
         let release = u64::from_str_radix(fields[4].trim_start_matches("0x"), 16)?;
         std::fs::OpenOptions::new()

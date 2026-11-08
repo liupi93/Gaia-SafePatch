@@ -199,45 +199,41 @@ cargo check --offline -p gaia-xdp
 
 更多协议约束和异常行为见[实现原理](safepatch-explained.md)。
 
-## 9. 非协作兼容模式与三模式对照
+## 9. 非协作兼容模式：可运行的受限安全子集
 
 ```bash
-# 使用已有工具链可避免 rust-toolchain.toml 自动更新；也可移除该环境变量使用 nightly。
 bash tests/safepatch/run-compat.sh /tmp/gaia-safepatch-compatible
 bash tests/safepatch/run.sh /tmp/gaia-safepatch-three-modes
+bash tests/safepatch/demo/run.sh /tmp/gaia-document-demo
 ```
 
-兼容脚本编译 `compatible.c`：8 个工作线程与主线程，不导出协作 ABI，也不执行门禁
-或活动计数。普通调用间有短暂休眠以提供可重复的无冲突窗口；另一个场景让全部工作线程
-持续在覆盖区间内循环，必须重试并超时，目标继续存活。普通场景完成 20 次安装和恢复，
-检查原始字节与补丁字节，验证缺失 ABI 的严格模式、无效地址、溢出、空/非整字长度均失败。
-脚本断言 40 条校验日志均为 `threads=9 rip_clear=true`。
+`run-compat.sh` 同时运行成功和拒绝测试，不允许只通过全部拒绝验收：
 
-同一脚本还运行仅在 `cfg(test)` 编译的真实 ptrace 故障注入：16 字节写入中第二个机器字
-失败或注入一次读回不一致，要求回滚读回等于原始内容；持续失败则要求目标被终止并回收，错误不能变成成功。
-注入钩子不会编译进 Gaia 运行程序。测试没有覆盖所有信号交错、线程变化、GETREGS/DETACH
-失败或内核异常；日志中的线程数来自已确认停止的集合，不能替代这些故障场景的专项验证。
+- `restricted.c` 无协作 ABI、门禁或计数器。真实旧调用在子函数里等待时，先用短超时
+  验证拒绝和字节不变，再用长超时等待其退出，安装返回 99 的补丁。完成 **4 次安装、
+  4 次恢复**，检查字节、原始代码恢复、目标存活、TracerPid 为零。
+- 运行时记录完整函数范围、每轮检查、实际帧、调用点和已知栈根。脚本强制要求 8 次
+  成功写入均 `checks>0`，旧 `target_value` 的非顶层活动帧确实导致 busy；把 `main`
+  声明为相关函数时必须超时拒绝。
+- 无帧指针变体和含禁止 syscall 的变体必须拒绝，字节不变、目标存活。动态链接的
+  普通目标、入口无限循环目标、不断创建/退出线程的目标共 60 次正常请求、12 次
+  错误输入请求均拒绝；不进入 ptrace 不会遗漏瞬时新线程。
+- 故障测试实际破坏保存的父帧链接，要求检查器拒绝，并在同一停止窗口修复测试数据。
+  另外注入 SEIZE/GETREGS/DETACH 失败、写失败、读回不一致，验证未虚报成功、代码
+  恢复和进程存活。持续回滚失败必须明确报告保留停止状态，由测试驱动显式人工恢复。
+- SIGSTOP 目标拒绝安装，确认解除追踪后仍保持原来的 group stop，再由测试发 SIGCONT。
+  共享写入器还测试 16 字节部分写失败恢复；该用例不被算作 Compatible 成功安装。
 
-原有 run.sh 保留 cooperative 零重叠断言，并增加 `compat-risk` 受控长调用实验。
-该实验沿用原版风险实验的控制点与计数器，仅用于确定测试交错；兼容写入器不读取它们。
-分析器分别要求 base 与 compatible 出现实际新旧调用区间重叠；compatible 的两次切换仍
-必须满足 9 个线程停止和 RIP 无冲突。这样对比安全保证，而不把兼容模式误标成排空模式。
-`results.json` 增加 `compatible_risk_overlapping_intervals`。兼容独立套件证明无需 ABI，
-受控风险实验则用测试设施证明其局限，两者目的不同。
+日志在输出目录的 `restricted.runtime`、`restricted.summary`、`*.runtime`、
+`fault-tests.log`。`run.sh` 包含同一兼容套件，再合并 Cooperative 的 40 次安装、
+40 次恢复和 Base 风险实验结果。计数明确区分兼容受限目标与不支持的动态目标。
 
-完整守护进程检查与运行套件分开：nightly/BPF 工具链不可用时应如实记录阻塞。
-使用 `AYA_BUILD_SKIP=1` 且复用已有 BPF 对象只能证明用户态编译，不能声称重新构建或加载 BPF。
+文档导出 demo 保留原业务行为：Compatible 对普通动态链接多线程目标明确拒绝，
+检查原字节不变、进程存活、旧作业和后续作业正常生成真实文件，不打印维护切换成功。
+Cooperative 仍验证先写完旧文档再切换，以及恢复后的导出。函数级安装不被解释为
+任意跨线程或异步业务的一致性保证。
 
-本次机器实测保存于 [measured-compatible-results.json](../tests/safepatch/measured-compatible-results.json)：
-协作模式 40 次安装、40 次恢复、80 次校验写入，零新旧区间重叠；独立无 ABI 兼容目标
-20 次安装、20 次恢复、40 次校验写入。受控风险实验 base 重叠计数 107061、compatible
-90610，表明兼容模式没有排空保证；这些计数不是性能比较。部分写失败、读回不一致回滚、
-持续回滚失败后的终止回收均通过。用户态编译通过，完整 BPF 重建受 nightly 工具链故障阻塞。
-
-调试中早期版本的致命回滚测试曾等待追踪线程退出而阻塞；现已修复为先终止并逐线程回收，
-最终测试通过。该轮遗留的 root 所有测试进程（38062、38171，及其退出中的子进程）
-无法由当前用户清理，普通 kill 被拒绝且 sudo 需要密码；需由进程所有者处理。
-
-## 课程录屏示例：文档导出与维护窗口
-
-参见 [demo/README.md](../tests/safepatch/demo/README.md)。新示例使用普通 C 业务函数、作业队列及真实文件，不再使用入口汇编实验。原版与兼容模式演示维护切换返回后仍有旧文件生成；协作式演示先写完旧文档再完成切换。这里验证业务区间的排空，不宣称发生机器码崩溃或覆盖了 WebUI 集成。
+本轮结果见 [measured-verified-compatible-results.json](../tests/safepatch/measured-verified-compatible-results.json)。
+之前的 measured-compatible-results.json、measured-conservative-results.json 和 demo
+历史记录分别对应旧 RIP-only 实现或上一轮全部拒绝子集，不代表本轮成功路径。
+用户态 `AYA_BUILD_SKIP=1 cargo check` 不代表重新构建、加载 BPF 或 HTTP 端到端验证。

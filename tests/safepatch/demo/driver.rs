@@ -125,19 +125,34 @@ fn main() -> Result<()> {
         _ => unreachable!(),
     };
     let started = Instant::now();
-    if mode != "control" {
+    if mode != "control" && mode != "compatible" {
         println!("【切换维护状态】新版本的导出函数将直接返回“暂不导出”。");
         ensure!(exchange(&patch)? == original, "安装时保存的原始代码不一致");
     }
+    if mode == "compatible" {
+        let error = exchange(&patch).expect_err("不可靠回溯不得报告一致性成功");
+        ensure!(
+            error
+                .to_string()
+                .contains("unsupported ELF"),
+            "{error:#}"
+        );
+        ensure!(read_code(pid, address)? == original, "拒绝后代码发生变化");
+        ensure!(target.0.try_wait()?.is_none(), "拒绝导致目标退出");
+        println!(
+            "【明确拒绝】耗时 {} 微秒；checks=0；code_installed=false；consistency_complete=false；原因：{error:#}",
+            started.elapsed().as_micros()
+        );
+    }
     let cutoff = now_ns();
-    if mode != "control" {
+    if mode != "control" && mode != "compatible" {
         ensure!(read_code(pid, address)? == patch, "补丁读回检查失败");
         println!(
             "【切换已返回成功】耗时 {} 毫秒；现在提交第二个文档。",
             started.elapsed().as_millis()
         );
     } else {
-        println!("【正常对照】保持原程序不变，现在提交第二个文档。");
+        println!("【保持原程序】未安装补丁，现在提交第二个文档。");
     }
     writeln!(input, "1")?;
     input.flush()?;
@@ -172,13 +187,16 @@ fn main() -> Result<()> {
         old.1 && directory.join("document-0.txt").is_file(),
         "旧作业没有实际生成文件"
     );
-    ensure!(new.1 == (mode == "control"), "新作业行为不符合预期");
     ensure!(
-        directory.join("document-1.txt").exists() == (mode == "control"),
+        new.1 == (matches!(mode, "control" | "compatible")),
+        "新作业行为不符合预期"
+    );
+    ensure!(
+        directory.join("document-1.txt").exists() == (matches!(mode, "control" | "compatible")),
         "新作业文件不符合预期"
     );
-    if mode == "control" {
-        println!("【对照通过】两个文档均正常生成，程序本身未出现异常。");
+    if matches!(mode, "control" | "compatible") {
+        println!("【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。");
     } else {
         if mode == "cooperative" {
             ensure!(old.3 < cutoff, "旧文件提交跨过维护完成时间");
@@ -226,15 +244,20 @@ fn main() -> Result<()> {
         fs::read_to_string(directory.join("document-0.txt"))? == "文档 0：20 页排版完成。\n",
         "旧文档内容不符合预期"
     );
+    ensure!(target.0.try_wait()?.is_none(), "目标进程异常退出");
+    let installed = mode == "base" || mode == "cooperative";
+    let consistent = mode == "cooperative";
     let report = format!(
-        "{{\n  \"mode\": \"{mode}\",\n  \"switch_return_ns\": {cutoff},\n  \"old_file_begin_ns\": {},\n  \"old_file_end_ns\": {},\n  \"new_file_exists\": {},\n  \"restored_file_exists\": {}\n}}\n",
+        "{{\n  \"code_installed\": {installed},\n  \"consistency_complete\": {consistent},\n  \"mode\": \"{mode}\",\n  \"switch_return_ns\": {cutoff},\n  \"old_file_begin_ns\": {},\n  \"old_file_end_ns\": {},\n  \"new_file_exists\": {},\n  \"restored_file_exists\": {}\n}}\n",
         old.2,
         old.3,
         directory.join("document-1.txt").exists(),
         directory.join("document-2.txt").exists()
     );
     for id in 0..=2 {
-        let expected = id == 0 || (id == 1 && mode == "control") || (id == 2 && mode != "control");
+        let expected = id == 0
+            || (id == 1 && matches!(mode, "control" | "compatible"))
+            || (id == 2 && !matches!(mode, "control" | "compatible"));
         let file = directory.join(format!("document-{id}.txt"));
         if expected {
             ensure!(

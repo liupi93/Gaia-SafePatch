@@ -21,4 +21,5 @@ for sample in 1 2 3; do
     done
 done
 git rev-parse base >"$output/base-commit"
+bash run-compat.sh "$output/compatible" >"$output/compatible-validation.summary" 2>"$output/compatible-validation.runtime"
 python3 analyze.py "$output"

@@ -1,9 +1,12 @@
-# Merge this target into Gaia's configuration; use the actual executable/PID/symbol.
+# Restricted static x86_64 ET_EXEC only; see docs/safepatch-explained.md.
+# Use an actual verified executable/PID/symbol. Dynamic libc/pthread targets refuse.
 [[hotpatch.targets]]
-binary = "/opt/service/bin/server"
+binary = "/tmp/gaia-safepatch-compatible/restricted"
 symbol = "target_value"
 pid = 12345
 enabled = false
 patch_action = "override_return" # or "skip_call"
 override_return_value = 99
 patch_mode = "compatible" # explicit opt-in; omitted => "cooperative"
+
+related_functions = [] # e.g. ["other_function"]; full functions, also checked on restore

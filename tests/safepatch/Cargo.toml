@@ -6,6 +6,7 @@ edition = "2024"
 [dependencies]
 anyhow = "1"
 libc = "0.2"
+object = { version = "0.38.0", default-features = false, features = ["read", "elf"] }
 [[bin]]
 name = "safepatch-validation"
 path = "driver.rs"
