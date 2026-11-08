@@ -1,9 +1,10 @@
 //! Linux x86_64 stop/write runtimes (cooperative drain or compatible RIP check). See tests/safepatch/README.md.
-use anyhow::{Context, Result, bail};
 use std::{
     fs,
     time::{Duration, Instant},
 };
+
+use anyhow::{Context, Result, bail};
 
 fn trace(request: u32, tid: i32, address: u64, data: u64) -> Result<i64> {
     #[cfg(test)]
@@ -335,11 +336,12 @@ thread_local! {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::{
         io::{BufRead, BufReader},
         process::{Command, Stdio},
     };
+
+    use super::*;
     #[test]
     fn partial_write_rollback_and_fatal_rollback() -> Result<()> {
         let executable = std::env::var("GAIA_COMPAT_TARGET")

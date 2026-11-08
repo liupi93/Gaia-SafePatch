@@ -1,0 +1,27 @@
+[
+  {
+    "scene": "entry",
+    "mode": "base",
+    "passed": 20
+  },
+  {
+    "scene": "entry",
+    "mode": "compatible",
+    "passed": 20
+  },
+  {
+    "scene": "orders",
+    "mode": "base",
+    "passed": 5
+  },
+  {
+    "scene": "orders",
+    "mode": "compatible",
+    "passed": 5
+  },
+  {
+    "scene": "orders",
+    "mode": "cooperative",
+    "passed": 5
+  }
+]

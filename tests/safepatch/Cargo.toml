@@ -12,3 +12,6 @@ path = "driver.rs"
 [[bin]]
 name = "safepatch-compat-validation"
 path = "compat_driver.rs"
+[[bin]]
+name = "safepatch-video-demo"
+path = "demo/driver.rs"

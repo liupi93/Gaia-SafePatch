@@ -203,8 +203,8 @@ cargo check --offline -p gaia-xdp
 
 ```bash
 # 使用已有工具链可避免 rust-toolchain.toml 自动更新；也可移除该环境变量使用 nightly。
-RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run-compat.sh /tmp/gaia-safepatch-compatible
-RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run.sh /tmp/gaia-safepatch-three-modes
+bash tests/safepatch/run-compat.sh /tmp/gaia-safepatch-compatible
+bash tests/safepatch/run.sh /tmp/gaia-safepatch-three-modes
 ```
 
 兼容脚本编译 `compatible.c`：8 个工作线程与主线程，不导出协作 ABI，也不执行门禁
