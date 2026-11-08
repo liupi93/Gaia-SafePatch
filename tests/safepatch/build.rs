@@ -1,5 +1,11 @@
+#[path = "../../gaia-xdp/src/safepatch/syscare/build.rs"]
+mod syscare_build;
 use std::{env, fs, path::PathBuf, process::Command};
 fn main() {
+    syscare_build::build(
+        &PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap())
+            .join("../../gaia-xdp/src/safepatch/syscare"),
+    );
     println!("cargo:rerun-if-changed=../../.git/refs/heads/base");
     let output = Command::new("git")
         .args(["show", "base:gaia-xdp/src/main.rs"])

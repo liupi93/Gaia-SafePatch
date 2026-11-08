@@ -1,12 +1,13 @@
 #[path = "../../gaia-xdp/src/safepatch.rs"]
 mod safepatch;
-use anyhow::{Result, ensure};
 use std::{
     io::{BufRead, BufReader},
     os::unix::fs::FileExt,
     process::{Command, Stdio},
     time::{Duration, Instant},
 };
+
+use anyhow::{Result, ensure};
 struct Child(std::process::Child);
 impl Drop for Child {
     fn drop(&mut self) {
@@ -39,17 +40,29 @@ fn main() -> Result<()> {
         memory.read_exact_at(&mut original, addr)?;
         let start = Instant::now();
         for _ in 0..20 {
-            let error = safepatch::exchange_compat(pid, addr, &patch, Duration::from_millis(30))
-                .unwrap_err();
-            ensure!(error.to_string().contains("unsupported ELF"), "{error:#}");
+            let result = safepatch::exchange_compat(pid, addr, &patch, Duration::from_millis(200));
+            if scenario == "normal" && result.is_ok() {
+                ensure!(result? == original);
+                ensure!(
+                    safepatch::exchange_compat(pid, addr, &original, Duration::from_secs(1))?
+                        == patch
+                );
+            } else if let Ok(old) = result {
+                ensure!(scenario == "churn", "active old call accepted");
+                ensure!(
+                    safepatch::exchange_compat(pid, addr, &original, Duration::from_secs(1))?
+                        == old
+                        || old == original
+                );
+            }
             let mut current = [0; 8];
             memory.read_exact_at(&mut current, addr)?;
-            ensure!(current == original, "refusal changed code");
-            ensure!(child.0.try_wait()?.is_none(), "refusal killed target");
+            ensure!(current == original, "failure changed code");
+            ensure!(child.0.try_wait()?.is_none(), "failure killed target");
             let status = std::fs::read_to_string(format!("/proc/{pid}/status"))?;
             ensure!(
                 status.lines().any(|s| s == "TracerPid:\t0"),
-                "refusal left tracer attached"
+                "tracer leaked"
             );
         }
         for (address, bytes) in [
@@ -61,7 +74,7 @@ fn main() -> Result<()> {
             ensure!(safepatch::exchange_compat(pid, address, bytes, Duration::ZERO).is_err());
         }
         println!(
-            "result=refused scenario={scenario} attempts=20 checks=0 elapsed_us={} code_unchanged=true target_alive=true tracer=0 reason=unsupported ELF",
+            "result=validated scenario={scenario} attempts=20 elapsed_us={} code_unchanged=true target_alive=true tracer=0 ",
             start.elapsed().as_micros()
         );
     }

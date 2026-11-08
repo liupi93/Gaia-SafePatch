@@ -1,0 +1,110 @@
+===== case 1 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-70rbt04c/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 1：已生成文档文件
+  作业 0：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-70rbt04c/files/document-0.txt
+===== case 2 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-mb50g7hn/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 0：已生成文档文件
+  作业 1：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-mb50g7hn/files/document-0.txt
+===== case 3 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-539r8f9f/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 1：已生成文档文件
+  作业 0：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-539r8f9f/files/document-0.txt
+===== case 4 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-l7zdr93u/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 0：已生成文档文件
+  作业 1：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-l7zdr93u/files/document-0.txt
+===== case 5 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-9key9ylf/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 1：已生成文档文件
+  作业 0：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-9key9ylf/files/document-0.txt
+===== case 6 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-dcpbah66/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 0：已生成文档文件
+  作业 1：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-dcpbah66/files/document-0.txt
+===== case 7 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-lpojjbca/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 1：已生成文档文件
+  作业 0：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-lpojjbca/files/document-0.txt
+===== case 8 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-2p7y7be5/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 0：已生成文档文件
+  作业 1：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-2p7y7be5/files/document-0.txt
+===== case 9 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-hcgrgu07/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 1：已生成文档文件
+  作业 0：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-hcgrgu07/files/document-0.txt
+===== case 10 =====
+【文档导出服务】不打补丁（对照）｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-control-p56ug8hw/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【保持原程序】未安装补丁，现在提交第二个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 0：已生成文档文件
+  作业 1：已生成文档文件
+【未安装验证通过】两个文档均正常生成；原始代码未变，进程仍存活。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-control-p56ug8hw/files/document-0.txt

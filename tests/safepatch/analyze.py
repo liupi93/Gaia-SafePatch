@@ -42,11 +42,12 @@ compat_runtime = (root/'compatible-risk.runtime').read_text()
 assert 'write verified' not in compat_runtime
 assert 'result=error' in compat_runtime and 'consistency_complete=false' in compat_runtime
 assert 'COMPAT_REFUSED' in (root/'compatible-risk.summary').read_text()
-compatible = (root/'compatible/restricted.runtime').read_text()
+compatible = (root/'compatible/fault-tests.log').read_text()
 compatible_successes = [line for line in compatible.splitlines() if 'result=success' in line]
-assert len(compatible_successes) == 8
-assert all(int(re.search(r'checks=(\d+)',line)[1])>0 for line in compatible_successes)
-assert 'root=verified' in compatible and 'active=target_value depth=1' in compatible
+assert len(compatible_successes) >= 20
+assert all('threads=9' in line and 'native_stack_check_complete=true' in line and
+           'business_consistency=unclaimed' in line for line in compatible_successes)
+assert '6 passed; 0 failed' in compatible
 import statistics
 performance = {}
 for mode in ('base','safe'):
@@ -58,8 +59,8 @@ for mode in ('base','safe'):
 result = dict(successful_installs=40, successful_restorations=40, restoration_failures=sum(case["restore_failures"] for case in case_metrics.values()),
               drain_measurements=case_metrics, calls_spanning_switches=crossing_switches, verified_writes=writes, unsafe_writes=unsafe, overlapping_intervals=overlap,
               completed_long_calls=len(intervals), performance_overhead_vs_base_pct=(1-performance["safe"]/performance["base"])*100,
-              median_calls_per_second=performance, base_risk_overlapping_intervals=risk_overlap, compatible_dynamic_risk_result="refused", compatible_installs=4, compatible_restorations=4,
-              compatible_verified_writes=len(compatible_successes), compatible_function_consistency_complete=True, compatible_business_consistency="unclaimed",
+              median_calls_per_second=performance, base_risk_overlapping_intervals=risk_overlap, compatible_dynamic_risk_result="refused", compatible_minimum_installs=10, compatible_minimum_restorations=10,
+              compatible_verified_writes=len(compatible_successes), compatible_native_stack_check_complete=True, compatible_business_consistency="unclaimed",
               base_commit=(root/"base-commit").read_text().strip())
 (root/'results.json').write_text(json.dumps(result, indent=2)+'\n')
 print(json.dumps(result, indent=2))

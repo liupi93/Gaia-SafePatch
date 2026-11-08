@@ -97,6 +97,6 @@ Gaia daemon; verifier acceptance, live observation and HTTP integration have not
 been measured by this run. Existing remote dlopen replacement is deliberately
 rejected, so a replacement target cannot report a successful code installation.
 
-兼容模式新增入口：`bash tests/safepatch/run-compat.sh`。配置与三模式能力差异见 [原理说明](../../docs/safepatch-explained.md) 和 [测试文档](../../docs/safepatch-testing.md)；`run.sh` 现在包含 Compatible 受限静态 ELF 的真实安装、等待排空、恢复及安全拒绝测试。动态链接多线程目标仍明确拒绝；成功检查不能解释为业务级一致性。
-
-用于课程录屏的纯 C 文档导出示例见 [demo/README.md](demo/README.md)：通过真实文件的生成顺序比较原版、兼容模式与协作模式，另有不打补丁的正常对照。
+Compatible 运行 `bash tests/safepatch/run-compat.sh`。当前使用发行版 SysCare 的 C
+线程控制与保守栈扫描，支持真实 pthread 多线程安装、恢复与失败验证。
+来源、保证级别及限制见 [移植说明](../../gaia-xdp/src/safepatch/syscare/README.md)。

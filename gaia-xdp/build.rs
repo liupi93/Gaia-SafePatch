@@ -1,3 +1,5 @@
+#[path = "src/safepatch/syscare/build.rs"]
+mod syscare_build;
 use std::{
     env, fs,
     path::{Path, PathBuf},
@@ -9,6 +11,7 @@ use aya_build::Toolchain;
 
 fn main() -> anyhow::Result<()> {
     let manifest_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR").context("CARGO_MANIFEST_DIR")?);
+    syscare_build::build(&manifest_dir.join("src/safepatch/syscare"));
     let webui_dir = manifest_dir.join("../gaia-webui");
 
     configure_webui_rerun(&webui_dir)?;

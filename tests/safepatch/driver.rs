@@ -55,13 +55,13 @@ fn main() -> Result<()> {
         }
         let observed = active(pid, state)?;
         if compat_risk {
-            let error = safepatch::exchange_compat(pid, address, &[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90], Duration::from_secs(3)).unwrap_err();
-            ensure!(error.to_string().contains("unsupported ELF"), "{error:#}");
+            let error = safepatch::exchange_compat(pid, address, &[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90], Duration::from_millis(30)).unwrap_err();
+            ensure!(error.to_string().contains("timeout"), "{error:#}");
             ensure!(child.0.try_wait()?.is_none(), "refusal killed target");
             child.0.kill()?;
             child.0.wait()?;
             collector.join().unwrap();
-            println!("COMPAT_REFUSED code_installed=false consistency_complete=false checks=0 reason={error:#}");
+            println!("COMPAT_REFUSED code_installed=false consistency_complete=false reason={error:#}");
             return Ok(());
         }
 

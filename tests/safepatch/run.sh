@@ -7,7 +7,7 @@ for test in high_frequency long_running; do
     cc -O0 -g -pthread -fno-pie -no-pie -fno-inline "$test.c" -o "$output/$test"
 done
 cc -O0 -g -pthread -fno-pie -no-pie -fno-inline -DGAIA_BASELINE high_frequency.c -o "$output/high_frequency_base"
-cargo build --manifest-path Cargo.toml
+cargo build --offline --manifest-path Cargo.toml --bin safepatch-validation --bin safepatch-compat-validation --bin safepatch-video-demo
 for test in high_frequency long_running; do
     target/debug/safepatch-validation "$output/$test" "$output/$test.calls" >"$output/$test.summary" 2>"$output/$test.runtime"
 done

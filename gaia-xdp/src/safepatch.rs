@@ -1,4 +1,4 @@
-//! Linux x86_64 cooperative and restricted verified non-cooperative runtimes.
+//! Linux x86_64 cooperative and SysCare native-stack compatible runtimes.
 //! See tests/safepatch/README.md for the supported consistency guarantees.
 use std::{
     fs,
@@ -192,7 +192,20 @@ impl Drop for Stopped {
 #[path = "safepatch/compatible.rs"]
 mod compatible;
 
-/// Restricted, verified native ELF compatibility runtime. See compatible.rs.
+/// Recovery material when Compatible wrote code but could not complete cleanup.
+#[derive(Debug)]
+pub struct CompatIncomplete {
+    pub original_bytes: Vec<u8>,
+    pub reason: String,
+}
+impl std::fmt::Display for CompatIncomplete {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.reason)
+    }
+}
+impl std::error::Error for CompatIncomplete {}
+
+/// SysCare native stack scan; success does not assert business consistency.
 pub fn exchange_compat(pid: u32, address: u64, bytes: &[u8], timeout: Duration) -> Result<Vec<u8>> {
     exchange_compat_related(pid, address, bytes, timeout, &[])
 }

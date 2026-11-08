@@ -1,8 +1,8 @@
-# Restricted static x86_64 ET_EXEC only; see docs/safepatch-explained.md.
-# Use an actual verified executable/PID/symbol. Dynamic libc/pthread targets refuse.
+# SysCare native-stack scan; see docs/safepatch-explained.md.
+# Use an actual executable/PID/full-size function symbol. No business drain claim.
 [[hotpatch.targets]]
-binary = "/tmp/gaia-safepatch-compatible/restricted"
-symbol = "target_value"
+binary = "/tmp/gaia-safepatch-compatible/document"
+symbol = "render_document"
 pid = 12345
 enabled = false
 patch_action = "override_return" # or "skip_call"

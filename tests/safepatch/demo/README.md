@@ -1,152 +1,35 @@
-# 纯 C 文档导出服务：为什么“补丁成功”不等于“业务已经停下”
+# 多线程文档导出对比
 
-业务情境：准备归档输出目录或切换存储位置，需要先让文档服务进入维护状态。
-维护完成之后，输出目录不应再新增文档。此时有一个文档正在排版。
-把导出函数改成“暂不导出”，能否保证目录不再变化？
+业务源码 target.c 和 cooperative.h 保持原样。8 个 worker 和 1 个主线程运行真实文件导出。
 
-本版删除了旧版入口指令实验。业务源码 [target.c](target.c) 约 120 行，使用正常的
-作业输入、线程队列和真实文件输出，没有汇编、裸函数、入口填充或指定执行位置。
-可选协作接口单独放在 [cooperative.h](cooperative.h)，便于比较改动。
-
-## 先读这几行业务
-
-```c
-enter_region();
-int exported = render_document(20);
-if (exported)
-{
-    /* 创建并写完 document-N.txt。 */
-}
-leave_region();
+```sh
+bash tests/safepatch/demo/run.sh /tmp/gaia-syscare-demo
+python3 tests/safepatch/demo/repeat.py /tmp/gaia-syscare-demo 3
 ```
 
-`render_document()` 调用排版模块，成功返回 1。维护补丁让它直接返回 0。
-普通版本的 enter/leave 是空操作；协作版本把“排版到写完文件”都纳入计数。
+- Control：两个作业都生成文档。
+- Base：补丁立即返回，旧文档在返回之后才开始创建；恢复后第三个文档正常导出。
+- Compatible：先以 30ms 超时验证活动旧调用被拒绝且代码不变，再等待旧 render_document
+  调用结束后安装。新作业不导出，恢复后第三个文档正常导出。仅声明原生栈检查完成。
+- Cooperative：计数覆盖排版至文件关闭，断言旧文件写完早于切换返回。
 
-排版模块用 800 毫秒等待模拟耗时处理，这只是普通测试替身，不是完整的排版引擎。
-输出是可打开的 UTF-8 文本文件，不是 PDF。异常是**真实文件在维护完成后才开始创建**，
-不靠人为报错或终止程序表现。所有模式使用同样的业务与耗时，未补丁版本另作正常对照。
+Compatible 的栈检查覆盖 RIP 位于 nanosleep 时的旧调用者，不只是入口覆盖区间。
+当前这次交错通常在文件写完之后才采样到干净栈；不能推导任意调度下目录稳定，
+不对 Compatible 断言业务排空，也不声明异步队列或下游工作已经完成。
+详细边界和失败语义见 [移植说明](../../../gaia-xdp/src/safepatch/syscare/README.md)。
 
-## 一条命令准备并实测
+驱动通过 stdin 提交作业，不改寄存器或业务内存来制造时序。实际机器码读回、
+文件内容、单调时钟以及恢复后执行均校验；输出 files.result.json 在业务目录外。
+历史 example-* 和 measured-results.json 不代表当前版本；本次 repeat-results.json
+和 runtime.log 才对应当前实测。未验证 HTTP/eBPF 端到端流程。
 
-从仓库根目录运行，使用仓库配置的 nightly：
+集中验收的新时序统计、只读栈快照和 PPT 表述边界见
+[验收结论](../../../docs/safepatch-acceptance.md)。当前重复 10 次没有观察到 Compatible
+返回后生成旧文件；这不是其业务排空保证。`consistency_complete` 表达保证声明，
+`business_observation` 另行表达实测时序。返回时间已改为交换调用返回后立即采样。
 
-```bash
-bash tests/safepatch/demo/run.sh
+只读检查旧调用命中原因（不安装补丁）：
+
+```sh
+python3 tests/safepatch/demo/inspect-native.py /tmp/gaia-syscare-acceptance/plain /tmp/gaia-syscare-acceptance/stack-audit.json
 ```
-
-产物和日志默认在 `/tmp/gaia-document-demo`。编译使用普通 `-O2`，禁用内联以保留
-要修改的函数边界，不依赖某个指令偏移。依赖 cc、objdump、可用 Cargo 依赖、
-正确的原版 base 分支，以及追踪子进程的运行环境。
-
-驱动直接引用 safepatch.rs；base 通过已有 build.rs 从原分支提取实际写入函数，
-没有改动原版算法。演示未启动 Gaia HTTP 服务或加载 eBPF，应称为“Gaia 写入器与
-SafePatch 运行时演示”，不能说已验证 WebUI 端到端流程。
-
-## 录屏顺序
-
-正式录制前先完成准备，再逐条运行下面的命令。输出以中文为主，未知错误仍原样保留。
-
-### 1. 正常导出，不打补丁
-
-```bash
-bash tests/safepatch/demo/show.sh control
-```
-
-两个作业都会生成文件，说明正常程序可以完成任务。先展示 `render_document()` 和
-worker 中的文件写入代码，让观众理解：排版成功之后才创建输出文件。
-
-### 2. 原版切换：界面说完成，文件却继续出现
-
-```bash
-bash tests/safepatch/demo/show.sh base
-```
-
-驱动通过正常输入提交作业 0，等排版模块实际开始工作后安装补丁。
-安装返回成功后，再通过正常输入提交作业 1。
-
-预期：
-
-```text
-作业 0 正在排版
-→ 维护切换返回成功
-→ 作业 1 不再导出
-→ 作业 0 却又生成了 document-0.txt
-```
-
-讲解：“新作业已经停下，但之前开始的工作还会回来写文件。此时立刻归档目录，
-就可能漏掉后来出现的文档。”打开输出目录中的真实文件给观众看。
-
-这是业务切换顺序异常，不是机器码崩溃。本例不再把“每次必然崩溃”作为目标。
-也不是说所有服务都禁止旧任务完成；这里明确选择了维护窗口需要目录稳定的要求。
-
-### 3. 兼容模式：不能证明可靠排空，明确拒绝
-
-```bash
-bash tests/safepatch/demo/show.sh compatible
-```
-
-使用相同的普通 C 程序。此目标使用动态链接库和 pthread，不符合当前可验证的静态单线程子集，
-因此在 attach 和写入前拒绝，输出耗时、checks=0、code_installed=false、
-consistency_complete=false 和原因。驱动验证原始字节不变、目标存活，两个作业都
-正常导出。拒绝后旧作业继续执行是预期行为，没有宣称维护切换成功。
-
-可成功安装的非协作式用例见上级目录的 restricted.c 和 run-compat.sh；本 demo 不修改
-业务行为来迎合检查器，也不把函数级安全说成异步业务一致性。
-
-### 4. 协作式：先等旧文档写完，再报告维护完成
-
-```bash
-bash tests/safepatch/demo/show.sh cooperative
-```
-
-先展示 cooperative.h 的接口，以及 worker 的 enter/leave 位置。
-注意 leave 在文件写完之后，不能在排版函数返回时就提前减少计数。
-
-预期：
-
-```text
-作业 0 正在排版
-→ 发起切换，但先等待
-→ 作业 0 文件写完
-→ 维护切换返回成功
-→ 作业 1 不再导出
-```
-
-协作式通常等待约 800 毫秒。它付出等待代价，换来维护完成后没有旧作业继续写文件。
-Base 和 Cooperative 模式最后都会恢复原始代码，再提交作业 2，验证服务确实恢复导出。
-这一步已经结束维护阶段，生成第三个文件是预期行为。
-
-## 如何判断测试是真的通过
-
-不是只检查终端上的提示：
-
-- 比较实际进程里的补丁字节，恢复时再次读回检查。
-- 检查真实文件是否存在，并校验旧文档内容。
-- 目标在 `fopen()` 前与 `fclose()` 后记录同一单调时钟的时间戳。这里只证明写入与文件关闭完成，不声称已经完成存储介质上的持久化。
-- 原版要求：旧文件开始时间 **晚于** 补丁操作返回时间。返回时间在驱动收到交换函数返回后立即采样，早于驱动额外的读回检查。
-- 兼容模式要求：明确拒绝、原字节不变、进程存活、两个作业正常导出。
-- 协作模式要求：旧文件写完时间 **早于** 补丁操作返回时间。
-- 时间顺序没有出现、子进程异常退出或任何检查失败，命令都会失败。
-
-驱动只通过标准输入提交作业，不读取或改写业务控制变量，不设置线程寄存器。
-等待“排版已开始”日志只是复现一次合理的请求交错，不参与运行时安全决策。
-每次演示都创建新目录，保留输出文件与旁边的 files.result.json 时间记录；不会复用旧文件冒充结果。
-报告文件在业务输出目录之外，不计入“维护期间目录稳定”的检查。
-
-重复验证（默认每种模式 10 次，共 40 次）：
-
-```bash
-python3 tests/safepatch/demo/repeat.py
-# 也可指定目录和每种模式的次数
-python3 tests/safepatch/demo/repeat.py /tmp/gaia-document-demo 10
-```
-
-[measured-results.json](measured-results.json) 保存本机重复记录，example-*.txt 保存示例终端输出。
-这些数据来自当前环境，不代表其他编译器、服务或负载下的普遍保证。
-
-测试保持固定线程集合，不覆盖动态线程、所有信号交错、任意入口修改或完整应用集成。
-如果主机调度使第一次排版在补丁前就完成，原版时序断言会失败，不会伪造异常。
-
-measured-results.json 和 example-*.txt 是旧 RIP-only Compatible 版本的历史记录，
-不能用来证明本次实现；重新运行后的 repeat-results.json 才对应当前代码。

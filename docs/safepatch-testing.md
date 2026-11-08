@@ -199,41 +199,11 @@ cargo check --offline -p gaia-xdp
 
 更多协议约束和异常行为见[实现原理](safepatch-explained.md)。
 
-## 9. 非协作兼容模式：可运行的受限安全子集
+## 9. SysCare Compatible 多线程路径
 
-```bash
-bash tests/safepatch/run-compat.sh /tmp/gaia-safepatch-compatible
-bash tests/safepatch/run.sh /tmp/gaia-safepatch-three-modes
-bash tests/safepatch/demo/run.sh /tmp/gaia-document-demo
-```
-
-`run-compat.sh` 同时运行成功和拒绝测试，不允许只通过全部拒绝验收：
-
-- `restricted.c` 无协作 ABI、门禁或计数器。真实旧调用在子函数里等待时，先用短超时
-  验证拒绝和字节不变，再用长超时等待其退出，安装返回 99 的补丁。完成 **4 次安装、
-  4 次恢复**，检查字节、原始代码恢复、目标存活、TracerPid 为零。
-- 运行时记录完整函数范围、每轮检查、实际帧、调用点和已知栈根。脚本强制要求 8 次
-  成功写入均 `checks>0`，旧 `target_value` 的非顶层活动帧确实导致 busy；把 `main`
-  声明为相关函数时必须超时拒绝。
-- 无帧指针变体和含禁止 syscall 的变体必须拒绝，字节不变、目标存活。动态链接的
-  普通目标、入口无限循环目标、不断创建/退出线程的目标共 60 次正常请求、12 次
-  错误输入请求均拒绝；不进入 ptrace 不会遗漏瞬时新线程。
-- 故障测试实际破坏保存的父帧链接，要求检查器拒绝，并在同一停止窗口修复测试数据。
-  另外注入 SEIZE/GETREGS/DETACH 失败、写失败、读回不一致，验证未虚报成功、代码
-  恢复和进程存活。持续回滚失败必须明确报告保留停止状态，由测试驱动显式人工恢复。
-- SIGSTOP 目标拒绝安装，确认解除追踪后仍保持原来的 group stop，再由测试发 SIGCONT。
-  共享写入器还测试 16 字节部分写失败恢复；该用例不被算作 Compatible 成功安装。
-
-日志在输出目录的 `restricted.runtime`、`restricted.summary`、`*.runtime`、
-`fault-tests.log`。`run.sh` 包含同一兼容套件，再合并 Cooperative 的 40 次安装、
-40 次恢复和 Base 风险实验结果。计数明确区分兼容受限目标与不支持的动态目标。
-
-文档导出 demo 保留原业务行为：Compatible 对普通动态链接多线程目标明确拒绝，
-检查原字节不变、进程存活、旧作业和后续作业正常生成真实文件，不打印维护切换成功。
-Cooperative 仍验证先写完旧文档再切换，以及恢复后的导出。函数级安装不被解释为
-任意跨线程或异步业务的一致性保证。
-
-本轮结果见 [measured-verified-compatible-results.json](../tests/safepatch/measured-verified-compatible-results.json)。
-之前的 measured-compatible-results.json、measured-conservative-results.json 和 demo
-历史记录分别对应旧 RIP-only 实现或上一轮全部拒绝子集，不代表本轮成功路径。
-用户态 `AYA_BUILD_SKIP=1 cargo check` 不代表重新构建、加载 BPF 或 HTTP 端到端验证。
+执行方式和验收项见 [源码移植说明](../gaia-xdp/src/safepatch/syscare/README.md)。
+`run-compat.sh` 包含 9 线程真实安装/恢复、栈读取与线程控制错误、安装/恢复失败、
+部分写入及持续回滚失败测试。`demo/run.sh` 对相同文档业务运行 Control、Base、
+Compatible、Cooperative。Compatible 等待活动旧调用，但不声明异步业务排空。
+旧 measured-* 数据属于历史实现，不能作为此路径证据；本次数据见
+[SysCare 实测记录](../tests/safepatch/measured-syscare-results.json)。

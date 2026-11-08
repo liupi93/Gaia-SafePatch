@@ -1146,6 +1146,7 @@ struct PatchedFunction {
     original_bytes: Vec<u8>,
     mode: PatchMode,
     related_functions: Vec<u64>,
+    incomplete: bool,
 }
 
 /// Apply runtime code patches for hotpatch targets that use override_return, skip_call,
@@ -1250,6 +1251,7 @@ fn apply_single_code_patch(
                 original_bytes,
                 mode: target.patch_mode,
                 related_functions: related,
+                incomplete: false,
             });
             info!(
                 "hotpatch code patch applied: {}:{} pid={} addr=0x{:x} override_return_value={}",
@@ -1257,6 +1259,13 @@ fn apply_single_code_patch(
             );
         }
         Err(err) => {
+            if let Some(incomplete) = err.downcast_ref::<safepatch::CompatIncomplete>() {
+                patches.push(PatchedFunction {
+                    pid, address: func_addr, original_bytes: incomplete.original_bytes.clone(),
+                    mode: target.patch_mode, related_functions: related, incomplete: true,
+                });
+                warn!("Compatible incomplete operation retained for recovery; consistency unclaimed");
+            }
             warn!(
                 "failed to apply code patch at {}:{} pid={} addr=0x{:x}: {err:#}",
                 target.binary, target.symbol, pid, func_addr

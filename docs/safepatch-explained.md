@@ -6,73 +6,18 @@
 `patch_mode = "compatible"`，示例见 [compatible-example.toml](../tests/safepatch/compatible-example.toml)。
 严格模式失败不会自动降级。下文门禁、ABI、排空和零重叠说明均针对 cooperative。
 
-Compatible 已有可成功安装的**受限用户态子集**。它不读取协作 ABI，不修改 RIP，
-不通过杀线程完成切换。旧 RIP-only 写入路径已经删除，Cooperative、Base 保持原有行为。
+Compatible 使用发行版 SysCare 1.2.2-8.oe2403sp4 的 C 原生栈扫描和线程控制移植，
+支持 pthread 多线程目标，无需业务预埋协议。完整来源、移植函数、安全修正、故障处理和
+限制见 [移植说明](../gaia-xdp/src/safepatch/syscare/README.md)。
 
-### Compatible 支持条件及实际验证
+检查覆盖每个已暂停线程的 RIP 和 RSP 至所在原生栈映射末尾的所有机器字，
+并与受影响函数完整 ELF 范围比较。发现匹配则放行线程后重试；读取、寄存器、
+映射或边界未知时拒绝。安装和恢复使用同一检查，不再使用自行设计的栈回溯器。
 
-当前只接受 Linux x86_64 **静态、非 PIE、单线程、无 libc 的 ET_EXEC**，使用固定
-`rbp` 栈帧和直接调用。需要完整带大小的函数符号、无可执行间隙、已知 `_start`。
-示例是 [restricted.c](../tests/safepatch/restricted.c)，构建命令见
-[run-compat.sh](../tests/safepatch/run-compat.sh)。其中启动汇编和原始 syscall 是普通
-freestanding 程序实现，不是预埋补丁协议；没有 gate、活动计数、补丁通知或协作停车点。
-
-编译参数不是可靠性的证明。运行时另外逐项验证：
-
-- 用 `object` 读取完整函数边界；将同一 ELF 字节快照封入 sealed memfd，由系统
-  `objdump` 解码。全部可执行字节必须有明确函数归属。
-- 验证每个函数的标准序言、固定栈分配和唯一标准尾声，禁止其他栈寄存器修改、
-  间接调用、尾跳转及未知指令。分支只能落在本函数已解码的允许指令边界。
-- 内存写指令仅允许有界的本帧局部变量写入；拒绝任意地址写、段覆盖、未知栈操作。
-  当前 syscall 白名单只有 stdout/stderr `write`、`nanosleep`（剩余时间指针必须为零）
-  和 `exit`；验证立即数设置与分支不能绕过设置。拒绝 clone/fork/exec、mmap、
-  信号处理安装、上下文切换等调用。输出 fd 也不能是可写目标内存等特殊设备。
-- 暂停后逐字核对实际可执行内存与已验证 ELF，只允许受控入口为原始字节或固定
-  `mov eax,imm32; ret; nop; nop`。拒绝其他执行映射、W+X、自定义处理器和待处理信号。
-- 持有 pidfd 确认原进程未退出，防止重试期间 PID 重用。用 SEIZE/INTERRUPT、带截止时间
-  的 wait 确认唯一线程停止，再核对任务集合。
-  启用 clone/fork/vfork/exec/exit 事件跟踪；异常事件拒绝，自动追踪到的子任务纳入
-  清理。多线程目标直接拒绝。安全性依赖“完整代码验证排除线程创建”，而非两次快照
-  恰好相同；本轮没有开放一般动态多线程支持。
-- 对实际寄存器及每个栈帧，验证 PC 属于帧已建立且尚未拆除的指令位置、RSP/RBP
-  与静态分配量严格相符、栈地址在内核标记的原生栈内、父帧严格递增且间距恰好
-  等于调用者分配量加 16。每个返回地址必须对应直接 call 的下一条指令，且被调函数
-  与当前帧一致。最终必须闭合到已验证的 `_start -> main`，保存 RBP 为零，并匹配
-  `/proc/PID/stat` 的初始栈地址。未知帧、截断、损坏、超深栈、序言/尾声暂停均拒绝。
-
-因此，可靠性来自受限代码的逐条约束、实际代码校验和运行时栈链闭合三者共同成立，
-并非仅凭帧指针链走到零。这里不使用通用 best-effort 回溯器，也不声称提供任意 ELF 的
-可靠栈服务。假设内核、objdump 及 ELF/栈内存未受外部恶意篡改，没有其他协调者或
-外部写内存的参与者；不承诺对抗能伪造代码、寄存器和完整栈链的攻击者。
-
-### 检查、重试和安装
-
-`exchange_compat()` 自动从 ELF 获取目标**完整函数**范围。
-`exchange_compat_related()` 还接受相关函数入口；Gaia 配置用
-`related_functions = ["other_function"]` 声明符号，安装和恢复保留同一范围。
-任一边界未知或不是函数入口都拒绝。
-
-栈中有受影响函数时，日志记录函数、帧深度及地址，释放线程，约 2ms 后重新暂停和
-检查，直到截止时间。不会因为当前 RIP 在子函数或 syscall 中就批准切换。
-只有完整栈安全时，才在同一次暂停窗口读取旧字节、写入 8 字节返回值补丁、读回验证。
-成功日志有 `checks>0`、`root=verified`、完整函数范围和线程数。
-
-写入校验与操作完成分别记录。`install_verified` 时恢复状态仍是 `pending_resume`；
-成功 detach 后才报告 `result=success function_consistency_complete=true`。
-日志始终标记 `business_consistency=unclaimed`。函数级排空不等于异步队列、其他线程
-或函数返回后业务动作排空。普通文档 demo 不符合该子集，明确拒绝，不能声称维护完成。
-
-写入/读回失败时，在停止窗口恢复原字节并验证；detach 失败且仍可确认停止时也尝试
-回滚。回滚无法完成则报告 `code_state=indeterminate` 和 `target retained stopped`，
-保留 ptrace 停止供人工处理，绝不打印恢复成功或发送 SIGKILL。跟踪/恢复失败均报告
-异常与未恢复状态；控制器退出可能解除内核追踪关系，因此必须在退出前处理保留的
-目标。这不是崩溃后自动恢复系统。
-
-参考 [klp_check_stack()](https://github.com/torvalds/linux/blob/master/kernel/livepatch/transition.c)、
-[官方一致性模型](https://docs.kernel.org/6.15/livepatch/livepatch.html#consistency-model)
-及[可靠栈要求](https://docs.kernel.org/6.9/livepatch/reliable-stacktrace.html)。
-本实现没有移植完整 Linux Livepatch，未支持动态链接库、pthread、JIT、协程、信号栈、
-尾调用、任意替换函数或任意长度机器码补丁；遇到这些条件拒绝，不自动退回 Base。
+成功日志只声明 `native_stack_check_complete=true` 和 `business_consistency=unclaimed`。
+这不是任意程序的可靠栈证明；栈中数据指针会造成保守误报，协程/自定义栈等模型
+不在支持范围内，且不能全部自动识别。异步任务、队列和函数返回后的业务动作
+可能遗留。文档 demo 已完成 9 线程安装与恢复，但不据此宣称业务排空。
 
 ## 1. 我们到底在修改什么？
 
