@@ -25,3 +25,7 @@ path = "single-thread-story/driver.rs"
 [[bin]]
 name = "safepatch-interactive-demo"
 path = "demo/interactive.rs"
+
+[[bin]]
+name = "safepatch-concurrent-export"
+path = "concurrent-export/driver.rs"

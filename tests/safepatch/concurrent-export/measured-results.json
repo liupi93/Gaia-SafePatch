@@ -1,0 +1,1628 @@
+{
+  "matrix_old_commits_after_return": {
+    "async": {
+      "base": [
+        4,
+        4,
+        4
+      ],
+      "compatible": [
+        4,
+        4,
+        4
+      ],
+      "cooperative": [
+        0,
+        0,
+        0
+      ]
+    },
+    "aligned": {
+      "base": [
+        4,
+        4,
+        4
+      ],
+      "compatible": [
+        0,
+        0,
+        0
+      ],
+      "cooperative": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "automatic_rounds": [
+    [
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2503189077,
+        "four_render_overlap_ns": 1000268242,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28790861624682,
+          "1": 28790861535118,
+          "2": 28790861581877,
+          "3": 28790861645818
+        },
+        "old_commit_ns": {
+          "0": 28790861628322,
+          "1": 28790861558923,
+          "2": 28790861590229,
+          "3": 28790861654224
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28787357659870,
+          "1": 28787357659551,
+          "2": 28787357681958,
+          "3": 28787357689925
+        },
+        "old_render_end_ns": {
+          "0": 28788357958167,
+          "1": 28788357964829,
+          "2": 28788357986014,
+          "3": 28788358290343
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28787357756906,
+        "restored_jobs_exported": 4,
+        "return_ns": 28787357815763,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 135,
+        "checks": 136,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2500677063,
+        "four_render_overlap_ns": 1000300615,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28797874929563,
+          "1": 28797875033587,
+          "2": 28797872205138,
+          "3": 28797872681718
+        },
+        "old_commit_ns": {
+          "0": 28797874936600,
+          "1": 28797875040960,
+          "2": 28797872231129,
+          "3": 28797872691510
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28794368700294,
+          "1": 28794368705711,
+          "2": 28794368714664,
+          "3": 28794368729521
+        },
+        "old_render_end_ns": {
+          "0": 28795371468622,
+          "1": 28795371452839,
+          "2": 28795369034630,
+          "3": 28795369030136
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28794368780304,
+        "restored_jobs_exported": 4,
+        "return_ns": 28795379581795,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2511984156,
+        "four_render_overlap_ns": 1000104552,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28804904124109,
+          "1": 28804905432333,
+          "2": 28804904121405,
+          "3": 28804904422516
+        },
+        "old_commit_ns": {
+          "0": 28804904142404,
+          "1": 28804905439950,
+          "2": 28804904136979,
+          "3": 28804904467807
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28801391829609,
+          "1": 28801391834822,
+          "2": 28801391850847,
+          "3": 28801391866397
+        },
+        "old_render_end_ns": {
+          "0": 28802392000000,
+          "1": 28802391970949,
+          "2": 28802391982351,
+          "3": 28802391975420
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28801391938554,
+        "restored_jobs_exported": 4,
+        "return_ns": 28804906469451,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2503282164,
+        "four_render_overlap_ns": 3503676691,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28812041837680,
+          "1": 28812040458288,
+          "2": 28812042075503,
+          "3": 28812041983263
+        },
+        "old_commit_ns": {
+          "0": 28812041850231,
+          "1": 28812040481577,
+          "2": 28812042079539,
+          "3": 28812041991452
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28808536780144,
+          "1": 28808536784395,
+          "2": 28808536794817,
+          "3": 28808536825107
+        },
+        "old_render_end_ns": {
+          "0": 28812041864454,
+          "1": 28812040501798,
+          "2": 28812042089235,
+          "3": 28812042007137
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28808536904599,
+        "restored_jobs_exported": 4,
+        "return_ns": 28808536964245,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 484,
+        "checks": 485,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2504447184,
+        "four_render_overlap_ns": 3504770780,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28819070871845,
+          "1": 28819070797250,
+          "2": 28819064478619,
+          "3": 28819064478658
+        },
+        "old_commit_ns": {
+          "0": 28819070876437,
+          "1": 28819070811443,
+          "2": 28819064492916,
+          "3": 28819064497902
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28815559684294,
+          "1": 28815559687992,
+          "2": 28815559727167,
+          "3": 28815559744772
+        },
+        "old_render_end_ns": {
+          "0": 28819070879201,
+          "1": 28819070827141,
+          "2": 28819064515552,
+          "3": 28819064525015
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28815559823615,
+        "restored_jobs_exported": 4,
+        "return_ns": 28819079008960,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2502134583,
+        "four_render_overlap_ns": 3502995149,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28826120085351,
+          "1": 28826120057565,
+          "2": 28826119067092,
+          "3": 28826119127028
+        },
+        "old_commit_ns": {
+          "0": 28826120094088,
+          "1": 28826120065917,
+          "2": 28826119084980,
+          "3": 28826119137878
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28822616075602,
+          "1": 28822616091612,
+          "2": 28822616100418,
+          "3": 28822616105743
+        },
+        "old_render_end_ns": {
+          "0": 28826120107176,
+          "1": 28826120076836,
+          "2": 28826119100892,
+          "3": 28826119143221
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28822616244864,
+        "restored_jobs_exported": 4,
+        "return_ns": 28826122481801,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      }
+    ],
+    [
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2503589583,
+        "four_render_overlap_ns": 1000175681,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28792028991913,
+          "1": 28792028342321,
+          "2": 28792028335079,
+          "3": 28792028319461
+        },
+        "old_commit_ns": {
+          "0": 28792029000473,
+          "1": 28792028353711,
+          "2": 28792028349457,
+          "3": 28792028341179
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28788524244366,
+          "1": 28788524259489,
+          "2": 28788524259825,
+          "3": 28788524267794
+        },
+        "old_render_end_ns": {
+          "0": 28789524666710,
+          "1": 28789524466901,
+          "2": 28789524451997,
+          "3": 28789524443475
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28788524336205,
+        "restored_jobs_exported": 4,
+        "return_ns": 28788524382539,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 135,
+        "checks": 136,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2503485171,
+        "four_render_overlap_ns": 1000624529,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28799063976448,
+          "1": 28799064177887,
+          "2": 28799064367285,
+          "3": 28799064235706
+        },
+        "old_commit_ns": {
+          "0": 28799063999627,
+          "1": 28799064190537,
+          "2": 28799064371739,
+          "3": 28799064239328
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28795559633674,
+          "1": 28795559638481,
+          "2": 28795559654741,
+          "3": 28795559660906
+        },
+        "old_render_end_ns": {
+          "0": 28796560349011,
+          "1": 28796560317729,
+          "2": 28796560300822,
+          "3": 28796560285435
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28795559717884,
+        "restored_jobs_exported": 4,
+        "return_ns": 28796567976744,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2502301512,
+        "four_render_overlap_ns": 1000070192,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28806084532282,
+          "1": 28806083401229,
+          "2": 28806083417073,
+          "3": 28806083411887
+        },
+        "old_commit_ns": {
+          "0": 28806084540477,
+          "1": 28806083416252,
+          "2": 28806083426903,
+          "3": 28806083422572
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28802580789112,
+          "1": 28802580792175,
+          "2": 28802580802630,
+          "3": 28802580818454
+        },
+        "old_render_end_ns": {
+          "0": 28803580903503,
+          "1": 28803580941669,
+          "2": 28803580888646,
+          "3": 28803580910055
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28802580873558,
+        "restored_jobs_exported": 4,
+        "return_ns": 28806085014625,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2503724446,
+        "four_render_overlap_ns": 3504232948,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28813219452522,
+          "1": 28813219783296,
+          "2": 28813219454898,
+          "3": 28813220338058
+        },
+        "old_commit_ns": {
+          "0": 28813219474757,
+          "1": 28813219787294,
+          "2": 28813219480052,
+          "3": 28813220341711
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28809715231644,
+          "1": 28809715238124,
+          "2": 28809715243206,
+          "3": 28809715269595
+        },
+        "old_render_end_ns": {
+          "0": 28813219502543,
+          "1": 28813219796856,
+          "2": 28813219513104,
+          "3": 28813220351491
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28809715308817,
+        "restored_jobs_exported": 4,
+        "return_ns": 28809715357221,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 491,
+        "checks": 492,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2504915725,
+        "four_render_overlap_ns": 3505490170,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28820240208139,
+          "1": 28820235886829,
+          "2": 28820233557071,
+          "3": 28820240252587
+        },
+        "old_commit_ns": {
+          "0": 28820240216880,
+          "1": 28820235897540,
+          "2": 28820233573278,
+          "3": 28820240261352
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28816727984015,
+          "1": 28816727988635,
+          "2": 28816728058226,
+          "3": 28816728097778
+        },
+        "old_render_end_ns": {
+          "0": 28820240228461,
+          "1": 28820235910958,
+          "2": 28820233587948,
+          "3": 28820240264270
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28816728150502,
+        "restored_jobs_exported": 4,
+        "return_ns": 28820247343618,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2502634497,
+        "four_render_overlap_ns": 3502949777,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28827266249026,
+          "1": 28827267090775,
+          "2": 28827266795267,
+          "3": 28827267160646
+        },
+        "old_commit_ns": {
+          "0": 28827266283181,
+          "1": 28827267098234,
+          "2": 28827266805000,
+          "3": 28827267168408
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28823763326224,
+          "1": 28823763331694,
+          "2": 28823763339955,
+          "3": 28823763348592
+        },
+        "old_render_end_ns": {
+          "0": 28827266298369,
+          "1": 28827267108767,
+          "2": 28827266816966,
+          "3": 28827267179964
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28823763415781,
+        "restored_jobs_exported": 4,
+        "return_ns": 28827269743358,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      }
+    ],
+    [
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2502307280,
+        "four_render_overlap_ns": 1000188387,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28793179977023,
+          "1": 28793179510191,
+          "2": 28793180951814,
+          "3": 28793179989174
+        },
+        "old_commit_ns": {
+          "0": 28793179988983,
+          "1": 28793179533233,
+          "2": 28793180958387,
+          "3": 28793179997960
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28789675340734,
+          "1": 28789675353325,
+          "2": 28789675358130,
+          "3": 28789675386597
+        },
+        "old_render_end_ns": {
+          "0": 28790675574984,
+          "1": 28790676250656,
+          "2": 28790676704667,
+          "3": 28790676418071
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28789675423096,
+        "restored_jobs_exported": 4,
+        "return_ns": 28789675471621,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 140,
+        "checks": 141,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2503862125,
+        "four_render_overlap_ns": 1000524366,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28800193636042,
+          "1": 28800194005634,
+          "2": 28800193653783,
+          "3": 28800193653340
+        },
+        "old_commit_ns": {
+          "0": 28800193664685,
+          "1": 28800194010801,
+          "2": 28800193672252,
+          "3": 28800193667915
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28796689056107,
+          "1": 28796689057179,
+          "2": 28796689073405,
+          "3": 28796689081588
+        },
+        "old_render_end_ns": {
+          "0": 28797689631167,
+          "1": 28797689618428,
+          "2": 28797689605954,
+          "3": 28797689609314
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28796689139319,
+        "restored_jobs_exported": 4,
+        "return_ns": 28797695453382,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2502673452,
+        "four_render_overlap_ns": 1000069385,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28807209483573,
+          "1": 28807208503903,
+          "2": 28807209931957,
+          "3": 28807209014069
+        },
+        "old_commit_ns": {
+          "0": 28807209491810,
+          "1": 28807208525809,
+          "2": 28807209940088,
+          "3": 28807209024128
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28803704988460,
+          "1": 28803704993197,
+          "2": 28803705002998,
+          "3": 28803705014510
+        },
+        "old_render_end_ns": {
+          "0": 28804705782641,
+          "1": 28804705083895,
+          "2": 28804705640801,
+          "3": 28804705084118
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 28803705067837,
+        "restored_jobs_exported": 4,
+        "return_ns": 28807213353970,
+        "scenario": "async",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2504960579,
+        "four_render_overlap_ns": 3505516007,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28814343596490,
+          "1": 28814343542185,
+          "2": 28814343533009,
+          "3": 28814343540087
+        },
+        "old_commit_ns": {
+          "0": 28814343600973,
+          "1": 28814343564715,
+          "2": 28814343555152,
+          "3": 28814343560574
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 28810838023716,
+          "1": 28810838032779,
+          "2": 28810838043686,
+          "3": 28810838066253
+        },
+        "old_render_end_ns": {
+          "0": 28814343604447,
+          "1": 28814343631722,
+          "2": 28814343582260,
+          "3": 28814343621344
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28810838113622,
+        "restored_jobs_exported": 4,
+        "return_ns": 28810838157314,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 492,
+        "checks": 493,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2504180457,
+        "four_render_overlap_ns": 3507813024,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28821368832082,
+          "1": 28821361757699,
+          "2": 28821357529977,
+          "3": 28821357542488
+        },
+        "old_commit_ns": {
+          "0": 28821368839915,
+          "1": 28821361766208,
+          "2": 28821357545542,
+          "3": 28821357552685
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28817849735539,
+          "1": 28817849736263,
+          "2": 28817849744085,
+          "3": 28817849755539
+        },
+        "old_render_end_ns": {
+          "0": 28821368851385,
+          "1": 28821361778837,
+          "2": 28821357568563,
+          "3": 28821357578324
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28817849839776,
+        "restored_jobs_exported": 4,
+        "return_ns": 28821375944445,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2502646661,
+        "four_render_overlap_ns": 3503163347,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 28828394004389,
+          "1": 28828392687878,
+          "2": 28828394020745,
+          "3": 28828394001863
+        },
+        "old_commit_ns": {
+          "0": 28828394014686,
+          "1": 28828392703236,
+          "2": 28828394029561,
+          "3": 28828394020168
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 28824889524286,
+          "1": 28824889535127,
+          "2": 28824889544307,
+          "3": 28824889554867
+        },
+        "old_render_end_ns": {
+          "0": 28828394058288,
+          "1": 28828392718214,
+          "2": 28828394116288,
+          "3": 28828394077051
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 28824889590789,
+        "restored_jobs_exported": 4,
+        "return_ns": 28828394899674,
+        "scenario": "aligned",
+        "threads_at_start": 9
+      }
+    ]
+  ],
+  "interactive_six_cases": [
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2502508758,
+      "four_render_overlap_ns": 1000271389,
+      "mode": "base",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 28958389876595,
+        "1": 28958389758211,
+        "2": 28958389744462,
+        "3": 28958389796939
+      },
+      "old_commit_ns": {
+        "0": 28958389881812,
+        "1": 28958389766165,
+        "2": 28958389751122,
+        "3": 28958389800159
+      },
+      "old_commits_after_return": 4,
+      "old_render_begin_ns": {
+        "0": 28954886673846,
+        "1": 28954886712070,
+        "2": 28954886806409,
+        "3": 28954886733012
+      },
+      "old_render_end_ns": {
+        "0": 28955887097442,
+        "1": 28955887081879,
+        "2": 28955887077798,
+        "3": 28955887086698
+      },
+      "original_bytes_restored": true,
+      "patch_target": "render_document",
+      "request_ns": 28954967649036,
+      "restored_jobs_exported": 4,
+      "return_ns": 28954967710272,
+      "scenario": "async",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 140,
+      "checks": 141,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2502636128,
+      "four_render_overlap_ns": 1000496698,
+      "mode": "compatible",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 28958386913605,
+        "1": 28958386596860,
+        "2": 28958386553743,
+        "3": 28958386675383
+      },
+      "old_commit_ns": {
+        "0": 28958386921115,
+        "1": 28958386607085,
+        "2": 28958386567929,
+        "3": 28958386682842
+      },
+      "old_commits_after_return": 4,
+      "old_render_begin_ns": {
+        "0": 28954882952324,
+        "1": 28954883001139,
+        "2": 28954883199786,
+        "3": 28954883231179
+      },
+      "old_render_end_ns": {
+        "0": 28955883777457,
+        "1": 28955883727877,
+        "2": 28955883840029,
+        "3": 28955883760077
+      },
+      "original_bytes_restored": true,
+      "patch_target": "render_document",
+      "request_ns": 28954964120734,
+      "restored_jobs_exported": 4,
+      "return_ns": 28955890539955,
+      "scenario": "async",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": 4,
+      "four_print_overlap_ns": 2503530045,
+      "four_render_overlap_ns": 1000011299,
+      "mode": "cooperative",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 28958391856097,
+        "1": 28958391847976,
+        "2": 28958392933440,
+        "3": 28958391847846
+      },
+      "old_commit_ns": {
+        "0": 28958391897792,
+        "1": 28958391855072,
+        "2": 28958392941015,
+        "3": 28958391858188
+      },
+      "old_commits_after_return": 0,
+      "old_render_begin_ns": {
+        "0": 28954888091888,
+        "1": 28954888117734,
+        "2": 28954888127081,
+        "3": 28954888153710
+      },
+      "old_render_end_ns": {
+        "0": 28955888165009,
+        "1": 28955888240432,
+        "2": 28955888257454,
+        "3": 28955888238958
+      },
+      "original_bytes_restored": true,
+      "patch_target": "render_document",
+      "request_ns": 28954968507402,
+      "restored_jobs_exported": 4,
+      "return_ns": 28958395732565,
+      "scenario": "async",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2502682455,
+      "four_render_overlap_ns": 3503329851,
+      "mode": "base",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 28958393311279,
+        "1": 28958392907394,
+        "2": 28958394371192,
+        "3": 28958394354427
+      },
+      "old_commit_ns": {
+        "0": 28958393317157,
+        "1": 28958392915230,
+        "2": 28958394377752,
+        "3": 28958394358397
+      },
+      "old_commits_after_return": 4,
+      "old_render_begin_ns": {
+        "0": 28954889538029,
+        "1": 28954889547166,
+        "2": 28954889585192,
+        "3": 28954889597080
+      },
+      "old_render_end_ns": {
+        "0": 28958393327768,
+        "1": 28958392926931,
+        "2": 28958394380229,
+        "3": 28958394367899
+      },
+      "original_bytes_restored": true,
+      "patch_target": "export_document",
+      "request_ns": 28954970135768,
+      "restored_jobs_exported": 4,
+      "return_ns": 28954970192493,
+      "scenario": "aligned",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 504,
+      "checks": 505,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2503817346,
+      "four_render_overlap_ns": 3504374922,
+      "mode": "compatible",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 28958393606658,
+        "1": 28958390339844,
+        "2": 28958400804487,
+        "3": 28958393599972
+      },
+      "old_commit_ns": {
+        "0": 28958393610830,
+        "1": 28958390344922,
+        "2": 28958400812926,
+        "3": 28958393606243
+      },
+      "old_commits_after_return": 0,
+      "old_render_begin_ns": {
+        "0": 28954885895414,
+        "1": 28954885895753,
+        "2": 28954885906009,
+        "3": 28954885981269
+      },
+      "old_render_end_ns": {
+        "0": 28958393648936,
+        "1": 28958390356191,
+        "2": 28958400824557,
+        "3": 28958393624964
+      },
+      "original_bytes_restored": true,
+      "patch_target": "export_document",
+      "request_ns": 28954966491248,
+      "restored_jobs_exported": 4,
+      "return_ns": 28958408353775,
+      "scenario": "aligned",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": 4,
+      "four_print_overlap_ns": 2503687098,
+      "four_render_overlap_ns": 3504110012,
+      "mode": "cooperative",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 28958388839302,
+        "1": 28958389349976,
+        "2": 28958388957572,
+        "3": 28958388831206
+      },
+      "old_commit_ns": {
+        "0": 28958388843727,
+        "1": 28958389360984,
+        "2": 28958388963324,
+        "3": 28958388838171
+      },
+      "old_commits_after_return": 0,
+      "old_render_begin_ns": {
+        "0": 28954884106698,
+        "1": 28954884538981,
+        "2": 28954884659025,
+        "3": 28954884747579
+      },
+      "old_render_end_ns": {
+        "0": 28958388919537,
+        "1": 28958389793789,
+        "2": 28958388973218,
+        "3": 28958388857591
+      },
+      "original_bytes_restored": true,
+      "patch_target": "export_document",
+      "request_ns": 28954965592364,
+      "restored_jobs_exported": 4,
+      "return_ns": 28958392874097,
+      "scenario": "aligned",
+      "threads_at_start": 9
+    }
+  ],
+  "scope": "Four concurrent old target calls and four concurrent file-output intervals; success means no old formal-document commit after patch return.",
+  "source_sha256": {
+    "target.c": "9d7a6b015965a5d18b537e96f94a044ed7574a90536a6b55cdcc5ff471969e88",
+    "driver.rs": "d6f1e8b438f5a310584686230d28b2e407f8d9f43d0884bd31b312ada5f8acd2"
+  },
+  "final_automatic_six_cases": [
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2503022873,
+      "four_render_overlap_ns": 1000266332,
+      "mode": "base",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 29032320178054,
+        "1": 29032320725975,
+        "2": 29032320708104,
+        "3": 29032319727041
+      },
+      "old_commit_ns": {
+        "0": 29032320202405,
+        "1": 29032320731103,
+        "2": 29032320714771,
+        "3": 29032319748259
+      },
+      "old_commits_after_return": 4,
+      "old_render_begin_ns": {
+        "0": 29028816167564,
+        "1": 29028816170745,
+        "2": 29028816206592,
+        "3": 29028816222462
+      },
+      "old_render_end_ns": {
+        "0": 29029816550674,
+        "1": 29029816494483,
+        "2": 29029816488794,
+        "3": 29029816501056
+      },
+      "original_bytes_restored": true,
+      "patch_target": "render_document",
+      "request_ns": 29028816267212,
+      "restored_jobs_exported": 4,
+      "return_ns": 29028816320164,
+      "scenario": "async",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 142,
+      "checks": 143,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2503616589,
+      "four_render_overlap_ns": 1000951932,
+      "mode": "compatible",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 29039333680096,
+        "1": 29039333688496,
+        "2": 29039333268750,
+        "3": 29039333236857
+      },
+      "old_commit_ns": {
+        "0": 29039333688448,
+        "1": 29039333695312,
+        "2": 29039333277586,
+        "3": 29039333257424
+      },
+      "old_commits_after_return": 4,
+      "old_render_begin_ns": {
+        "0": 29035828356816,
+        "1": 29035828377358,
+        "2": 29035828387609,
+        "3": 29035828394621
+      },
+      "old_render_end_ns": {
+        "0": 29036829568821,
+        "1": 29036829346553,
+        "2": 29036829513375,
+        "3": 29036829380550
+      },
+      "original_bytes_restored": true,
+      "patch_target": "render_document",
+      "request_ns": 29035828433506,
+      "restored_jobs_exported": 4,
+      "return_ns": 29036836440461,
+      "scenario": "async",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": 4,
+      "four_print_overlap_ns": 2507400468,
+      "four_render_overlap_ns": 1000212225,
+      "mode": "cooperative",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 29046375423991,
+        "1": 29046375937656,
+        "2": 29046376452400,
+        "3": 29046376430166
+      },
+      "old_commit_ns": {
+        "0": 29046375440239,
+        "1": 29046375955507,
+        "2": 29046376462682,
+        "3": 29046376433450
+      },
+      "old_commits_after_return": 0,
+      "old_render_begin_ns": {
+        "0": 29042867296530,
+        "1": 29042867296622,
+        "2": 29042867330369,
+        "3": 29042867340971
+      },
+      "old_render_end_ns": {
+        "0": 29043867553196,
+        "1": 29043867575621,
+        "2": 29043867567221,
+        "3": 29043867572338
+      },
+      "original_bytes_restored": true,
+      "patch_target": "render_document",
+      "request_ns": 29042867439881,
+      "restored_jobs_exported": 4,
+      "return_ns": 29046376876708,
+      "scenario": "async",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2505138468,
+      "four_render_overlap_ns": 3508847169,
+      "mode": "base",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 29053513159932,
+        "1": 29053513073861,
+        "2": 29053513192251,
+        "3": 29053513260734
+      },
+      "old_commit_ns": {
+        "0": 29053513165115,
+        "1": 29053513094841,
+        "2": 29053513195999,
+        "3": 29053513264128
+      },
+      "old_commits_after_return": 4,
+      "old_render_begin_ns": {
+        "0": 29050004247569,
+        "1": 29050004248144,
+        "2": 29050004260584,
+        "3": 29050004266994
+      },
+      "old_render_end_ns": {
+        "0": 29053513166468,
+        "1": 29053513114163,
+        "2": 29053513196957,
+        "3": 29053513265616
+      },
+      "original_bytes_restored": true,
+      "patch_target": "export_document",
+      "request_ns": 29050004349495,
+      "restored_jobs_exported": 4,
+      "return_ns": 29050004401098,
+      "scenario": "aligned",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 481,
+      "checks": 482,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": null,
+      "four_print_overlap_ns": 2501241388,
+      "four_render_overlap_ns": 3504903467,
+      "mode": "compatible",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 29060538192667,
+        "1": 29060538192762,
+        "2": 29060529982111,
+        "3": 29060525468841
+      },
+      "old_commit_ns": {
+        "0": 29060538210276,
+        "1": 29060538215615,
+        "2": 29060529993922,
+        "3": 29060525484455
+      },
+      "old_commits_after_return": 0,
+      "old_render_begin_ns": {
+        "0": 29057020571078,
+        "1": 29057020576976,
+        "2": 29057020591115,
+        "3": 29057020596636
+      },
+      "old_render_end_ns": {
+        "0": 29060538236256,
+        "1": 29060538334542,
+        "2": 29060530010417,
+        "3": 29060525500103
+      },
+      "original_bytes_restored": true,
+      "patch_target": "export_document",
+      "request_ns": 29057020630443,
+      "restored_jobs_exported": 4,
+      "return_ns": 29060543641512,
+      "scenario": "aligned",
+      "threads_at_start": 9
+    },
+    {
+      "busy": 0,
+      "checks": 0,
+      "concurrent_old_render_calls": 4,
+      "concurrent_printers": 4,
+      "cooperative_active_before_install": 4,
+      "four_print_overlap_ns": 2512998169,
+      "four_render_overlap_ns": 3513349873,
+      "mode": "cooperative",
+      "new_jobs_rejected": 4,
+      "old_close_ns": {
+        "0": 29067568804075,
+        "1": 29067568847005,
+        "2": 29067568864940,
+        "3": 29067568789703
+      },
+      "old_commit_ns": {
+        "0": 29067568825641,
+        "1": 29067568855513,
+        "2": 29067568868922,
+        "3": 29067568820846
+      },
+      "old_commits_after_return": 0,
+      "old_render_begin_ns": {
+        "0": 29064055464626,
+        "1": 29064055473659,
+        "2": 29064055485141,
+        "3": 29064055500778
+      },
+      "old_render_end_ns": {
+        "0": 29067568866396,
+        "1": 29067568858837,
+        "2": 29067568871811,
+        "3": 29067568850651
+      },
+      "original_bytes_restored": true,
+      "patch_target": "export_document",
+      "request_ns": 29064055537355,
+      "restored_jobs_exported": 4,
+      "return_ns": 29067572385738,
+      "scenario": "aligned",
+      "threads_at_start": 9
+    }
+  ],
+  "timed_rehearsal": {
+    "profile": {
+      "layout_ms": 3000,
+      "print_ms": 2000,
+      "sequential_six_cases": true
+    },
+    "timing": {
+      "sequential": true,
+      "wall_seconds": 63.371473723000236
+    },
+    "monitor": {
+      "live_monitor_six_transitions": true,
+      "all_six_observed_old_and_restored_files": true,
+      "elapsed_seconds": 63.77797701600139
+    },
+    "cases": [
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2004662640,
+        "four_render_overlap_ns": 5005226230,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 29841161563365,
+          "1": 29841161645069,
+          "2": 29841161426941,
+          "3": 29841161555519
+        },
+        "old_commit_ns": {
+          "0": 29841161568581,
+          "1": 29841161649021,
+          "2": 29841161445488,
+          "3": 29841161565073
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 29836156209224,
+          "1": 29836156216607,
+          "2": 29836156228480,
+          "3": 29836156235465
+        },
+        "old_render_end_ns": {
+          "0": 29841161570530,
+          "1": 29841161650341,
+          "2": 29841161461695,
+          "3": 29841161568489
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 29836236907564,
+        "restored_jobs_exported": 4,
+        "return_ns": 29836237048398,
+        "scenario": "aligned",
+        "threads_at_start": 9,
+        "interactive_unit_seconds": 10.458738362001895
+      },
+      {
+        "busy": 683,
+        "checks": 684,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2005217343,
+        "four_render_overlap_ns": 5006795708,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 29851672768778,
+          "1": 29851664641770,
+          "2": 29851657725674,
+          "3": 29851657839618
+        },
+        "old_commit_ns": {
+          "0": 29851672790363,
+          "1": 29851664650348,
+          "2": 29851657741640,
+          "3": 29851657849192
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 29846650930734,
+          "1": 29846650941350,
+          "2": 29846650947674,
+          "3": 29846650960685
+        },
+        "old_render_end_ns": {
+          "0": 29851672806826,
+          "1": 29851664662774,
+          "2": 29851657756393,
+          "3": 29851657852268
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 29846731800665,
+        "restored_jobs_exported": 4,
+        "return_ns": 29851678202503,
+        "scenario": "aligned",
+        "threads_at_start": 9,
+        "interactive_unit_seconds": 10.623937724001735
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2002771024,
+        "four_render_overlap_ns": 5003261905,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 29862268511002,
+          "1": 29862241611305,
+          "2": 29862241609784,
+          "3": 29862268461575
+        },
+        "old_commit_ns": {
+          "0": 29862268521353,
+          "1": 29862241625798,
+          "2": 29862241631025,
+          "3": 29862268477421
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 29857238352901,
+          "1": 29857238367146,
+          "2": 29857238384646,
+          "3": 29857238386292
+        },
+        "old_render_end_ns": {
+          "0": 29862268524991,
+          "1": 29862241648197,
+          "2": 29862241659224,
+          "3": 29862268493464
+        },
+        "original_bytes_restored": true,
+        "patch_target": "export_document",
+        "request_ns": 29857319076354,
+        "restored_jobs_exported": 4,
+        "return_ns": 29862271283614,
+        "scenario": "aligned",
+        "threads_at_start": 9,
+        "interactive_unit_seconds": 10.71372244899976
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2003843560,
+        "four_render_overlap_ns": 3000273553,
+        "mode": "base",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 29872970592336,
+          "1": 29872970740853,
+          "2": 29872970697208,
+          "3": 29872970718029
+        },
+        "old_commit_ns": {
+          "0": 29872970610700,
+          "1": 29872970757475,
+          "2": 29872970704162,
+          "3": 29872970728802
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 29867966113609,
+          "1": 29867966126642,
+          "2": 29867966128915,
+          "3": 29867966147686
+        },
+        "old_render_end_ns": {
+          "0": 29870966421313,
+          "1": 29870966449472,
+          "2": 29870966421339,
+          "3": 29870966421239
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 29868048501367,
+        "restored_jobs_exported": 4,
+        "return_ns": 29868048626105,
+        "scenario": "async",
+        "threads_at_start": 9,
+        "interactive_unit_seconds": 10.450077607001731
+      },
+      {
+        "busy": 401,
+        "checks": 402,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": null,
+        "four_print_overlap_ns": 2002591953,
+        "four_render_overlap_ns": 3000586227,
+        "mode": "compatible",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 29883403279383,
+          "1": 29883403931595,
+          "2": 29883403365306,
+          "3": 29883403872813
+        },
+        "old_commit_ns": {
+          "0": 29883403300670,
+          "1": 29883403935343,
+          "2": 29883403370058,
+          "3": 29883403884368
+        },
+        "old_commits_after_return": 4,
+        "old_render_begin_ns": {
+          "0": 29878399744041,
+          "1": 29878399745844,
+          "2": 29878399770140,
+          "3": 29878399773107
+        },
+        "old_render_end_ns": {
+          "0": 29881400561680,
+          "1": 29881400449517,
+          "2": 29881400359334,
+          "3": 29881400386510
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 29878480815318,
+        "restored_jobs_exported": 4,
+        "return_ns": 29881407890004,
+        "scenario": "async",
+        "threads_at_start": 9,
+        "interactive_unit_seconds": 10.47029032700084
+      },
+      {
+        "busy": 0,
+        "checks": 0,
+        "concurrent_old_render_calls": 4,
+        "concurrent_printers": 4,
+        "cooperative_active_before_install": 4,
+        "four_print_overlap_ns": 2002216660,
+        "four_render_overlap_ns": 3000506646,
+        "mode": "cooperative",
+        "new_jobs_rejected": 4,
+        "old_close_ns": {
+          "0": 29893889316764,
+          "1": 29893890036781,
+          "2": 29893887894839,
+          "3": 29893890041703
+        },
+        "old_commit_ns": {
+          "0": 29893889327182,
+          "1": 29893890044478,
+          "2": 29893887924699,
+          "3": 29893890046043
+        },
+        "old_commits_after_return": 0,
+        "old_render_begin_ns": {
+          "0": 29888884974074,
+          "1": 29888884981284,
+          "2": 29888884995962,
+          "3": 29888884999849
+        },
+        "old_render_end_ns": {
+          "0": 29891885520700,
+          "1": 29891885586519,
+          "2": 29891885506495,
+          "3": 29891885542491
+        },
+        "original_bytes_restored": true,
+        "patch_target": "render_document",
+        "request_ns": 29888966116754,
+        "restored_jobs_exported": 4,
+        "return_ns": 29893891824785,
+        "scenario": "async",
+        "threads_at_start": 9,
+        "interactive_unit_seconds": 10.649813454998366
+      }
+    ],
+    "evidence": "evidence/rehearsal"
+  }
+}
