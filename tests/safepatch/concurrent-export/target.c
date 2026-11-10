@@ -36,80 +36,131 @@ static struct job *pop(struct queue *q) {
     while(sem_wait(&q->ready)) if(errno!=EINTR) abort();
     pthread_mutex_lock(&q->lock);struct job *j=q->items[q->head++%128];pthread_mutex_unlock(&q->lock);return j;
 }
-/* Rendering authorizes export; the printer queue owns subsequent output work. */
+/// @brief 异步模型patch目标。渲染排版导出；后续输出工作交给别的打印机线程
+/// @param pages 
+/// @return 1 if the document was successfully rendered, 0 otherwise
 __attribute__((noinline)) int render_document(int pages) {
-    printf("BEGIN %d %lu\n",current_job,now());
+    printf("BEGIN %d %lu\n", current_job, now());
     delay(LAYOUT_MS);
-    return pages>0;
+    return pages > 0;
 }
-/* Identical output operation in both business models. */
+
+/// @brief 相同的输出操作在两种（对齐/异步）业务模型中。
+/// @param j 
 static void print_document(struct job *j) {
-        char temporary[600];snprintf(temporary,sizeof(temporary),"%s.part",j->path);
-        FILE *f=fopen(temporary,"w");if(!f) abort();
-        printf("PRINT_BEGIN %d %lu\n",j->id,now());
-        /* A paced printer substitute writes real data in chunks. This same
-         * device latency applies to all modes, independently of patch status. */
-        for(int page=0;page<10;page++) {
-            if(fprintf(f,"Document %d page %d\n",j->id,page)<0 || fflush(f)) abort();
+        char temporary[600];
+        snprintf(temporary, sizeof(temporary), "%s.part", j->path); // 打印过程
+        FILE *f = fopen(temporary,"w");
+        if (!f) {
+            abort();
+        }
+        printf("PRINT_BEGIN %d %lu\n", j->id, now());
+        /* 一个定速打印机的替代品以块的形式写入真实数据。
+        这种相同的设备延迟适用于所有模式，与补丁状态无关。 */
+        for (int page = 0; page < 10; page++) {
+            if (fprintf(f, "Document %d page %d\n", j->id, page)<0 || fflush(f)) {
+                abort();
+            }
             delay(PRINT_MS/10);
         }
-        if(fclose(f)) abort();
-        uint64_t closed=now();
-        if(rename(temporary,j->path)) abort();
-        uint64_t committed=now();
-        printf("COMMIT %d %lu %lu\n",j->id,closed,committed);
+        if (fclose(f)) {
+            abort(); // 确保所有数据都写入磁盘。
+        }
+        uint64_t closed = now();
+        if (rename(temporary, j->path)) {
+            abort(); // 公开最终文档。
+        }
+        uint64_t committed = now();
+        printf("COMMIT %d %lu %lu\n", j->id, closed, committed);
 }
-#ifdef ALIGNED_BOUNDARY
-/* One finite call owns the whole job, including final document publication. */
+#ifdef ALIGNED_BOUNDARY // 如果是业务边界与补丁边界对齐的模型
+
+/// @brief 对齐模型patch目标。导出文档；打印机队列不拥有后续输出工作
+/// @param j 
+/// @return 
 __attribute__((noinline)) int export_document(struct job *j) {
-    printf("BEGIN %d %lu\n",j->id,now());
+    printf("BEGIN %d %lu\n", j->id, now());
     delay(LAYOUT_MS);
     print_document(j);
     return 1;
 }
 #define PATCH_TARGET export_document
 #else
-#define PATCH_TARGET render_document
+#define PATCH_TARGET render_document // 如果是补丁边界小于业务边界的异步模型
 #endif
+
+/// @brief 渲染线程的任务
+/// @param unused 
+/// @return 
 static void *renderer(void *unused) {
     (void)unused;
     for(;;) {
-        struct job *j=pop(&incoming);current_job=j->id;
-        enter_region();
-#ifdef ALIGNED_BOUNDARY
-        int accepted=export_document(j);
-        printf("RENDER_END %d %lu\n",j->id,now());
-        if(!accepted) printf("REJECT %d %lu\n",j->id,now());
-        leave_region();free(j);
-#else
-        int accepted=render_document(20);
-        printf("RENDER_END %d %lu\n",j->id,now());
-        if(accepted) push(&printing,j); /* Count obligation moves to consumer. */
-        else {printf("REJECT %d %lu\n",j->id,now());leave_region();free(j);}
+        struct job *j = pop(&incoming);
+        current_job = j->id;
+        enter_region(); // 供协作式使用的，表示进入门控区域
+#ifdef ALIGNED_BOUNDARY // 对齐模型
+        int accepted = export_document(j); // 对齐模型调用export_document
+        printf("RENDER_END %d %lu\n", j -> id, now());
+        if (!accepted) {
+            printf("REJECT %d %lu\n",j -> id, now());
+        }
+        leave_region(); // 供协作式使用的，表示离开门控区域
+        free(j);
+#else // 异步模型
+        int accepted = render_document(20); // 异步模型调用render_document
+        printf("RENDER_END %d %lu\n", j->id, now());
+        if (accepted) {
+            push(&printing, j); /* Count obligation moves to consumer. */
+        }
+        else {
+            printf("REJECT %d %lu\n", j->id, now());
+            leave_region(); // 供协作式使用的，表示离开门控区域
+            free(j);
+        }
 #endif
     }
     return NULL;
 }
+
+/// @brief 打印线程的任务
+/// @param unused 
+/// @return 
 static void *printer(void *unused) {
     (void)unused;
     for(;;) {
-        struct job *j=pop(&printing);
+        struct job *j = pop(&printing);
         print_document(j);
-        leave_region();free(j);
+        leave_region();
+        free(j);
     }
     return NULL;
 }
 int main(int argc,char **argv) {
-    if(argc!=2) return 2;directory=argv[1];
-    prctl(PR_SET_PTRACER,getppid(),0,0,0);setvbuf(stdout,NULL,_IOLBF,0);
-    sem_init(&incoming.ready,0,0);sem_init(&printing.ready,0,0);
+    if(argc != 2) {
+        return 2;
+    }
+    directory = argv[1];
+    prctl(PR_SET_PTRACER,getppid(), 0, 0, 0);
+    setvbuf(stdout, NULL, _IOLBF, 0);
+    sem_init(&incoming.ready, 0, 0);
+    sem_init(&printing.ready, 0, 0);
+    // 共有8个线程，4个渲染线程和4个打印线程
     pthread_t threads[8];
-    for(int i=0;i<4;i++) if(pthread_create(&threads[i],0,renderer,0)||pthread_create(&threads[4+i],0,printer,0)) return 3;
-    printf("READY %d %p %p\n",getpid(),(void*)PATCH_TARGET,DEMO_STATE);
+    for (int i = 0; i < 4; i++) {
+        if (pthread_create(&threads[i], 0, renderer, 0) || pthread_create(&threads[4+i], 0, printer, 0)) {
+            return 3;
+        }
+    }
+    printf("READY %d %p %p\n", getpid(), (void*)PATCH_TARGET, DEMO_STATE);
     int id;
-    while(scanf("%d",&id)==1) {
-        struct job *j=calloc(1,sizeof(*j));if(!j) abort();j->id=id;
-        snprintf(j->path,sizeof(j->path),"%s/document-%d.txt",directory,id);push(&incoming,j);
+    while (scanf("%d", &id) == 1) {
+        struct job *j = calloc(1, sizeof(*j));
+        if (!j) {
+            abort();
+        }
+        j->id = id;
+        snprintf(j->path, sizeof(j->path), "%s/document-%d.txt", directory, id);
+        push(&incoming, j);
     }
     return 0;
 }
