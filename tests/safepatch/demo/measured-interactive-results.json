@@ -1,0 +1,475 @@
+{
+  "presentation_version": 2,
+  "environment": {
+    "kernel": "6.6.0-159.4.19.173.oe2403sp4.x86_64",
+    "machine": "x86_64"
+  },
+  "interactive_cases": [
+    {
+      "label": "base-30s",
+      "session": "/tmp/gaia-classroom-final/base-7nhCoyv5",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "unclaimed",
+        "files": "/tmp/gaia-classroom-final/base-7nhCoyv5/files",
+        "install_requested_ns": 24862372301793,
+        "mode": "base",
+        "observation": "old_file_after_patch_return",
+        "old_file_begin_ns": 24886290969733,
+        "old_file_close_ns": 24886291080981,
+        "old_task_unfinished_at_patch_request": true,
+        "patch_return_ns": 24862372580269,
+        "restore_return_ns": 24886371853470,
+        "started_monotonic_ns": 24856127700209,
+        "tasks": [
+          {
+            "begin_ns": 24886290969733,
+            "end_ns": 24886291080981,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 24862457401105,
+            "end_ns": 24862457401166,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 24916375070520,
+            "end_ns": 24916375323011,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      },
+      "stack_checks": 0,
+      "busy_events": 0,
+      "gate_closed_active_positive_samples": 0,
+      "actual_terminal": "interactive-evidence/classroom/base-30s.ansi.log",
+      "rendered_scrollback": "interactive-evidence/classroom/base-30s.screen.txt",
+      "events": "interactive-evidence/classroom/base-30s.events.jsonl"
+    },
+    {
+      "label": "compatible-30s",
+      "session": "/tmp/gaia-classroom-final/compatible-zrYegRXu",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "native_stack_check",
+        "files": "/tmp/gaia-classroom-final/compatible-zrYegRXu/files",
+        "install_requested_ns": 24862370285119,
+        "mode": "compatible",
+        "observation": "old_file_closed_before_patch_return",
+        "old_file_begin_ns": 24886292795636,
+        "old_file_close_ns": 24886292847905,
+        "old_task_unfinished_at_patch_request": true,
+        "patch_return_ns": 24886299972913,
+        "restore_return_ns": 24886466007764,
+        "started_monotonic_ns": 24856125914425,
+        "tasks": [
+          {
+            "begin_ns": 24886292795636,
+            "end_ns": 24886292847905,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 24886380557166,
+            "end_ns": 24886380557219,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 24916466580016,
+            "end_ns": 24916466636259,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      },
+      "stack_checks": 3277,
+      "busy_events": 3275,
+      "gate_closed_active_positive_samples": 0,
+      "actual_terminal": "interactive-evidence/classroom/compatible-30s.ansi.log",
+      "rendered_scrollback": "interactive-evidence/classroom/compatible-30s.screen.txt",
+      "events": "interactive-evidence/classroom/compatible-30s.events.jsonl"
+    },
+    {
+      "label": "cooperative-30s",
+      "session": "/tmp/gaia-classroom-final/cooperative-8qEs1Z3J",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "cooperative_region",
+        "files": "/tmp/gaia-classroom-final/cooperative-8qEs1Z3J/files",
+        "install_requested_ns": 24862372146513,
+        "mode": "cooperative",
+        "observation": "old_file_closed_before_patch_return",
+        "old_file_begin_ns": 24886291128623,
+        "old_file_close_ns": 24886291558804,
+        "old_task_unfinished_at_patch_request": true,
+        "patch_return_ns": 24886294370689,
+        "restore_return_ns": 24886457656561,
+        "started_monotonic_ns": 24856129379609,
+        "tasks": [
+          {
+            "begin_ns": 24886291128623,
+            "end_ns": 24886291558804,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 24886375094459,
+            "end_ns": 24886375094508,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 24916458017563,
+            "end_ns": 24916458079726,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      },
+      "stack_checks": 0,
+      "busy_events": 0,
+      "gate_closed_active_positive_samples": 94,
+      "actual_terminal": "interactive-evidence/classroom/cooperative-30s.ansi.log",
+      "rendered_scrollback": "interactive-evidence/classroom/cooperative-30s.screen.txt",
+      "events": "interactive-evidence/classroom/cooperative-30s.events.jsonl"
+    },
+    {
+      "label": "compatible-refused",
+      "session": "/tmp/gaia-classroom-final/compatible-IkunqXlC",
+      "exit_code": 1,
+      "summary": {
+        "completed": false,
+        "consistency_scope": "native_stack_check",
+        "files": "/tmp/gaia-classroom-final/compatible-IkunqXlC/files",
+        "install_requested_ns": 24917201873417,
+        "mode": "compatible",
+        "observation": "unpaired",
+        "old_file_begin_ns": null,
+        "old_file_close_ns": null,
+        "old_task_unfinished_at_patch_request": null,
+        "patch_return_ns": null,
+        "restore_return_ns": null,
+        "started_monotonic_ns": 24916958170013,
+        "tasks": []
+      },
+      "stack_checks": 13,
+      "busy_events": 13,
+      "gate_closed_active_positive_samples": 0,
+      "actual_terminal": "interactive-evidence/classroom/compatible-refused.ansi.log",
+      "rendered_scrollback": "interactive-evidence/classroom/compatible-refused.screen.txt",
+      "events": "interactive-evidence/classroom/compatible-refused.events.jsonl"
+    },
+    {
+      "label": "old-finished-before-enter",
+      "session": "/tmp/gaia-classroom-final/compatible-IZDTFzg8",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "native_stack_check",
+        "files": "/tmp/gaia-classroom-final/compatible-IZDTFzg8/files",
+        "install_requested_ns": 24918137533428,
+        "mode": "compatible",
+        "observation": "old_file_closed_before_patch_return",
+        "old_file_begin_ns": 24917757225315,
+        "old_file_close_ns": 24917757319842,
+        "old_task_unfinished_at_patch_request": false,
+        "patch_return_ns": 24918142731762,
+        "restore_return_ns": 24918309268457,
+        "started_monotonic_ns": 24917392909249,
+        "tasks": [
+          {
+            "begin_ns": 24917757225315,
+            "end_ns": 24917757319842,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 24918223333093,
+            "end_ns": 24918223333143,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 24918509955702,
+            "end_ns": 24918510043701,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      },
+      "stack_checks": 2,
+      "busy_events": 0,
+      "gate_closed_active_positive_samples": 0,
+      "actual_terminal": "interactive-evidence/classroom/old-finished-before-enter.ansi.log",
+      "rendered_scrollback": "interactive-evidence/classroom/old-finished-before-enter.screen.txt",
+      "events": "interactive-evidence/classroom/old-finished-before-enter.events.jsonl"
+    },
+    {
+      "label": "input-eof",
+      "session": "/tmp/gaia-classroom-final/base-lBk8OFvT",
+      "exit_code": 1,
+      "summary": {
+        "completed": false,
+        "consistency_scope": "unclaimed",
+        "files": "/tmp/gaia-classroom-final/base-lBk8OFvT/files",
+        "install_requested_ns": null,
+        "mode": "base",
+        "observation": "unpaired",
+        "old_file_begin_ns": null,
+        "old_file_close_ns": null,
+        "old_task_unfinished_at_patch_request": null,
+        "patch_return_ns": null,
+        "restore_return_ns": null,
+        "started_monotonic_ns": 24918678699863,
+        "tasks": []
+      },
+      "stack_checks": 0,
+      "busy_events": 0,
+      "gate_closed_active_positive_samples": 0,
+      "actual_terminal": "interactive-evidence/classroom/input-eof.ansi.log",
+      "rendered_scrollback": "interactive-evidence/classroom/input-eof.screen.txt",
+      "events": "interactive-evidence/classroom/input-eof.events.jsonl"
+    }
+  ],
+  "quick_regression_cases": [
+    {
+      "label": "base-5s",
+      "session": "/tmp/gaia-classroom-shell-final/base-ZaiIKDyC",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "unclaimed",
+        "files": "/tmp/gaia-classroom-shell-final/base-ZaiIKDyC/files",
+        "install_requested_ns": 25083077380494,
+        "mode": "base",
+        "observation": "old_file_after_patch_return",
+        "old_file_begin_ns": 25087996259545,
+        "old_file_close_ns": 25087996333204,
+        "old_task_unfinished_at_patch_request": true,
+        "patch_return_ns": 25083077717943,
+        "restore_return_ns": 25088083101177,
+        "started_monotonic_ns": 25082833473750,
+        "tasks": [
+          {
+            "begin_ns": 25087996259545,
+            "end_ns": 25087996333204,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 25083158687222,
+            "end_ns": 25083158687283,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 25093083593447,
+            "end_ns": 25093083691200,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      }
+    },
+    {
+      "label": "compatible-5s",
+      "session": "/tmp/gaia-classroom-shell-final/compatible-3oQBzTQf",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "native_stack_check",
+        "files": "/tmp/gaia-classroom-shell-final/compatible-3oQBzTQf/files",
+        "install_requested_ns": 25093836583604,
+        "mode": "compatible",
+        "observation": "old_file_closed_before_patch_return",
+        "old_file_begin_ns": 25098757556316,
+        "old_file_close_ns": 25098757617176,
+        "old_task_unfinished_at_patch_request": true,
+        "patch_return_ns": 25098764557418,
+        "restore_return_ns": 25098933005946,
+        "started_monotonic_ns": 25093593165775,
+        "tasks": [
+          {
+            "begin_ns": 25098757556316,
+            "end_ns": 25098757617176,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 25098845277020,
+            "end_ns": 25098845277059,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 25103933657625,
+            "end_ns": 25103934408430,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      }
+    },
+    {
+      "label": "cooperative-5s",
+      "session": "/tmp/gaia-classroom-shell-final/cooperative-ciD5k9OF",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "cooperative_region",
+        "files": "/tmp/gaia-classroom-shell-final/cooperative-ciD5k9OF/files",
+        "install_requested_ns": 25104704860140,
+        "mode": "cooperative",
+        "observation": "old_file_closed_before_patch_return",
+        "old_file_begin_ns": 25109624508377,
+        "old_file_close_ns": 25109624596765,
+        "old_task_unfinished_at_patch_request": true,
+        "patch_return_ns": 25109626086259,
+        "restore_return_ns": 25109789443905,
+        "started_monotonic_ns": 25104462180990,
+        "tasks": [
+          {
+            "begin_ns": 25109624508377,
+            "end_ns": 25109624596765,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 25109707397250,
+            "end_ns": 25109707397301,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 25114789897730,
+            "end_ns": 25114790000345,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      }
+    },
+    {
+      "label": "compatible-refused",
+      "session": "/tmp/gaia-classroom-shell-final/compatible-qcbGelVc",
+      "exit_code": 1,
+      "summary": {
+        "completed": false,
+        "consistency_scope": "native_stack_check",
+        "files": "/tmp/gaia-classroom-shell-final/compatible-qcbGelVc/files",
+        "install_requested_ns": 25115517652535,
+        "mode": "compatible",
+        "observation": "unpaired",
+        "old_file_begin_ns": null,
+        "old_file_close_ns": null,
+        "old_task_unfinished_at_patch_request": null,
+        "patch_return_ns": null,
+        "restore_return_ns": null,
+        "started_monotonic_ns": 25115274415422,
+        "tasks": []
+      }
+    },
+    {
+      "label": "old-finished-before-enter",
+      "session": "/tmp/gaia-classroom-shell-final/compatible-LD2TdekW",
+      "exit_code": 0,
+      "summary": {
+        "completed": true,
+        "consistency_scope": "native_stack_check",
+        "files": "/tmp/gaia-classroom-shell-final/compatible-LD2TdekW/files",
+        "install_requested_ns": 25116454610917,
+        "mode": "compatible",
+        "observation": "old_file_closed_before_patch_return",
+        "old_file_begin_ns": 25116072654074,
+        "old_file_close_ns": 25116072780703,
+        "old_task_unfinished_at_patch_request": false,
+        "patch_return_ns": 25116459805087,
+        "restore_return_ns": 25116627923519,
+        "started_monotonic_ns": 25115709506535,
+        "tasks": [
+          {
+            "begin_ns": 25116072654074,
+            "end_ns": 25116072780703,
+            "exported": true,
+            "id": 0
+          },
+          {
+            "begin_ns": 25116540706301,
+            "end_ns": 25116540706355,
+            "exported": false,
+            "id": 1
+          },
+          {
+            "begin_ns": 25116829921384,
+            "end_ns": 25116830241421,
+            "exported": true,
+            "id": 2
+          }
+        ]
+      }
+    },
+    {
+      "label": "input-eof",
+      "session": "/tmp/gaia-classroom-shell-final/base-SguGpd4o",
+      "exit_code": 1,
+      "summary": {
+        "completed": false,
+        "consistency_scope": "unclaimed",
+        "files": "/tmp/gaia-classroom-shell-final/base-SguGpd4o/files",
+        "install_requested_ns": null,
+        "mode": "base",
+        "observation": "unpaired",
+        "old_file_begin_ns": null,
+        "old_file_close_ns": null,
+        "old_task_unfinished_at_patch_request": null,
+        "patch_return_ns": null,
+        "restore_return_ns": null,
+        "started_monotonic_ns": 25117016637951,
+        "tasks": []
+      }
+    }
+  ],
+  "recording_profile": {
+    "task_ms": 30000,
+    "operator_delay_before_install_ms": 6000,
+    "parallel_independent_pty_sessions": true
+  },
+  "terminal_checks": {
+    "relative_millisecond_timestamps": true,
+    "ansi_two_line_footer": true,
+    "scrollback_event_counts_verified": true,
+    "all_samples_retained": true,
+    "independent_live_monitor_files_verified": true,
+    "interrupt": {
+      "exit_code": 130,
+      "tty_restored": true,
+      "service_started": true
+    },
+    "pipe_output": {
+      "exit_code": 0,
+      "ansi_sequences": false,
+      "busy_transition_lines": 1,
+      "completed": true
+    }
+  },
+  "regression": {
+    "automatic_demo": "passed: /tmp/gaia-terminal-ui-regression",
+    "repeat": "4 modes x 3 repeats passed",
+    "compatible_fault_tests": "6 passed; 0 failed"
+  },
+  "unchanged_algorithms_and_business_sources": {
+    "gaia-xdp/src/safepatch.rs": "6305ad6b93e6da7de3e04b74c6419d0e4e27da9041a671a4c95975d1ca20e64b",
+    "gaia-xdp/src/safepatch/compatible.rs": "4f9ef07107d1ade7316ae18dbcd17286c9206ca24038a4509f64a2d1a76b6143",
+    "gaia-xdp/src/safepatch/syscare/bridge.c": "0122b65666dce0a634bd3c1c560b7b759eea57a41b5101bc3f98f2094aed7051",
+    "tests/safepatch/demo/target.c": "49f10efff76c9c39977fbf5afb00e1b8e4fe666d2ceca4264e40c422537e985e",
+    "tests/safepatch/demo/cooperative.h": "45c641c35d8eee4c3846baf2bf5a4bf8ab4f705ef7e64243c650b3882a146804"
+  },
+  "examples": "interactive-evidence/classroom/examples.md"
+}

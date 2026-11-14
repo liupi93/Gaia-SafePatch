@@ -1,0 +1,3 @@
+result=validated scenario=normal attempts=20 elapsed_us=3997842 code_unchanged=true target_alive=true tracer=0 
+result=validated scenario=conflict attempts=20 elapsed_us=4000135 code_unchanged=true target_alive=true tracer=0 
+result=validated scenario=churn attempts=20 elapsed_us=112351 code_unchanged=true target_alive=true tracer=0 

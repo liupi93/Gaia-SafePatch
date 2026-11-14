@@ -1,0 +1,173 @@
+{
+  "recorded_utc": "2026-11-08T11:50:04.009341+00:00",
+  "platform": "Linux-6.6.0-159.4.19.173.oe2403sp4.x86_64-x86_64-with-glibc2.38",
+  "scope": "Fail-closed refusal subset. Non-cooperative successful installation is NOT implemented.",
+  "compatible": {
+    "requests": 48,
+    "refused": 48,
+    "successful_installs": 0,
+    "consistency_complete": false,
+    "stack_checks": 0,
+    "reason": "reliable_stack_check_unavailable",
+    "summaries": [
+      "result=refused conflict=false attempts=20 checks=0 elapsed_us=243 code_unchanged=true target_alive=true tracer=0 reason=reliable_stack_check_unavailable",
+      "result=refused conflict=true attempts=20 checks=0 elapsed_us=345 code_unchanged=true target_alive=true tracer=0 reason=reliable_stack_check_unavailable"
+    ]
+  },
+  "shared_writer": {
+    "partial_write_failure_restored": true,
+    "readback_failure_restored": true,
+    "target_survived": true,
+    "compatible_transition": false
+  },
+  "cooperative_and_base_regression": {
+    "successful_installs": 40,
+    "successful_restorations": 40,
+    "restoration_failures": 0,
+    "drain_measurements": {
+      "high_frequency": {
+        "successes": 40,
+        "wall_us": 1162663,
+        "completed_calls": 23243913,
+        "drain_mean_us": 3640,
+        "drain_max_us": 4574,
+        "restore_failures": 0
+      },
+      "long_running": {
+        "successes": 40,
+        "wall_us": 5026241,
+        "completed_calls": 321691,
+        "drain_mean_us": 195784,
+        "drain_max_us": 217088,
+        "restore_failures": 0
+      }
+    },
+    "calls_spanning_switches": 0,
+    "verified_writes": 80,
+    "unsafe_writes": 0,
+    "overlapping_intervals": 0,
+    "completed_long_calls": 321699,
+    "performance_overhead_vs_base_pct": 34.63880908675235,
+    "median_calls_per_second": {
+      "base": 30334659.136496082,
+      "safe": 19827094.471088123
+    },
+    "base_risk_overlapping_intervals": 96841,
+    "compatible_result": "refused",
+    "compatible_installs": 0,
+    "compatible_consistency_complete": false,
+    "base_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326"
+  },
+  "document_demo_repetitions": [
+    {
+      "mode": "control",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "control",
+          "switch_return_ns": 10708614186789,
+          "old_file_begin_ns": 10709414399294,
+          "old_file_end_ns": 10709414533014,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        },
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "control",
+          "switch_return_ns": 10709417960341,
+          "old_file_begin_ns": 10710218067359,
+          "old_file_end_ns": 10710218168991,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": true,
+          "consistency_complete": false,
+          "mode": "base",
+          "switch_return_ns": 10710221587798,
+          "old_file_begin_ns": 10711022057792,
+          "old_file_end_ns": 10711022140918,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        },
+        {
+          "code_installed": true,
+          "consistency_complete": false,
+          "mode": "base",
+          "switch_return_ns": 10711825654748,
+          "old_file_begin_ns": 10712638433605,
+          "old_file_end_ns": 10712638611701,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        }
+      ]
+    },
+    {
+      "mode": "compatible",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "compatible",
+          "switch_return_ns": 10713481689704,
+          "old_file_begin_ns": 10714282014978,
+          "old_file_end_ns": 10714282097835,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        },
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "compatible",
+          "switch_return_ns": 10714319781048,
+          "old_file_begin_ns": 10715119784253,
+          "old_file_end_ns": 10715119880470,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        }
+      ]
+    },
+    {
+      "mode": "cooperative",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": true,
+          "consistency_complete": true,
+          "mode": "cooperative",
+          "switch_return_ns": 10715925948034,
+          "old_file_begin_ns": 10715923251713,
+          "old_file_end_ns": 10715923325759,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        },
+        {
+          "code_installed": true,
+          "consistency_complete": true,
+          "mode": "cooperative",
+          "switch_return_ns": 10717531915192,
+          "old_file_begin_ns": 10717530397454,
+          "old_file_end_ns": 10717530471515,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        }
+      ]
+    }
+  ],
+  "validation_commands": [
+    "RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run-compat.sh /tmp/gaia-conservative-compat",
+    "RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run.sh /tmp/gaia-conservative-regression",
+    "RUSTUP_TOOLCHAIN=stable bash tests/safepatch/demo/run.sh /tmp/gaia-conservative-demo",
+    "python3 tests/safepatch/demo/repeat.py /tmp/gaia-conservative-demo 2"
+  ]
+}

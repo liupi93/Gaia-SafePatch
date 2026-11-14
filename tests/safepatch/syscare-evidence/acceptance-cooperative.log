@@ -1,0 +1,180 @@
+===== case 1 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-v58vyfbm/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 801 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-v58vyfbm/files/document-0.txt
+SafePatch write verified pid=61002 threads=9 active=0 switch_ns=18227689328664 drain_us=801041
+SafePatch write verified pid=61002 threads=9 active=0 switch_ns=18227690235811 drain_us=624
+===== case 2 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-eop34mxh/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 804 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-eop34mxh/files/document-0.txt
+SafePatch write verified pid=61039 threads=9 active=0 switch_ns=18229297495991 drain_us=803950
+SafePatch write verified pid=61039 threads=9 active=0 switch_ns=18229298090136 drain_us=328
+===== case 3 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-6r92rk6b/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 801 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-6r92rk6b/files/document-0.txt
+SafePatch write verified pid=61053 threads=9 active=0 switch_ns=18230913106164 drain_us=801721
+SafePatch write verified pid=61053 threads=9 active=0 switch_ns=18230913720521 drain_us=360
+===== case 4 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-3_ml0pow/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 803 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-3_ml0pow/files/document-0.txt
+SafePatch write verified pid=61071 threads=9 active=0 switch_ns=18232523182203 drain_us=803787
+SafePatch write verified pid=61071 threads=9 active=0 switch_ns=18232523773930 drain_us=329
+===== case 5 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-txd3na9g/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 801 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-txd3na9g/files/document-0.txt
+SafePatch write verified pid=61087 threads=9 active=0 switch_ns=18234128852138 drain_us=801217
+SafePatch write verified pid=61087 threads=9 active=0 switch_ns=18234129452615 drain_us=309
+===== case 6 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-4tinzi0s/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 803 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-4tinzi0s/files/document-0.txt
+SafePatch write verified pid=61098 threads=9 active=0 switch_ns=18235735832298 drain_us=802882
+SafePatch write verified pid=61098 threads=9 active=0 switch_ns=18235736682971 drain_us=547
+===== case 7 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-dae25okm/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 801 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-dae25okm/files/document-0.txt
+SafePatch write verified pid=61116 threads=9 active=0 switch_ns=18237342155305 drain_us=801805
+SafePatch write verified pid=61116 threads=9 active=0 switch_ns=18237342790897 drain_us=379
+===== case 8 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-jigwefkt/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 803 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-jigwefkt/files/document-0.txt
+SafePatch write verified pid=61132 threads=9 active=0 switch_ns=18238948991840 drain_us=803074
+SafePatch write verified pid=61132 threads=9 active=0 switch_ns=18238949710104 drain_us=361
+===== case 9 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-1ejsdxwm/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 803 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-1ejsdxwm/files/document-0.txt
+SafePatch write verified pid=61143 threads=9 active=0 switch_ns=18240557815534 drain_us=803072
+SafePatch write verified pid=61143 threads=9 active=0 switch_ns=18240558554200 drain_us=479
+===== case 10 =====
+【文档导出服务】协作模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-cooperative-soqfsin2/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【切换已返回成功】耗时 801 毫秒；现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【顺序正确】旧文档在维护完成之前已经写完；维护完成后没有新增文件。
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-cooperative-soqfsin2/files/document-0.txt
+SafePatch write verified pid=61199 threads=9 active=0 switch_ns=18242164031476 drain_us=801812
+SafePatch write verified pid=61199 threads=9 active=0 switch_ns=18242164746965 drain_us=374

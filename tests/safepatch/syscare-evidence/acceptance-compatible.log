@@ -1,0 +1,190 @@
+===== case 1 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-gmasepvf/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 779 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-gmasepvf/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare stack check timeout (active old calls or conservative stack matches)
+SafePatch compatible result=success threads=9 checks=102 elapsed_us=778989 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4882 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 2 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-pot04rhk/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 778 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-pot04rhk/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare stack check timeout (active old calls or conservative stack matches)
+SafePatch compatible result=success threads=9 checks=108 elapsed_us=778553 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4820 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 3 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-0x0gpsbj/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 778 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-0x0gpsbj/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=102 elapsed_us=777973 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=5315 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 4 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-dwl2ingb/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 774 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-dwl2ingb/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=104 elapsed_us=774103 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=5599 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 5 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-omyxfo43/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 775 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-omyxfo43/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=103 elapsed_us=775256 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4639 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 6 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-s7ac4umm/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 779 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-s7ac4umm/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=108 elapsed_us=779900 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4782 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 7 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-8jm19zka/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 775 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-8jm19zka/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=106 elapsed_us=775330 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4894 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 8 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-2jo9_1dg/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 779 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-2jo9_1dg/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=109 elapsed_us=779889 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=5348 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 9 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-2vij4i37/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 779 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-2vij4i37/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare thread stop timeout
+SafePatch compatible result=success threads=9 checks=107 elapsed_us=779168 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4379 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+===== case 10 =====
+【文档导出服务】兼容模式｜8 个工作线程，1 个主线程
+【业务要求】进入维护状态之后，输出目录不应再新增文档。
+【输出目录】/tmp/gaia-syscare-acceptance/repeat-compatible-r5lrdug2/files
+  【排版中】已收到文档，预计处理 800 毫秒。
+【切换维护状态】新版本的导出函数将直接返回“暂不导出”。
+  作业 0：已生成文档文件
+【原生栈检查通过】已等待旧函数调用；不声明业务排空或目录稳定。
+【代码安装返回】耗时 779 毫秒；业务排空未确认。现在提交第二个文档。
+  作业 1：维护中，未生成文件
+【时间对照】本次旧文件在安装返回前已经关闭；此观测不代表通用业务排空保证。
+【恢复通过】原始代码已恢复，读回检查一致。现在提交第三个文档。
+  【排版中】已收到文档，预计处理 800 毫秒。
+  作业 2：已生成文档文件
+【恢复后试运行】第三个文档已正常生成，服务恢复导出。
+【实物证据】/tmp/gaia-syscare-acceptance/repeat-compatible-r5lrdug2/files/document-0.txt
+SafePatch compatible result=error checks=4 consistency_complete=false reason=SysCare stack check timeout (active old calls or conservative stack matches)
+SafePatch compatible result=success threads=9 checks=104 elapsed_us=779324 code_installed=true native_stack_check_complete=true business_consistency=unclaimed
+SafePatch compatible result=success threads=9 checks=1 elapsed_us=4794 code_installed=true native_stack_check_complete=true business_consistency=unclaimed

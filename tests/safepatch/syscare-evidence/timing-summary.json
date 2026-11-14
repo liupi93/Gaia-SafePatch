@@ -1,0 +1,61 @@
+{
+  "control": {
+    "cases": 10,
+    "observations": {
+      "no_patch": 10
+    },
+    "file_begin_minus_return_ms_min": 800.045453,
+    "file_begin_minus_return_ms_max": 800.508156,
+    "file_end_minus_return_ms_min": 800.143311,
+    "file_end_minus_return_ms_max": 800.614514
+  },
+  "base": {
+    "cases": 10,
+    "observations": {
+      "file_creation_started_after_return": 10
+    },
+    "file_begin_minus_return_ms_min": 799.959499,
+    "file_begin_minus_return_ms_max": 800.324574,
+    "file_end_minus_return_ms_min": 800.071352,
+    "file_end_minus_return_ms_max": 800.405665
+  },
+  "compatible": {
+    "cases": 10,
+    "observations": {
+      "file_closed_before_return": 10
+    },
+    "file_begin_minus_return_ms_min": -8.040908,
+    "file_begin_minus_return_ms_max": -4.117412,
+    "file_end_minus_return_ms_min": -7.965707,
+    "file_end_minus_return_ms_max": -4.049749
+  },
+  "cooperative": {
+    "cases": 10,
+    "observations": {
+      "file_closed_before_return": 10
+    },
+    "file_begin_minus_return_ms_min": -3.732738,
+    "file_begin_minus_return_ms_max": -0.93144,
+    "file_end_minus_return_ms_min": -3.624814,
+    "file_end_minus_return_ms_max": -0.840492
+  },
+  "stack_inspection": {
+    "read_only_no_patch": true,
+    "busy_snapshots": 108,
+    "matches_layout_call_return": 108,
+    "matched_address": "0x401479",
+    "render_offset": 9,
+    "rip_locations": [
+      {
+        "module": "/usr/lib64/libc.so.6",
+        "file_offset": 821349,
+        "addr2line": "clock_nanosleep\n??:?"
+      }
+    ],
+    "last_busy_elapsed_ms": 803.143826,
+    "first_clean_elapsed_ms": 810.672083,
+    "gap_between_last_busy_and_first_clean_ms": 7.528257,
+    "last_busy_file_exists": false,
+    "first_clean_file_exists": true
+  }
+}

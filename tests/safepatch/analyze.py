@@ -38,19 +38,16 @@ for start,end,version in sorted(risk_intervals):
     risk_overlap += latest[99 if version == 10 else 10] > start
     latest[version] = max(latest[version],end)
 assert risk_overlap > 0, 'controlled base interleaving did not demonstrate overlap'
-compat_intervals = []
-for line in (root/'compatible-risk.calls').read_text().splitlines():
-    if line.startswith('CALL '):
-        _, tid, start, end, version = line.split()
-        compat_intervals.append((int(start), int(end), int(version)))
-latest = {10: 0, 99: 0}
-compat_overlap = 0
-for start, end, version in sorted(compat_intervals):
-    compat_overlap += latest[99 if version == 10 else 10] > start
-    latest[version] = max(latest[version], end)
-assert compat_overlap > 0, 'controlled compatible interleaving did not demonstrate its limitation'
-compat_writes = [s for s in (root/'compatible-risk.runtime').read_text().splitlines() if 'write verified' in s]
-assert len(compat_writes) == 2 and all('threads=9 rip_clear=true' in s for s in compat_writes)
+compat_runtime = (root/'compatible-risk.runtime').read_text()
+assert 'write verified' not in compat_runtime
+assert 'result=error' in compat_runtime and 'consistency_complete=false' in compat_runtime
+assert 'COMPAT_REFUSED' in (root/'compatible-risk.summary').read_text()
+compatible = (root/'compatible/fault-tests.log').read_text()
+compatible_successes = [line for line in compatible.splitlines() if 'result=success' in line]
+assert len(compatible_successes) >= 20
+assert all('threads=9' in line and 'native_stack_check_complete=true' in line and
+           'business_consistency=unclaimed' in line for line in compatible_successes)
+assert '6 passed; 0 failed' in compatible
 import statistics
 performance = {}
 for mode in ('base','safe'):
@@ -62,7 +59,8 @@ for mode in ('base','safe'):
 result = dict(successful_installs=40, successful_restorations=40, restoration_failures=sum(case["restore_failures"] for case in case_metrics.values()),
               drain_measurements=case_metrics, calls_spanning_switches=crossing_switches, verified_writes=writes, unsafe_writes=unsafe, overlapping_intervals=overlap,
               completed_long_calls=len(intervals), performance_overhead_vs_base_pct=(1-performance["safe"]/performance["base"])*100,
-              median_calls_per_second=performance, base_risk_overlapping_intervals=risk_overlap, compatible_risk_overlapping_intervals=compat_overlap,
+              median_calls_per_second=performance, base_risk_overlapping_intervals=risk_overlap, compatible_dynamic_risk_result="refused", compatible_minimum_installs=10, compatible_minimum_restorations=10,
+              compatible_verified_writes=len(compatible_successes), compatible_native_stack_check_complete=True, compatible_business_consistency="unclaimed",
               base_commit=(root/"base-commit").read_text().strip())
 (root/'results.json').write_text(json.dumps(result, indent=2)+'\n')
 print(json.dumps(result, indent=2))

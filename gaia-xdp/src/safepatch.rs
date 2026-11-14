@@ -1,11 +1,21 @@
-//! Linux x86_64 stop/write runtimes (cooperative drain or compatible RIP check). See tests/safepatch/README.md.
-use anyhow::{Context, Result, bail};
+//! Linux x86_64 cooperative and SysCare native-stack compatible runtimes.
+//! See tests/safepatch/README.md for the supported consistency guarantees.
 use std::{
     fs,
     time::{Duration, Instant},
 };
 
+use anyhow::{Context, Result, bail};
+
 fn trace(request: u32, tid: i32, address: u64, data: u64) -> Result<i64> {
+    #[cfg(test)]
+    TRACE_FAILURE.with(|fault| {
+        if fault.get() == Some(request) {
+            fault.set(None);
+            bail!("injected ptrace request {request} failure");
+        }
+        Ok(())
+    })?;
     #[cfg(test)]
     if request == libc::PTRACE_POKETEXT {
         FAULT.with(|f| {
@@ -178,67 +188,67 @@ impl Drop for Stopped {
     }
 }
 
-/// No admission protocol is required. This checks only the overwritten interval,
-/// not old stack frames or pending returns into that interval.
-pub fn exchange_compat(pid: u32, address: u64, bytes: &[u8], timeout: Duration) -> Result<Vec<u8>> {
-    anyhow::ensure!(
-        cfg!(all(target_os = "linux", target_arch = "x86_64")),
-        "compatible mode requires Linux x86_64"
-    );
-    anyhow::ensure!(
-        !bytes.is_empty() && bytes.len() % 8 == 0,
-        "nonempty complete machine words required"
-    );
-    let end = address
-        .checked_add(bytes.len() as u64)
-        .context("patch address overflow")?;
-    let start = Instant::now();
-    let expected = tasks(pid)?;
-    let mut retried = false;
-    loop {
-        anyhow::ensure!(
-            !retried || start.elapsed() < timeout,
-            "SafePatch RIP conflict timeout"
-        );
-        let mut stopped = Stopped::all(pid)?;
-        anyhow::ensure!(
-            stopped.tids == expected,
-            "thread set changed between retries"
-        );
-        let mut conflict = false;
-        #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
-        for &tid in &stopped.tids {
-            let mut regs: libc::user_regs_struct = unsafe { std::mem::zeroed() };
-            trace(libc::PTRACE_GETREGS, tid, 0, &mut regs as *mut _ as u64)?;
-            conflict |= (address..end).contains(&regs.rip);
-        }
-        if conflict {
-            stopped.release()?;
-            retried = true;
-            anyhow::ensure!(start.elapsed() < timeout, "SafePatch RIP conflict timeout");
-            std::thread::sleep(Duration::from_millis(2));
-            continue;
-        }
-        anyhow::ensure!(
-            !retried || start.elapsed() < timeout,
-            "SafePatch RIP conflict timeout"
-        );
-        let original = stopped.read(address, bytes.len())?;
-        if let Err(error) = stopped.write(address, bytes) {
-            if let Err(rollback) = stopped.write(address, &original) {
-                stopped.poisoned = true;
-                bail!("write failed: {error:#}; rollback failed; target killed: {rollback:#}");
-            }
-            return Err(error).context("compatible write failed; rollback verified");
-        }
-        eprintln!(
-            "SafePatch compatible write verified pid={pid} threads={} rip_clear=true",
-            stopped.tids.len()
-        );
-        stopped.release()?;
-        return Ok(original);
+#[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+#[path = "safepatch/compatible.rs"]
+mod compatible;
+
+/// Recovery material when Compatible wrote code but could not complete cleanup.
+#[derive(Debug)]
+pub struct CompatIncomplete {
+    pub original_bytes: Vec<u8>,
+    pub reason: String,
+}
+impl std::fmt::Display for CompatIncomplete {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.reason)
     }
 }
+impl std::error::Error for CompatIncomplete {}
+
+/// SysCare native stack scan; success does not assert business consistency.
+pub fn exchange_compat(pid: u32, address: u64, bytes: &[u8], timeout: Duration) -> Result<Vec<u8>> {
+    exchange_compat_related(pid, address, bytes, timeout, &[])
+}
+
+/// Include complete additional affected functions by their entry addresses.
+pub fn exchange_compat_related(
+    pid: u32,
+    address: u64,
+    bytes: &[u8],
+    timeout: Duration,
+    related: &[u64],
+) -> Result<Vec<u8>> {
+    #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+    {
+        compatible::exchange(pid, address, bytes, timeout, related)
+    }
+    #[cfg(not(all(target_os = "linux", target_arch = "x86_64")))]
+    {
+        let _ = (pid, address, bytes, timeout, related);
+        bail!("Compatible requires Linux x86_64")
+    }
+}
+/// Read-only progress from actual SysCare checks: count and result
+/// (0 = clean, positive = busy, negative = inspection error).
+/// Callback must not block or modify the target. Safety decisions are unchanged.
+pub fn exchange_compat_observed(
+    pid: u32,
+    address: u64,
+    bytes: &[u8],
+    timeout: Duration,
+    observe: &mut dyn FnMut(u64, i32),
+) -> Result<Vec<u8>> {
+    #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+    {
+        compatible::exchange_observed(pid, address, bytes, timeout, &[], observe)
+    }
+    #[cfg(not(all(target_os = "linux", target_arch = "x86_64")))]
+    {
+        let _ = (pid, address, bytes, timeout, observe);
+        bail!("Compatible requires Linux x86_64")
+    }
+}
+
 /// ABI: [magic, gate, active], all aligned sequentially-consistent atomic u64.
 /// The caller must serialize coordinators for a process. Unknown targets fail closed.
 pub fn exchange(
@@ -329,54 +339,50 @@ pub fn exchange(
 
 #[cfg(test)]
 thread_local! {
+    static TRACE_FAILURE: std::cell::Cell<Option<u32>> = const { std::cell::Cell::new(None) };
     static READBACK_FAIL: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
     static FAULT: std::cell::Cell<(usize, usize, bool)> = const { std::cell::Cell::new((0, usize::MAX, false)) };
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::{
         io::{BufRead, BufReader},
         process::{Command, Stdio},
     };
+
+    use super::*;
     #[test]
-    fn partial_write_rollback_and_fatal_rollback() -> Result<()> {
+    fn writer_partial_failure_and_readback_rollback() -> Result<()> {
         let executable = std::env::var("GAIA_COMPAT_TARGET")
             .context("set GAIA_COMPAT_TARGET to compiled compatible.c")?;
-        for (persistent, readback_failure) in [(false, false), (true, false), (false, true)] {
+        for readback_failure in [false, true] {
             let mut child = Command::new(&executable).stdout(Stdio::piped()).spawn()?;
             let result = (|| -> Result<()> {
                 let mut line = String::new();
                 BufReader::new(child.stdout.take().unwrap()).read_line(&mut line)?;
                 let fields: Vec<_> = line.split_whitespace().collect();
                 let addr = u64::from_str_radix(fields[2].trim_start_matches("0x"), 16)?;
-                // Save 16 bytes: fail the second word after the first has changed.
-                let stopped = Stopped::all(child.id())?;
+                let mut stopped = Stopped::all(child.id())?;
                 let original = stopped.read(addr, 16)?;
-                drop(stopped);
-                FAULT.with(|f| {
-                    f.set((0, if readback_failure { usize::MAX } else { 1 }, persistent))
-                });
+                FAULT.with(|f| f.set((0, if readback_failure { usize::MAX } else { 1 }, false)));
                 READBACK_FAIL.with(|flag| flag.set(readback_failure));
+                // Exercise the shared writer, not a successful Compatible transition.
                 let mut patch = vec![0x90; 16];
                 patch[..8].copy_from_slice(&[0xb8, 99, 0, 0, 0, 0xc3, 0x90, 0x90]);
-                let error =
-                    exchange_compat(child.id(), addr, &patch, Duration::from_secs(3)).unwrap_err();
+                let failure = stopped.write(addr, &patch);
+                // Restore before assertions so a failing test cannot resume partial code.
                 FAULT.with(|f| f.set((0, usize::MAX, false)));
-                if persistent {
-                    anyhow::ensure!(error.to_string().contains("rollback failed"));
-                    anyhow::ensure!(
-                        !std::path::Path::new(&format!("/proc/{}", child.id())).exists()
-                    );
-                } else {
-                    anyhow::ensure!(error.to_string().contains("rollback verified"));
-                    let stopped = Stopped::all(child.id())?;
-                    anyhow::ensure!(stopped.read(addr, 16)? == original);
-                }
+                READBACK_FAIL.with(|flag| flag.set(false));
+                stopped.write(addr, &original)?;
+                anyhow::ensure!(failure.is_err(), "fault injection did not fail");
+                anyhow::ensure!(stopped.read(addr, 16)? == original);
+                stopped.release()?;
+                anyhow::ensure!(child.try_wait()?.is_none(), "writer test killed target");
                 Ok(())
             })();
             FAULT.with(|f| f.set((0, usize::MAX, false)));
+            READBACK_FAIL.with(|flag| flag.set(false));
             let _ = child.kill();
             let _ = child.wait();
             result?;

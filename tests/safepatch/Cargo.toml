@@ -6,9 +6,26 @@ edition = "2024"
 [dependencies]
 anyhow = "1"
 libc = "0.2"
+serde_json = "1"
+object = { version = "0.38.0", default-features = false, features = ["read", "elf"] }
 [[bin]]
 name = "safepatch-validation"
 path = "driver.rs"
 [[bin]]
 name = "safepatch-compat-validation"
 path = "compat_driver.rs"
+[[bin]]
+name = "safepatch-video-demo"
+path = "demo/driver.rs"
+
+[[bin]]
+name = "safepatch-single-story"
+path = "single-thread-story/driver.rs"
+
+[[bin]]
+name = "safepatch-interactive-demo"
+path = "demo/interactive.rs"
+
+[[bin]]
+name = "safepatch-concurrent-export"
+path = "concurrent-export/driver.rs"

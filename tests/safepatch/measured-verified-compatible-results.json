@@ -1,0 +1,215 @@
+{
+  "recorded_utc": "2026-11-08T12:22:12.833178+00:00",
+  "platform": "Linux-6.6.0-159.4.19.173.oe2403sp4.x86_64-x86_64-with-glibc2.38",
+  "scope": "Verified static x86_64 ET_EXEC, one native thread, fixed frames, complete code certificate; function consistency only; business consistency unclaimed.",
+  "source_sha256": {
+    "gaia-xdp/src/safepatch.rs": "5c76d96ae6ed6057a5e068fd8c5a9ef1608bb83e4f0b7b43edc4e985dfc49376",
+    "gaia-xdp/src/safepatch/compatible.rs": "25a92fef1cebf9a3ffeed84aa59f98cb2258fc4b96390060192221cabd9d919f",
+    "tests/safepatch/restricted.c": "6450b2e82641bd1c1ba54556256d74d6f7e3ce425ea356a20e735e6e5b5640d3"
+  },
+  "compatible": {
+    "successful_installs": 4,
+    "successful_restorations": 4,
+    "verified_writes": 8,
+    "actual_new_entry_execution_observed": true,
+    "actual_original_execution_after_restore_observed": true,
+    "busy_snapshots": 68,
+    "summary": [
+      "timeout_refusal elapsed_us=33713 code_unchanged=true target_alive=true reason=active old call timeout",
+      "restricted installs=4 restorations=4 waited_us=218053 target_alive=true original_restored=true function_consistency_complete=true business_consistency=unclaimed"
+    ],
+    "successful_check_records": [
+      "SafePatch compatible result=success elapsed_us=218051 checks=53 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=4205 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=4547 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=2863 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=3084 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=2967 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=2645 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed",
+      "SafePatch compatible result=success elapsed_us=2843 checks=1 code_installed=true function_consistency_complete=true business_consistency=unclaimed"
+    ],
+    "first_old_call_records": [
+      "SafePatch compatible check=1 result=busy active=target_value depth=1 ip=401074",
+      "SafePatch compatible check=2 result=busy active=target_value depth=1 ip=401074"
+    ],
+    "first_verified_stack_records": [
+      "SafePatch compatible stack tid=32093 frames=2 root=verified",
+      "SafePatch compatible stack tid=32093 frames=2 root=verified"
+    ],
+    "function_scope_records": [
+      "SafePatch compatible scope function=target_value start=40105c end=40108a",
+      "SafePatch compatible scope function=target_value start=40105c end=40108a",
+      "SafePatch compatible scope function=target_value start=40105c end=40108a"
+    ],
+    "unsupported_dynamic_requests_refused": 72,
+    "negative_static_cases": [
+      "static_rejection code_unchanged=true target_alive=true reason=output: canonical frame absent",
+      "static_rejection code_unchanged=true target_alive=true reason=unsupported syscall (clone/exec/mmap/signal/context operations forbidden)"
+    ],
+    "fault_tests_passed": 5,
+    "fault_cases": [
+      "corrupt saved frame link detected and repaired while stopped",
+      "SEIZE/GETREGS/DETACH failures: no false success, code restored, target alive",
+      "write/readback failures: original restored and verified",
+      "persistent rollback failure: explicit indeterminate state, retained stop, manual recovery by test",
+      "pre-existing SIGSTOP: refusal preserves group stop",
+      "shared 16-byte writer partial failure/readback recovery"
+    ],
+    "business_consistency": "unclaimed"
+  },
+  "regression": {
+    "successful_installs": 40,
+    "successful_restorations": 40,
+    "restoration_failures": 0,
+    "drain_measurements": {
+      "high_frequency": {
+        "successes": 40,
+        "wall_us": 1181452,
+        "completed_calls": 22098950,
+        "drain_mean_us": 4242,
+        "drain_max_us": 7544,
+        "restore_failures": 0
+      },
+      "long_running": {
+        "successes": 40,
+        "wall_us": 5099535,
+        "completed_calls": 339917,
+        "drain_mean_us": 197936,
+        "drain_max_us": 225470,
+        "restore_failures": 0
+      }
+    },
+    "calls_spanning_switches": 0,
+    "verified_writes": 80,
+    "unsafe_writes": 0,
+    "overlapping_intervals": 0,
+    "completed_long_calls": 339925,
+    "performance_overhead_vs_base_pct": 37.61976768873371,
+    "median_calls_per_second": {
+      "base": 32617495.94928959,
+      "safe": 20346869.747284718
+    },
+    "base_risk_overlapping_intervals": 79783,
+    "compatible_dynamic_risk_result": "refused",
+    "compatible_installs": 4,
+    "compatible_restorations": 4,
+    "compatible_verified_writes": 8,
+    "compatible_function_consistency_complete": true,
+    "compatible_business_consistency": "unclaimed",
+    "base_commit": "eec1660a4d6679fb3ce687b757a25578a6abd326"
+  },
+  "document_demo": [
+    {
+      "mode": "control",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "control",
+          "switch_return_ns": 12393574097403,
+          "old_file_begin_ns": 12394374745407,
+          "old_file_end_ns": 12394374851359,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        },
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "control",
+          "switch_return_ns": 12394377839635,
+          "old_file_begin_ns": 12395177960674,
+          "old_file_end_ns": 12395178066628,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        }
+      ]
+    },
+    {
+      "mode": "base",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": true,
+          "consistency_complete": false,
+          "mode": "base",
+          "switch_return_ns": 12395181801318,
+          "old_file_begin_ns": 12395982303790,
+          "old_file_end_ns": 12395982403322,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        },
+        {
+          "code_installed": true,
+          "consistency_complete": false,
+          "mode": "base",
+          "switch_return_ns": 12396785923767,
+          "old_file_begin_ns": 12397586025550,
+          "old_file_end_ns": 12397586137287,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        }
+      ]
+    },
+    {
+      "mode": "compatible",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "compatible",
+          "switch_return_ns": 12398409971942,
+          "old_file_begin_ns": 12399209970516,
+          "old_file_end_ns": 12399210084519,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        },
+        {
+          "code_installed": false,
+          "consistency_complete": false,
+          "mode": "compatible",
+          "switch_return_ns": 12399213251553,
+          "old_file_begin_ns": 12400013497886,
+          "old_file_end_ns": 12400013609592,
+          "new_file_exists": true,
+          "restored_file_exists": false
+        }
+      ]
+    },
+    {
+      "mode": "cooperative",
+      "passed": 2,
+      "cases": [
+        {
+          "code_installed": true,
+          "consistency_complete": true,
+          "mode": "cooperative",
+          "switch_return_ns": 12400817886105,
+          "old_file_begin_ns": 12400816569271,
+          "old_file_end_ns": 12400816687214,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        },
+        {
+          "code_installed": true,
+          "consistency_complete": true,
+          "mode": "cooperative",
+          "switch_return_ns": 12402436560987,
+          "old_file_begin_ns": 12402433274433,
+          "old_file_end_ns": 12402433485555,
+          "new_file_exists": false,
+          "restored_file_exists": true
+        }
+      ]
+    }
+  ],
+  "user_space_cargo_check": "passed with AYA_BUILD_SKIP=1; reused existing BPF object; no BPF rebuild/load or HTTP end-to-end claim",
+  "commands": [
+    "RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run.sh /tmp/gaia-final-validation",
+    "RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run-compat.sh /tmp/gaia-compatible-evidence",
+    "RUSTUP_TOOLCHAIN=stable bash tests/safepatch/demo/run.sh /tmp/gaia-working-demo",
+    "python3 tests/safepatch/demo/repeat.py /tmp/gaia-working-demo 2",
+    "AYA_BUILD_SKIP=1 RUSTUP_TOOLCHAIN=stable cargo check --offline -p gaia-xdp"
+  ]
+}

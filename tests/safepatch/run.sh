@@ -7,7 +7,7 @@ for test in high_frequency long_running; do
     cc -O0 -g -pthread -fno-pie -no-pie -fno-inline "$test.c" -o "$output/$test"
 done
 cc -O0 -g -pthread -fno-pie -no-pie -fno-inline -DGAIA_BASELINE high_frequency.c -o "$output/high_frequency_base"
-cargo build --manifest-path Cargo.toml
+cargo build --offline --manifest-path Cargo.toml --bin safepatch-validation --bin safepatch-compat-validation --bin safepatch-video-demo
 for test in high_frequency long_running; do
     target/debug/safepatch-validation "$output/$test" "$output/$test.calls" >"$output/$test.summary" 2>"$output/$test.runtime"
 done
@@ -21,4 +21,5 @@ for sample in 1 2 3; do
     done
 done
 git rev-parse base >"$output/base-commit"
+bash run-compat.sh "$output/compatible" >"$output/compatible-validation.summary" 2>"$output/compatible-validation.runtime"
 python3 analyze.py "$output"

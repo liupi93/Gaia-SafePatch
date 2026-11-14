@@ -4,15 +4,9 @@ cd "$(dirname "$0")"
 output="${1:-/tmp/gaia-safepatch-compatible}"
 mkdir -p "$output"
 cc -O0 -g -pthread -fno-pie -no-pie compatible.c -o "$output/compatible"
-cargo build --offline --manifest-path Cargo.toml --bin safepatch-compat-validation
+cc -O2 -g -pthread -fno-pie -no-pie -fno-inline demo/target.c -o "$output/document"
+cargo build --offline --bin safepatch-compat-validation
 target/debug/safepatch-compat-validation "$output/compatible" >"$output/summary" 2>"$output/runtime"
-python3 - "$output/runtime" <<'PY'
-import sys
-lines=[s for s in open(sys.argv[1]) if 'compatible write verified' in s]
-assert len(lines)==40, len(lines)
-assert all('threads=9 rip_clear=true' in s for s in lines)
-print('40 verified writes, all 9 threads stopped and RIP clear')
-PY
+GAIA_COMPAT_TARGET="$output/compatible" GAIA_DOCUMENT_TARGET="$output/document" cargo test --offline --bin safepatch-compat-validation -- --nocapture >"$output/fault-tests.log" 2>&1
 cat "$output/summary"
-
-GAIA_COMPAT_TARGET="$output/compatible" cargo test --offline --manifest-path Cargo.toml --bin safepatch-compat-validation -- --nocapture
+tail -3 "$output/fault-tests.log"

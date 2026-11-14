@@ -199,41 +199,11 @@ cargo check --offline -p gaia-xdp
 
 更多协议约束和异常行为见[实现原理](safepatch-explained.md)。
 
-## 9. 非协作兼容模式与三模式对照
+## 9. SysCare Compatible 多线程路径
 
-```bash
-# 使用已有工具链可避免 rust-toolchain.toml 自动更新；也可移除该环境变量使用 nightly。
-RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run-compat.sh /tmp/gaia-safepatch-compatible
-RUSTUP_TOOLCHAIN=stable bash tests/safepatch/run.sh /tmp/gaia-safepatch-three-modes
-```
-
-兼容脚本编译 `compatible.c`：8 个工作线程与主线程，不导出协作 ABI，也不执行门禁
-或活动计数。普通调用间有短暂休眠以提供可重复的无冲突窗口；另一个场景让全部工作线程
-持续在覆盖区间内循环，必须重试并超时，目标继续存活。普通场景完成 20 次安装和恢复，
-检查原始字节与补丁字节，验证缺失 ABI 的严格模式、无效地址、溢出、空/非整字长度均失败。
-脚本断言 40 条校验日志均为 `threads=9 rip_clear=true`。
-
-同一脚本还运行仅在 `cfg(test)` 编译的真实 ptrace 故障注入：16 字节写入中第二个机器字
-失败或注入一次读回不一致，要求回滚读回等于原始内容；持续失败则要求目标被终止并回收，错误不能变成成功。
-注入钩子不会编译进 Gaia 运行程序。测试没有覆盖所有信号交错、线程变化、GETREGS/DETACH
-失败或内核异常；日志中的线程数来自已确认停止的集合，不能替代这些故障场景的专项验证。
-
-原有 run.sh 保留 cooperative 零重叠断言，并增加 `compat-risk` 受控长调用实验。
-该实验沿用原版风险实验的控制点与计数器，仅用于确定测试交错；兼容写入器不读取它们。
-分析器分别要求 base 与 compatible 出现实际新旧调用区间重叠；compatible 的两次切换仍
-必须满足 9 个线程停止和 RIP 无冲突。这样对比安全保证，而不把兼容模式误标成排空模式。
-`results.json` 增加 `compatible_risk_overlapping_intervals`。兼容独立套件证明无需 ABI，
-受控风险实验则用测试设施证明其局限，两者目的不同。
-
-完整守护进程检查与运行套件分开：nightly/BPF 工具链不可用时应如实记录阻塞。
-使用 `AYA_BUILD_SKIP=1` 且复用已有 BPF 对象只能证明用户态编译，不能声称重新构建或加载 BPF。
-
-本次机器实测保存于 [measured-compatible-results.json](../tests/safepatch/measured-compatible-results.json)：
-协作模式 40 次安装、40 次恢复、80 次校验写入，零新旧区间重叠；独立无 ABI 兼容目标
-20 次安装、20 次恢复、40 次校验写入。受控风险实验 base 重叠计数 107061、compatible
-90610，表明兼容模式没有排空保证；这些计数不是性能比较。部分写失败、读回不一致回滚、
-持续回滚失败后的终止回收均通过。用户态编译通过，完整 BPF 重建受 nightly 工具链故障阻塞。
-
-调试中早期版本的致命回滚测试曾等待追踪线程退出而阻塞；现已修复为先终止并逐线程回收，
-最终测试通过。该轮遗留的 root 所有测试进程（38062、38171，及其退出中的子进程）
-无法由当前用户清理，普通 kill 被拒绝且 sudo 需要密码；需由进程所有者处理。
+执行方式和验收项见 [源码移植说明](../gaia-xdp/src/safepatch/syscare/README.md)。
+`run-compat.sh` 包含 9 线程真实安装/恢复、栈读取与线程控制错误、安装/恢复失败、
+部分写入及持续回滚失败测试。`demo/run.sh` 对相同文档业务运行 Control、Base、
+Compatible、Cooperative。Compatible 等待活动旧调用，但不声明异步业务排空。
+旧 measured-* 数据属于历史实现，不能作为此路径证据；本次数据见
+[SysCare 实测记录](../tests/safepatch/measured-syscare-results.json)。

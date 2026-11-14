@@ -436,8 +436,9 @@ async fn api_reload_hotpatch(State(shared): State<Shared>) -> Json<ReloadResult>
         if !patches.is_empty() { return Err(anyhow!("code restoration failed; retained for retry")); }
         apply_hotpatch_code_patches(&targets, &mut patches);
         let expected = targets.iter().filter(|t| t.enabled && t.patch_action != PatchAction::Monitor).count();
-        if patches.len() != expected {
-            return Err(anyhow!("machine-code patch failure: {} verified of {} requested", patches.len(), expected));
+        let verified = patches.iter().filter(|p| !p.incomplete).count();
+        if verified != expected || patches.iter().any(|p| p.incomplete) {
+            return Err(anyhow!("machine-code patch failure: {} verified of {} requested", verified, expected));
         }
         Ok(())
     });
